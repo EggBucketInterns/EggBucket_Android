@@ -22,28 +22,44 @@
             android:name=".delivery_profile"
             android:exported="false" />
         <activity
-                    android:name=".Order_Placed_Screen"
-                    android:exported="false" />
-                <activity
-                    android:name=".Order_Details_Screen"
-                    android:exported="false" />
-                <activity
-                    android:name=".Create_Order_Screen"
-                    android:exported="false" />
+            android:name=".Order_Placed_Screen"
+            android:exported="false" />
+        <activity
+            android:name=".Order_Details_Screen"
+            android:exported="false" />
+        <activity
+            android:name=".Create_Order_Screen"
+            android:exported="false" />
+        <activity
+            android:name=".PendingOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PaymentCollection2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".PaymentCollectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FilterOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CashCollectedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AllOrdersActiviry"
+            android:exported="false" />
         <activity
             android:name=".LoginScreenActivity"
-            android:exported="true" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>
