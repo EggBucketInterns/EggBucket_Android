@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="#FFA500"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentCollectionActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="15dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:text="PAYMENT COLLECTION"
+        android:layout_height="wrap_content"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginStart="3dp"
+        android:elevation="24dp"
+        android:layout_marginEnd="3dp"
+        app:cardCornerRadius="30dp"
+        android:layout_height="1000dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/payment_mode"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_margin="30dp"
+                android:padding="10dp"
+                android:text="MODE OF PAYMENT"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_below="@id/payment_mode"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/online_payment_back"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginStart="65dp"
+                android:id="@+id/online_payment"
+                android:text="ONLINE \nPAYMENT"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/cash_payment"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="16sp"
+                android:background="@drawable/cash_payment_back"
+                android:text="CASH \nPAMENT"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_below="@id/payment_mode"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="65dp"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_below="@+id/online_payment"
+                android:text="DELIVERY COMPLETED"
+                android:background="@drawable/delibery_completed_back"
+                android:gravity="center"
+                android:layout_marginTop="350dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="40dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:paddingStart="40dp"
+                android:textSize="16sp"
+                android:padding="5dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_height="45dp"/>
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

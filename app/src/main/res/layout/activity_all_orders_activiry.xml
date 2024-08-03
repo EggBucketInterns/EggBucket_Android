@@ -80,7 +80,7 @@
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/recyclerview_background"
                 android:nestedScrollingEnabled="true"
-                tools:listitem="@layout/card_items" />
+                tools:listitem="@layout/all_orders_cart_items" />
 
             <ImageView
                 android:id="@+id/clockimage1"
