@@ -7,4 +7,6 @@
     <color name="orange">#FF512F</color>
     <color name="yellow">#FF9900</color>
     <color name="blue">#2098B2</color>
+    <color name="transparent">#EDFFFFFF</color>
+    <color name="textcolor">#979797</color>
 </resources>
