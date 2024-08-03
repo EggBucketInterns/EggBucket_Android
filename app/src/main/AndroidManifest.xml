@@ -22,6 +22,15 @@
             android:name=".delivery_profile"
             android:exported="false" />
         <activity
+                    android:name=".Order_Placed_Screen"
+                    android:exported="false" />
+                <activity
+                    android:name=".Order_Details_Screen"
+                    android:exported="false" />
+                <activity
+                    android:name=".Create_Order_Screen"
+                    android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
