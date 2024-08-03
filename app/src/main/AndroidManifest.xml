@@ -13,6 +13,12 @@
         android:theme="@style/Theme.EggBucket_Android"
         tools:targetApi="31">
         <activity
+            android:name=".mode_of_payment"
+            android:exported="false" />
+        <activity
+            android:name=".delivery_profile"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
