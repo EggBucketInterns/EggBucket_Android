@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="16dp">
+
+    <!-- Search Vendors Header -->
+    <TextView
+        android:id="@+id/search_vendors_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search Vendors"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Search Bar -->
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_vendors_header"
+        android:layout_marginBottom="16dp"
+        android:drawableLeft="@drawable/ic_search"
+        android:hint="VendorName, VendorID, Vendor Location"
+        android:padding="12dp"
+        android:background="@drawable/search_bar_background"
+        android:textSize="12sp"
+        android:drawablePadding="8dp" />
+
+    <!-- List of Vendors -->
+    <ListView
+        android:id="@+id/vendor_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/search_bar"
+        android:layout_alignParentBottom="true"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="16dp" />
+
+</RelativeLayout>

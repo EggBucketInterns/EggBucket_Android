@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!-- Order 1 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="@drawable/rounded_corner_white"
+        android:layout_marginBottom="8dp"
+        android:elevation="4dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_order"
+            android:layout_gravity="center_vertical" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:id="@+id/order_name_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12 Tray Eggs"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/order_location_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order location"
+                android:textColor="@color/link_color"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/order_status_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="COMPLETED"
+            android:textStyle="bold"
+            android:textSize="10dp"
+            android:background="@drawable/rounded_corner_green"
+            android:textColor="@android:color/white"
+            android:paddingHorizontal="17dp"
+            android:paddingVertical="9dp"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+</LinearLayout>
