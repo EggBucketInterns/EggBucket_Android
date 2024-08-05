@@ -78,196 +78,208 @@
             </RelativeLayout>
 
             <!-- Outlet Milestones Section -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="358dp"
+                android:layout_height="347dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/rounded_corner_white"
                 android:elevation="4dp"
-                android:orientation="vertical"
-                android:padding="24dp">
-
-                <!-- Outlet Milestones Heading -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Outlet Milestones"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
+                app:cardCornerRadius="32dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:orientation="vertical"
-                    android:weightSum="2">
+                    android:padding="12dp">
 
-                    <!-- Total Orders and Pending Orders Row -->
-                    <LinearLayout
+                    <!-- Outlet Milestones Heading -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Outlet Milestones"
+                        android:textColor="@color/black"
+                        android:paddingTop="16dp"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <GridLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:columnCount="2"
+                        android:orientation="horizontal"
+                        android:rowCount="2">
 
-                        <LinearLayout
+                        <!-- Total Orders Card -->
+                        <androidx.cardview.widget.CardView
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/light_black_box"
-                            android:gravity="start"
-                            android:orientation="vertical"
-                            android:padding="16dp">
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="5dp"
+                            android:elevation="4dp"
+                            app:cardCornerRadius="32dp">
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Total Orders"
-                                android:textColor="@color/purplelight"
-                                android:textStyle="bold" />
+                                android:orientation="vertical"
+                                android:padding="16dp">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:src="@drawable/ic_total_orders" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Total Orders"
+                                    android:textColor="@color/purplelight"
+                                    android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/total_orders"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/yellow"
-                                android:text="87"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
+                                    android:src="@drawable/ic_total_orders" />
 
-                        <LinearLayout
+                                <TextView
+                                    android:id="@+id/total_orders"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="87"
+                                    android:textColor="@color/yellow"
+                                    android:textSize="24sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Pending Orders Card -->
+                        <androidx.cardview.widget.CardView
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/light_black_box"
-                            android:gravity="start"
-                            android:orientation="vertical"
-                            android:padding="16dp">
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="5dp"
+                            android:elevation="4dp"
+                            app:cardCornerRadius="32dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Pending Orders"
-                                android:textColor="@color/purplelight"
-                                android:textStyle="bold" />
+                                android:orientation="vertical"
+                                android:padding="16dp">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:src="@drawable/ic_pending_orders" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Pending Orders"
+                                    android:textColor="@color/purplelight"
+                                    android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/pending_orders"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:textColor="@color/yellow"
-                                android:text="14"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </LinearLayout>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
+                                    android:src="@drawable/ic_pending_orders" />
 
-                    <!-- Completed Orders and Pending Cash Collections Row -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                                <TextView
+                                    android:id="@+id/pending_orders"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="14"
+                                    android:textColor="@color/yellow"
+                                    android:textSize="24sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
 
-                        <LinearLayout
+                        <!-- Completed Orders Card -->
+                        <androidx.cardview.widget.CardView
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/light_black_box"
-                            android:gravity="start"
-                            android:orientation="vertical"
-                            android:padding="16dp">
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="5dp"
+                            android:elevation="4dp"
+                            app:cardCornerRadius="32dp"
+                            app:layout_rowSpec="GridLayout.spec(1)">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Completed Orders"
-                                android:textColor="@color/purplelight"
-                                android:textStyle="bold" />
+                                android:orientation="vertical"
+                                android:padding="16dp">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:src="@drawable/ic_total_orders" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Completed Orders"
+                                    android:textColor="@color/purplelight"
+                                    android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/completed_orders"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:textColor="@color/yellow"
-                                android:text="25"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
+                                    android:src="@drawable/ic_total_orders" />
 
-                        <LinearLayout
+                                <TextView
+                                    android:id="@+id/completed_orders"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="25"
+                                    android:textColor="@color/yellow"
+                                    android:textSize="24sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Pending Cash Collections Card -->
+                        <androidx.cardview.widget.CardView
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/light_black_box"
-                            android:gravity="start"
-                            android:orientation="vertical"
-                            android:padding="16dp">
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="5dp"
+                            android:elevation="4dp"
+                            app:cardCornerRadius="32dp"
+                            app:layout_rowSpec="GridLayout.spec(1)">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Pending Cash"
-                                android:textColor="@color/purplelight"
-                                android:textStyle="bold" />
+                                android:orientation="vertical"
+                                android:padding="16dp">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:src="@drawable/ic_total_orders" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Pending Cash"
+                                    android:textColor="@color/purplelight"
+                                    android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/pending_cash_collections"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="1dp"
-                                android:textColor="@color/yellow"
-                                android:text="$0"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </LinearLayout>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="4dp"
+                                    android:src="@drawable/ic_total_orders" />
+
+                                <TextView
+                                    android:id="@+id/pending_cash_collections"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="$0"
+                                    android:textColor="@color/yellow"
+                                    android:textSize="24sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </GridLayout>
                 </LinearLayout>
-            </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <!-- Recent Orders -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Recent Orders"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginBottom="8dp" />
