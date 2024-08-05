@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".delivery_dashboard"
-    android:background="#F6F6F6">
+    android:background="@color/white">
 
     <fragment
         android:id="@+id/fragment2"
         android:layout_marginTop="40dp"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="800dp"
+        android:layout_height="815dp"
         app:defaultNavHost="true"
         app:navGraph="@navigation/delivery_nav_graph" />
 

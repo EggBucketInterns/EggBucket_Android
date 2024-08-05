@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity"
-    android:background="#F6F6F6">
+    android:background="@color/white">
 
     <fragment
         android:layout_marginTop="40dp"
         android:id="@+id/fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="800dp"
+        android:layout_height="770dp"
         app:defaultNavHost="true"
         app:navGraph="@navigation/outlet_nav_graph" />
 
@@ -34,23 +34,22 @@
             android:layout_height="match_parent"
             app:backgroundTint="@android:color/transparent"
             app:elevation="0dp"
-            app:itemIconTint="@color/black"
-            app:itemRippleColor="@color/black"
+            android:background="@drawable/floating_back"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/outlet_bottom_navigation" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageView
         android:layout_width="wrap_content"
         android:id="@+id/create_order"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
+        app:layout_anchorGravity="center"
+        android:layout_marginBottom="85dp"
         android:contentDescription="create"
         android:src="@drawable/ic_add_24"
-        android:tint="@color/white"
-        app:backgroundTint="@color/white"
+        android:scaleType="fitCenter"
+        android:padding="10dp"
+        android:background="@drawable/floating_back"
+        app:backgroundTint="@color/yellow"
         app:layout_anchor="@id/bottomAppbar" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
