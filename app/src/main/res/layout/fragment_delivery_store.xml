@@ -1,17 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="#FFA500"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DeliveryStoreFragment">
+    tools:context=".AllOrdersActiviry">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="34dp"
-        android:gravity="center"
-        android:textColor="#234323"
-        android:text="Store Fragment" />
+        android:layout_margin="10dp"
+        android:baselineAligned="true"
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:paddingTop="5dp"
+            android:src="@drawable/previous_errow"
+            android:layout_weight=".1"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:textColor="@color/white"
+            android:text="All Orders"
+            android:layout_height="35dp" />
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_weight=".2"
+            android:gravity="center"
+            android:background="@drawable/filter_background"
+            android:layout_height="30dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_weight=".3"
+                android:paddingStart="5dp"
+                android:paddingVertical="5dp"
+                android:paddingTop="5dp"
+                android:src="@drawable/filter"
+                android:layout_height="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="filter"
+                android:paddingTop="5dp"
+                android:layout_weight=".6"
+                android:layout_height="30dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="3dp"
+        android:elevation="24dp"
+        android:layout_marginEnd="3dp"
+        app:cardCornerRadius="30dp"
+        android:layout_height="1000dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/recyclerview_background"
+                android:nestedScrollingEnabled="true"
+                tools:listitem="@layout/all_orders_cart_items" />
+
+            <ImageView
+                android:id="@+id/clockimage1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recyclerview"
+                android:layout_marginStart="250dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/clock_img" />
+
+            <ImageView
+                android:id="@+id/floor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/clockimage1"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/freepik_floor" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/clockimage1"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/freepik_deviceinject2" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/clockimage1"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/freepik_character_inject2" />
+            <TextView
+                android:id="@+id/history"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:text="No Order History Found !"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:textSize="28sp"
+                android:gravity="center"
+                android:layout_below="@+id/floor"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_below="@+id/history"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textSize="24sp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/referes_background"
+                android:textColor="@color/white"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:text="Refresh Order History"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
+

@@ -9,9 +9,10 @@
 
     <fragment
         android:id="@+id/fragment2"
+        android:layout_marginTop="40dp"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="630dp"
+        android:layout_height="800dp"
         app:defaultNavHost="true"
         app:navGraph="@navigation/delivery_nav_graph" />
 

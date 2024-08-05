@@ -12,7 +12,7 @@
         android:id="@+id/fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="800dp"
         app:defaultNavHost="true"
         app:navGraph="@navigation/outlet_nav_graph" />
 
@@ -42,6 +42,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
+        android:id="@+id/create_order"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
