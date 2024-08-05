@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -51,6 +51,7 @@
             android:orientation="horizontal">
 
             <CheckBox
+                android:id="@+id/outlet_pertner"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:button="@drawable/custom_checked_button"
@@ -64,6 +65,7 @@
                 android:text="AUTLATE PARTNER" />
 
             <CheckBox
+                android:id="@+id/delivery_partner"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:button="@drawable/custom_checked_button"
@@ -83,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/linearLayout1"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="0dp">
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -96,7 +98,7 @@
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="80dp"
                 android:layout_marginEnd="40dp"
                 android:background="@drawable/login_background">
 
@@ -111,6 +113,7 @@
                     />
 
                 <ImageView
+                    android:id="@+id/goto_next"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
@@ -132,6 +135,7 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/customer_code"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:drawableStart="@drawable/baseline_person_24"
@@ -141,10 +145,11 @@
                 android:paddingStart="10dp"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:text="Enter Customer Code"
+                android:hint="Enter Customer Code"
                 android:background="@drawable/edt_back" />
 
             <EditText
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
@@ -153,7 +158,7 @@
                 android:drawableStart="@drawable/baseline_lock_24"
                 android:paddingStart="5dp"
                 android:background="@drawable/edt_back"
-                android:text="Enter Password"
+                android:hint="Enter Password"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 />
