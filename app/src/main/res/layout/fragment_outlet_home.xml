@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   >
+    android:background="@color/white">
+
     <!-- Background Image on the Bottom Left -->
     <ImageView
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="24dp">
 
             <!-- Top Section with Avatar and Outlet Name -->
             <RelativeLayout
@@ -70,8 +70,8 @@
 
                 <ImageView
                     android:id="@+id/notification_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/ic_notification"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true" />
@@ -80,63 +80,66 @@
             <!-- Outlet Milestones Section -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:background="@drawable/rounded_corner_white"
+                android:layout_height="358dp"
                 android:layout_marginBottom="16dp"
-                android:elevation="4dp">
+                android:background="@drawable/rounded_corner_white"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="24dp">
 
                 <!-- Outlet Milestones Heading -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Outlet Milestones"
-                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:textColor="@color/black" />
+                    android:textStyle="bold"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginTop="8dp"
+                    android:orientation="vertical"
                     android:weightSum="2">
 
                     <!-- Total Orders and Pending Orders Row -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:orientation="horizontal"
-                        android:layout_weight="1">
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
+                            android:layout_marginEnd="8dp"
                             android:layout_weight="1"
-                            android:padding="8dp"
                             android:background="@drawable/light_black_box"
-                            android:gravity="start">
+                            android:gravity="start"
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Total Orders"
-                                android:textStyle="bold"
-                                android:textColor="@color/purple" />
+                                android:textColor="@color/purplelight"
+                                android:textStyle="bold" />
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_total_orders"
                                 android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp" />
+                                android:layout_marginBottom="4dp"
+                                android:src="@drawable/ic_total_orders" />
 
                             <TextView
                                 android:id="@+id/total_orders"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/yellow"
                                 android:text="87"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -145,34 +148,36 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
+                            android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:padding="8dp"
                             android:background="@drawable/light_black_box"
-                            android:gravity="start">
+                            android:gravity="start"
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Pending Orders"
-                                android:textStyle="bold"
-                                android:textColor="@color/purple" />
+                                android:textColor="@color/purplelight"
+                                android:textStyle="bold" />
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_pending_orders"
                                 android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp" />
+                                android:layout_marginBottom="4dp"
+                                android:src="@drawable/ic_pending_orders" />
 
                             <TextView
                                 android:id="@+id/pending_orders"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:textColor="@color/yellow"
                                 android:text="14"
                                 android:textSize="24sp"
-                                android:textStyle="bold"
-                                android:layout_marginTop="4dp" />
+                                android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -180,74 +185,78 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp"
                         android:layout_weight="1"
-                        android:layout_marginTop="8dp">
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
+                            android:layout_marginEnd="8dp"
                             android:layout_weight="1"
-                            android:padding="8dp"
                             android:background="@drawable/light_black_box"
-                            android:gravity="start">
+                            android:gravity="start"
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Completed Orders"
-                                android:textStyle="bold"
-                                android:textColor="@color/purple" />
+                                android:textColor="@color/purplelight"
+                                android:textStyle="bold" />
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_total_orders"
                                 android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp" />
+                                android:layout_marginBottom="4dp"
+                                android:src="@drawable/ic_total_orders" />
 
                             <TextView
                                 android:id="@+id/completed_orders"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:textColor="@color/yellow"
                                 android:text="25"
                                 android:textSize="24sp"
-                                android:textStyle="bold"
-                                android:layout_marginTop="4dp" />
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
+                            android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:padding="8dp"
                             android:background="@drawable/light_black_box"
-                            android:gravity="start">
+                            android:gravity="start"
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Pending Cash"
-                                android:textStyle="bold"
-                                android:textColor="@color/purple" />
+                                android:textColor="@color/purplelight"
+                                android:textStyle="bold" />
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_total_orders"
                                 android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp" />
+                                android:layout_marginBottom="4dp"
+                                android:src="@drawable/ic_total_orders" />
 
                             <TextView
                                 android:id="@+id/pending_cash_collections"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="1dp"
+                                android:textColor="@color/yellow"
                                 android:text="$0"
                                 android:textSize="24sp"
-                                android:textStyle="bold"
-                                android:layout_marginTop="1dp" />
+                                android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -258,6 +267,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Recent Orders"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginBottom="8dp" />
@@ -273,5 +283,4 @@
                 android:layout_marginBottom="16dp" />
         </LinearLayout>
     </ScrollView>
-
 </FrameLayout>
