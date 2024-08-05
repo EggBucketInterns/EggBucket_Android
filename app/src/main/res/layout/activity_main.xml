@@ -1,277 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <!-- Background Image on the Bottom Left -->
-    <ImageView
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:background="#F6F6F6">
+
+    <fragment
+        android:layout_marginTop="40dp"
+        android:id="@+id/fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/outlet_nav_graph" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/white"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp"
+        app:fabAlignmentMode="center"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="20dp">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:backgroundTint="@android:color/transparent"
+            app:elevation="0dp"
+            app:itemIconTint="@color/black"
+            app:itemRippleColor="@color/black"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/outlet_bottom_navigation" />
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_marginBottom="-50dp"
-        android:src="@drawable/your_background_drawable"
-        android:scaleType="centerCrop" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Top Section with Avatar and Outlet Name -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
-
-                <ImageView
-                    android:id="@+id/avatar"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/avatar_placeholder"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_toEndOf="@id/avatar"
-                    android:layout_marginStart="8dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true">
-
-                    <TextView
-                        android:id="@+id/outlet_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ashutosh’s EggBucket Outlet"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:layout_marginBottom="4dp" />
-
-                    <TextView
-                        android:id="@+id/welcome_message"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Welcome back!"
-                        android:textSize="14sp"
-                        android:textColor="#757575" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/notification_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_notification"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true" />
-            </RelativeLayout>
-
-            <!-- Outlet Milestones Section -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:background="@drawable/rounded_corner_white"
-                android:layout_marginBottom="16dp"
-                android:elevation="4dp">
-
-                <!-- Outlet Milestones Heading -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Outlet Milestones"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/black" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="8dp"
-                    android:weightSum="2">
-
-                    <!-- Total Orders and Pending Orders Row -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:orientation="horizontal"
-                        android:layout_weight="1">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:background="@drawable/light_black_box"
-                            android:gravity="start">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Total Orders"
-                                android:textStyle="bold"
-                                android:textColor="@color/purple" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_total_orders"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp" />
-
-                            <TextView
-                                android:id="@+id/total_orders"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="87"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:background="@drawable/light_black_box"
-                            android:gravity="start">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Pending Orders"
-                                android:textStyle="bold"
-                                android:textColor="@color/purple" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_pending_orders"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp" />
-
-                            <TextView
-                                android:id="@+id/pending_orders"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="14"
-                                android:textSize="24sp"
-                                android:textStyle="bold"
-                                android:layout_marginTop="4dp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <!-- Completed Orders and Pending Cash Collections Row -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:orientation="horizontal"
-                        android:layout_weight="1"
-                        android:layout_marginTop="8dp">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:background="@drawable/light_black_box"
-                            android:gravity="start">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Completed Orders"
-                                android:textStyle="bold"
-                                android:textColor="@color/purple" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_total_orders"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp" />
-
-                            <TextView
-                                android:id="@+id/completed_orders"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="25"
-                                android:textSize="24sp"
-                                android:textStyle="bold"
-                                android:layout_marginTop="4dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:background="@drawable/light_black_box"
-                            android:gravity="start">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Pending Cash"
-                                android:textStyle="bold"
-                                android:textColor="@color/purple" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_total_orders"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp" />
-
-                            <TextView
-                                android:id="@+id/pending_cash_collections"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="$0"
-                                android:textSize="24sp"
-                                android:textStyle="bold"
-                                android:layout_marginTop="1dp" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Recent Orders -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recent Orders"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_marginBottom="8dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/item_outletorder"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="vertical"
-                tools:itemCount="2"
-                android:layout_marginBottom="16dp" />
-        </LinearLayout>
-    </ScrollView>
-
-</FrameLayout>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="create"
+        android:src="@drawable/ic_add_24"
+        android:tint="@color/white"
+        app:backgroundTint="@color/white"
+        app:layout_anchor="@id/bottomAppbar" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

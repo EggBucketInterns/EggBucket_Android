@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/outletHomeFragment">
+
+    <fragment
+        android:id="@+id/outletHomeFragment"
+        android:name="com.eggbucket.eggbucket_android.OutletHomeFragment"
+        android:label="fragment_outlet_home"
+        tools:layout="@layout/fragment_outlet_home" />
+    <fragment
+        android:id="@+id/outletProfileFragment"
+        android:name="com.eggbucket.eggbucket_android.outletProfileFragment"
+        android:label="fragment_outlet_profile"
+        tools:layout="@layout/fragment_outlet_profile" />
+    <fragment
+        android:id="@+id/outletSearchFragment"
+        android:name="com.eggbucket.eggbucket_android.OutletSearchFragment"
+        android:label="fragment_outlet_search"
+        tools:layout="@layout/fragment_outlet_search" />
+    <fragment
+        android:id="@+id/outletStoreFragment"
+        android:name="com.eggbucket.eggbucket_android.OutletStoreFragment"
+        android:label="fragment_outlet_store"
+        tools:layout="@layout/fragment_outlet_store" />
+</navigation>

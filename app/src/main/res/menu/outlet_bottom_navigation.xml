@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@id/outletHomeFragment"
+        android:icon="@drawable/outlet_home_24"
+        android:title="Home" />
+    <item
+        android:id="@id/outletStoreFragment"
+        android:icon="@drawable/shoping_bag"
+        android:title="Shope" />
+
+    <item
+        android:id="@+id/botton_add"
+        android:enabled="false"
+        android:title="" />
+
+    <item
+        android:id="@id/outletSearchFragment"
+        android:icon="@drawable/outlet_ic_search_24"
+        android:title="Search" />
+
+    <item
+        android:id="@id/outletProfileFragment"
+        android:icon="@drawable/user_profile_image"
+        android:title="Profile" />
+
+
+</menu>

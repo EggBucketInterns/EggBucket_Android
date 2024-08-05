@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@id/deliveryHomeFragment"
+        android:icon="@drawable/outlet_home_24"
+        android:title="Home" />
+    <item
+        android:id="@id/deliveryStoreFragment"
+        android:icon="@drawable/shoping_bag"
+        android:title="Shope" />
+
+    <item
+        android:id="@id/deliverySearchFragment"
+        android:icon="@drawable/outlet_ic_search_24"
+        android:title="Search" />
+
+    <item
+        android:id="@id/deliveryProfileFragment"
+        android:icon="@drawable/user_profile_image"
+        android:title="Profile" />
+</menu>
