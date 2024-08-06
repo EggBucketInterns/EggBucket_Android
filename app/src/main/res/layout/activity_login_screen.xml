@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="#FFA500"
-                android:text="AUTLATE PARTNER" />
+                android:text="OUTLET PARTNER" />
 
             <CheckBox
                 android:id="@+id/delivery_partner"

@@ -54,21 +54,12 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="160dp"
+                android:layout_height="70dp"
                 android:layout_marginBottom="16dp"
+                android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/blue"
-                    android:padding="16dp"
-                    android:text="ONLINE PAYMENT"
-                    android:textColor="@android:color/white" />
 
                 <Button
                     android:layout_width="0dp"
@@ -105,7 +96,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_marginBottom="16dp"
                         android:background="@drawable/outline_edit_text_background"
                         android:gravity="center_vertical"
@@ -122,7 +113,7 @@
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="48dp"
                             android:background="@android:color/transparent"
                             android:hint="Amount in Rs" />
                     </LinearLayout>
@@ -139,7 +130,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:background="@drawable/outline_edit_text_background"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
@@ -154,7 +145,7 @@
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="48dp"
                             android:background="@android:color/transparent"
                             android:hint="Amount in Rs" />
                     </LinearLayout>

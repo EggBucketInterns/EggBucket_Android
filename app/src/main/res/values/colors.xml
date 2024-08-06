@@ -15,5 +15,6 @@
     <color name="transparent">#EDFFFFFF</color>
     <color name="textcolor">#979797</color>
     <color name="purple">#800080</color>
+    <color name="purplelight">#55418E</color>
     <color name="link_color">#007AFF</color>
 </resources>
