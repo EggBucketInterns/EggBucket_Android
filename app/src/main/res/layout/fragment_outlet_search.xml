@@ -7,9 +7,9 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="239dp"
+        android:layout_width="150dp"
         android:layout_margin="10dp"
-        android:textSize="34sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_height="54dp"
@@ -17,18 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="28dp"
-        android:layout_height="29dp"
-        android:layout_margin="10dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.641"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307"
-        app:srcCompat="@drawable/cross_image" />
+
     <androidx.cardview.widget.CardView
         android:id="@id/cardview1"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -49,7 +38,7 @@
                 android:gravity="center"
 
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:padding="10dp"
                 android:layout_weight="1"
                 android:text="COMPLETED" />
@@ -58,7 +47,7 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:padding="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/apply_filter_back"
@@ -86,7 +75,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:padding="10dp"
                 android:text="IN-TRANSIT" />
 
@@ -96,7 +85,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:padding="10dp"
                 android:text="CANCELLED" />
 
@@ -140,7 +129,7 @@
                     android:layout_weight="1"
                     android:paddingStart="16dp"
                     android:paddingBottom="15dp"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:text="Select Date" />
 
                 <ImageView
@@ -189,7 +178,7 @@
                     android:layout_weight="1"
                     android:paddingStart="16dp"
                     android:paddingBottom="15dp"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:text="Select Date" />
 
                 <ImageView
@@ -219,7 +208,7 @@
             android:layout_weight="1"
             android:background="@drawable/apply_filter_back"
             android:gravity="center"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:padding="8dp"
             android:text="Apply Filter"
             android:layout_height="wrap_content" />
@@ -233,7 +222,7 @@
             android:background="@drawable/apply_filter_back"
             android:gravity="center"
             android:padding="8dp"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:text="Reset Filter"
             android:layout_height="wrap_content" />
 
