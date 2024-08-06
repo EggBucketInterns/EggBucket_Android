@@ -26,9 +26,11 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".delivery_dashboard"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".mode_of_payment"
@@ -63,8 +65,9 @@
         <activity
             android:name=".LoginScreenActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+            >
         </activity>
     </application>
 
