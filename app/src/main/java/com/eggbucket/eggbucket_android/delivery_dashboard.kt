@@ -16,6 +16,21 @@ class delivery_dashboard : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_delivery_dashboard)
 
+
+        val amount = intent.getStringExtra("EXTRA_AMOUNT")
+        val fragment=DeliveryHomeFragment()
+        val bundle=Bundle()
+        bundle.putString("amount",amount)
+        fragment.arguments=bundle
+        supportFragmentManager.beginTransaction().add(R.id.fragment2,fragment).commit()
+
+        val pendigItems = intent.getStringExtra("pendingItem")
+        val fragment2=DeliveryHomeFragment()
+        val bundle2=Bundle()
+        bundle2.putString("Items",pendigItems)
+        fragment2.arguments=bundle2
+        supportFragmentManager.beginTransaction().add(R.id.fragment2,fragment2).commit()
+
         bottomNavigationView = findViewById(R.id.bottomNavigation2)
 
         val rootView = findViewById<View>(android.R.id.content)

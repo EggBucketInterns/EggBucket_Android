@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
+import com.eggbucket.eggbucket_android.model.Orders
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,17 +21,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class OutletStoreFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,23 +30,62 @@ class OutletStoreFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_outlet_store, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment OutletStoreFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            OutletStoreFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Sample data
+        val orderList = listOf(
+            Orders(
+                orderId = "#3577",
+                customerId = "Customer ID",
+                customerImageResId=R.drawable.user_profile_image,
+                numberOfTrays = 12,
+                createdAt = "2023-08-01",
+                deliveredAt = "2023-08-03",
+                orderAmount = 567.88,
+                orderStatus = "Completed"
+            ),
+            Orders(
+                orderId = "#3578",
+                customerId = "Customer ID",
+                customerImageResId=R.drawable.user_profile_image,
+                numberOfTrays = 10,
+                createdAt = "2023-08-02",
+                deliveredAt = "2023-08-04",
+                orderAmount = 345.67,
+                orderStatus = "Pending"
+            ),
+            Orders(
+                orderId = "#3579",
+                customerId = "Customer ID",
+                customerImageResId=R.drawable.user_profile_image,
+                numberOfTrays = 8,
+                createdAt = "2023-08-03",
+                deliveredAt = "2023-08-05",
+                orderAmount = 765.45,
+                orderStatus = "Completed"
+            ),
+            Orders(
+                orderId = "#3580",
+                customerId = "Customer ID",
+                customerImageResId=R.drawable.user_profile_image,
+                numberOfTrays = 15,
+                createdAt = "2023-08-04",
+                deliveredAt = "2023-08-06",
+                orderAmount = 890.12,
+                orderStatus = "Shipped"
+            )
+            // Add more dummy items if needed
+        )
+
+        // Find the RecyclerView
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerview1)
+
+        // Set layout manager
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // Set the adapter
+        recyclerView.adapter = OrdersAdapter(requireContext(), orderList)
+
     }
 }

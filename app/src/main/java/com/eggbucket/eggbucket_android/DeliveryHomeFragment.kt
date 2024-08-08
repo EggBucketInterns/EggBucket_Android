@@ -1,59 +1,49 @@
 package com.eggbucket.eggbucket_android
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.widget.*
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DeliveryHomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DeliveryHomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+   // private var message: String?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_delivery_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_delivery_home, container, false)
+        val amount_col=view.findViewById<TextView>(R.id.amount_collected)
+        val pendingOrderCount=view.findViewById<TextView>(R.id.pending_order_count)
+        val  message = arguments?.getString("amount")
+        amount_col.setText("$${message}")
+
+        val  pendingItem = arguments?.getString("Items")
+        pendingOrderCount.setText(pendingItem)
+
+        // Use the message as needed
+        return view
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val confirmOrder=view.findViewById<Button>(R.id.confirm_order)
+        val pendingOd=view.findViewById<CardView>(R.id.pendingOd)
+        pendingOd.setOnClickListener {
+            startActivity(Intent(requireContext(),PendingOrdersActivity::class.java))
+        }
+        /*val amount_collected=view.findViewById<TextView>(R.id.amount_collected)
+        amount_collected.text=message.toString()*/
+
+        confirmOrder.setOnClickListener {
+            startActivity(Intent(requireContext(),Order_Details_Screen::class.java))
+        }
+
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DeliveryHomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DeliveryHomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

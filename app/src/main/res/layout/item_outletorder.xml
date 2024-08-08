@@ -14,6 +14,7 @@
         android:elevation="4dp">
 
         <ImageView
+            android:id="@+id/image_outlet"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_order"
@@ -51,9 +52,8 @@
             android:textSize="10dp"
             android:background="@drawable/rounded_corner_green"
             android:textColor="@android:color/white"
-            android:paddingHorizontal="17dp"
-            android:paddingVertical="9dp"
-            android:layout_gravity="center_vertical" />
+           android:paddingBottom="8dp"
+            android:gravity="center" />
     </LinearLayout>
 
 </LinearLayout>

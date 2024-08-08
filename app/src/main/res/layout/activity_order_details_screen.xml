@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Create_Order_Screen"
+    tools:context=".Order_Details_Screen"
     android:orientation="vertical"
     android:gravity="bottom"
     android:background="#ff9500">
@@ -409,6 +409,7 @@
                                 app:cardCornerRadius="15dp"
                                 >
                                 <TextView
+                                    android:id="@+id/reached"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:text="REACHED"

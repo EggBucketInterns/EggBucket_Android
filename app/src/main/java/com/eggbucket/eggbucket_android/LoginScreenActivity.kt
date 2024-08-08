@@ -20,11 +20,11 @@ class LoginScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login_screen)
-        val outletePartner=findViewById<CheckBox>(R.id.outlet_pertner)
-        val deliveryPartner=findViewById<CheckBox>(R.id.delivery_partner)
-        val gotoNext=findViewById<ImageView>(R.id.goto_next)
-        val customerCode=findViewById<EditText>(R.id.customer_code)
-        val password=findViewById<EditText>(R.id.password)
+        val outletePartner = findViewById<CheckBox>(R.id.outlet_pertner)
+        val deliveryPartner = findViewById<CheckBox>(R.id.delivery_partner)
+        val gotoNext = findViewById<ImageView>(R.id.goto_next)
+        val customerCode = findViewById<EditText>(R.id.customer_code)
+        val password = findViewById<EditText>(R.id.password)
 
         // Set listeners to ensure only one checkbox is checked at a time
         outletePartner.setOnCheckedChangeListener { _, isChecked ->
@@ -43,9 +43,13 @@ class LoginScreenActivity : AppCompatActivity() {
 
         // Set a click listener for the button to perform an action
         gotoNext.setOnClickListener {
-            if(customerCode.text.toString().isEmpty() || password.text.toString().isEmpty()){
-                Toast.makeText(this, "Please fill Customer code and Password first", Toast.LENGTH_SHORT).show()
-            }else {
+            if (customerCode.text.toString().isEmpty() || password.text.toString().isEmpty()) {
+                Toast.makeText(
+                    this,
+                    "Please fill Customer code and Password first",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
                 if (outletePartner.isChecked) {
                     startActivity(Intent(this, MainActivity::class.java))
                 } else if (deliveryPartner.isChecked) {
@@ -57,18 +61,16 @@ class LoginScreenActivity : AppCompatActivity() {
         }
 
 
-
-
     }
 
-   /* fun show(v:View){
-        closeKey()
-    }*/
-    private fun closeKey(){
-        val view:View?=this.currentFocus
-        if (view!==null){
-      val imm=getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken,0)
+    /* fun show(v:View){
+         closeKey()
+     }*/
+    private fun closeKey() {
+        val view: View? = this.currentFocus
+        if (view !== null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }
