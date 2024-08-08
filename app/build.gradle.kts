@@ -57,14 +57,14 @@ dependencies {
 
     implementation ("com.google.android.material:material:1.9.0")
 
-    implementation ("com.google.code.gson:gson:2.10.1")
 
-    implementation (libs.logging.interceptor)
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
-    implementation (libs.converter.simplexml)
+    //retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    implementation ("com.squareup.picasso:picasso:2.8")
 
-    implementation (libs.glide)
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.1")
 
 
 

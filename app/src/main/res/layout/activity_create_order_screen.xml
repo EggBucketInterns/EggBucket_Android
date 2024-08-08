@@ -35,14 +35,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="650dp"
+        android:layout_height="675dp"
         android:orientation="vertical"
         android:background="@drawable/top_curve_bg"
-        android:paddingHorizontal="50dp"
+        android:paddingHorizontal="35dp"
         android:paddingTop="20dp"
-        android:visibility="gone"
+        android:visibility="visible"
         >
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -260,7 +259,7 @@
         android:background="@drawable/top_curve_bg"
         android:paddingHorizontal="40dp"
         android:paddingTop="20dp"
-        android:visibility="visible"
+        android:visibility="gone"
         >
         <LinearLayout
             android:layout_width="match_parent"
