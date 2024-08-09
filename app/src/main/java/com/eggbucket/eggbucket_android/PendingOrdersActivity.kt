@@ -2,6 +2,7 @@ package com.eggbucket.eggbucket_android
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,6 +17,7 @@ class PendingOrdersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_pending_orders)
+        val backDeliveryDash=findViewById<ImageView>(R.id.back_to_deliveryDashboard)
 
         // Sample data
         val pendingOrderList = listOf(
@@ -73,13 +75,16 @@ class PendingOrdersActivity : AppCompatActivity() {
         recyclerView.adapter = PendingOrderAdapter(this, pendingOrderList)
 
         // Create an Intent to start SecondActivity
-        val intent = Intent(this, delivery_dashboard::class.java)
+        backDeliveryDash.setOnClickListener {
+            val intent = Intent(this, delivery_dashboard::class.java)
 
-        // Put the EditText value into the Intent
-        intent.putExtra("pendingItem", pending)
+            // Put the EditText value into the Intent
+            intent.putExtra("pendingItem", pending)
 
-        // Start SecondActivity
-        startActivity(intent)
+            // Start SecondActivity
+            startActivity(intent)
+        }
+
 
     }
 }

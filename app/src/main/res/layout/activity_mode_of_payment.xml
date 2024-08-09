@@ -145,6 +145,7 @@
                             android:src="@drawable/streamline_bag_rupee" />
 
                         <EditText
+                            android:id="@+id/discount_amount"
                             android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:background="@android:color/transparent"

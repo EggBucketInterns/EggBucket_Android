@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:layout_marginTop="50dp"
     android:background="#FFA500"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,6 +16,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/back_to_deliveryDashboard"
             android:layout_width="wrap_content"
             android:paddingTop="5dp"
             android:src="@drawable/previous_errow"
@@ -48,10 +50,13 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pendingOrder_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="30dp"
+                android:layout_height="320dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="11dp"
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/recyclerview_background"
                 android:nestedScrollingEnabled="true"

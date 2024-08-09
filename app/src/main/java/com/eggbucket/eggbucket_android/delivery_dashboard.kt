@@ -5,31 +5,38 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.eggbucket.eggbucket_android.adapters.OrderViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class delivery_dashboard : AppCompatActivity() {
+    private val sharedViewModel: OrderViewModel by viewModels()
     private lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_delivery_dashboard)
+        val amount = intent.getStringExtra("amount").toString()
+        sharedViewModel.setAmount(amount)
+
+        val pendingOrd=intent.getStringExtra("pendingItem")?:""
+        sharedViewModel.setPendingItems(pendingOrd)
 
 
-        val amount = intent.getStringExtra("EXTRA_AMOUNT")
-        val fragment=DeliveryHomeFragment()
+       /* val fragment=DeliveryHomeFragment()
         val bundle=Bundle()
         bundle.putString("amount",amount)
         fragment.arguments=bundle
         supportFragmentManager.beginTransaction().add(R.id.fragment2,fragment).commit()
 
-        val pendigItems = intent.getStringExtra("pendingItem")
+        val pendigItems = intent.getStringExtra("pendingItem").toString()
         val fragment2=DeliveryHomeFragment()
         val bundle2=Bundle()
         bundle2.putString("Items",pendigItems)
         fragment2.arguments=bundle2
-        supportFragmentManager.beginTransaction().add(R.id.fragment2,fragment2).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fragment2,fragment2).commit()*/
 
         bottomNavigationView = findViewById(R.id.bottomNavigation2)
 
