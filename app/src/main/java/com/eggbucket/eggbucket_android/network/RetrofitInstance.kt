@@ -24,4 +24,9 @@ object RetrofitInstance {
             .build()
             .create(ApiService::class.java)
     }
+    private val retrofit: Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+    val apiService = retrofit.create(ApiService::class.java)
 }

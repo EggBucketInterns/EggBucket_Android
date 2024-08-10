@@ -9,3 +9,6 @@ data class DeliveryPartnersItem(
     val lastName: String,
     val phoneNumber: String
 )
+data class DeliveryPartnerResponse(
+    val result: DeliveryPartnersItem
+)
