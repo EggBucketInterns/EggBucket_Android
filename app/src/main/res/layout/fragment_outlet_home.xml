@@ -160,6 +160,7 @@
                             android:layout_width="140dp"
                             android:layout_height="118dp"
                          android:layout_marginStart="16dp"
+
                             android:elevation="4dp"
                             app:cardCornerRadius="23dp">
 
@@ -272,7 +273,7 @@
                                     android:src="@drawable/ic_total_orders" />
 
                                 <TextView
-                                    android:id="@+id/pending_cash_collections"
+                                    android:id="@+id/pendingCash"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="$0"

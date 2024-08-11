@@ -34,55 +34,60 @@
 
 
     <LinearLayout
+        android:id="@+id/createOrderLayout"
         android:layout_width="match_parent"
         android:layout_height="675dp"
-        android:orientation="vertical"
         android:background="@drawable/top_curve_bg"
+        android:orientation="vertical"
         android:paddingHorizontal="35dp"
         android:paddingTop="20dp"
-        android:visibility="gone"
-        android:id="@+id/createOrderLayout"
-        >
+        android:visibility="visible">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Outlet ID(Non Editable-AutoFilled By Session)"
-            android:textColor="#b7aeaf"
             android:layout_marginLeft="5dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:text="Outlet ID(Non Editable-AutoFilled By Session)"
+            android:textColor="#b7aeaf" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/input_box"
             android:layout_marginBottom="15dp"
-            >
+            android:background="@drawable/input_box">
+
             <ImageView
-                android:src="@drawable/input_box"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/input_box" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/baseline_person_outline_24"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    />
+                    android:src="@drawable/baseline_person_outline_24" />
+
                 <EditText
+                    android:id="@+id/OutleId"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#00000000"
                     android:hint="Your Outlet ID"
+                    android:inputType="none"
                     android:paddingStart="15dp"
                     android:textColor="#b7aeaf"
-                    android:textStyle="normal"
-                    android:inputType="none"
                     android:textSize="16dp"
+                    android:textStyle="normal"
+                    android:text="66b3c7226ab3f6c1af298593"
+                    android:enabled="false"
                     />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -91,175 +96,235 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select/Search Vendor"
-            android:textColor="#b7aeaf"
             android:layout_marginLeft="5dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:text="Select/Search Vendor"
+            android:textColor="#b7aeaf" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/input_box"
             android:layout_marginBottom="15dp"
-            >
+            android:background="@drawable/input_box">
+
             <ImageView
-                android:src="@drawable/input_box"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/input_box" />
+
             <LinearLayout
+                android:id="@+id/search_vendor_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/search_vendor_btn"
-                >
+                android:orientation="horizontal">
+
                 <ImageView
 
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/baseline_person_outline_24"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    />
+                    android:src="@drawable/baseline_person_outline_24" />
 
                 <TextView
                     android:id="@+id/search_vendor_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#00000000"
+                    android:gravity="center_vertical"
                     android:hint="Select/Search Vendor"
                     android:paddingStart="15dp"
                     android:textColor="#b7aeaf"
                     android:textSize="16dp"
-                    android:textStyle="normal"
-                    android:gravity="center_vertical"
-                    />
+                    android:textStyle="normal" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total Number of Egg trays to be Delivered"
-            android:textColor="#b7aeaf"
             android:layout_marginLeft="5dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:text="Total Number of Egg trays to be Delivered"
+            android:textColor="#b7aeaf" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/input_box"
             android:layout_marginBottom="15dp"
-            >
+            android:background="@drawable/input_box">
+
             <ImageView
-                android:src="@drawable/input_box"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/input_box" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/baseline_person_outline_24"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    />
+                    android:src="@drawable/baseline_person_outline_24" />
+
                 <EditText
+                    android:id="@+id/trays"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#00000000"
                     android:hint="Enter Number of Trays."
                     android:paddingStart="15dp"
                     android:textColor="#b7aeaf"
-                    android:textStyle="normal"
                     android:textSize="16dp"
-                    />
+                    android:textStyle="normal" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Amount to be collected"
-            android:textColor="#b7aeaf"
             android:layout_marginLeft="5dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:text="Amount to be collected"
+            android:textColor="#b7aeaf" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/input_box"
             android:layout_marginBottom="15dp"
-            >
+            android:background="@drawable/input_box">
+
             <ImageView
-                android:src="@drawable/input_box"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/input_box" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/baseline_person_outline_24"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    />
+                    android:src="@drawable/baseline_person_outline_24" />
+
                 <EditText
+                    android:id="@+id/amount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#00000000"
                     android:hint="Amount to be collected"
                     android:paddingStart="15dp"
                     android:textColor="#b7aeaf"
-                    android:textStyle="normal"
                     android:textSize="16dp"
-                    />
+                    android:textStyle="normal" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/assignDelivreyPartnerBtn"
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/drop_down_bg"
-            android:layout_marginTop="10dp"
-            android:text="Assign delivery Partner"
-            android:textAlignment="center"
-            android:gravity="center"
-            />
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/input_box">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/input_box" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/baseline_person_outline_24" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00000000"
+                    android:hint="Customer ID"
+                    android:inputType="none"
+                    android:paddingStart="15dp"
+                    android:textColor="#b7aeaf"
+                    android:textSize="16dp"
+                    android:textStyle="normal"
+                    android:id="@+id/customerID"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:background="@drawable/drop_down_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/delivery"
+
+                />
+
+            <TextView
+                android:id="@+id/assignDelivreyPartnerBtn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:paddingStart="18dp"
+                android:text="Assign delivery Partner" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <CheckBox
                 android:layout_width="15dp"
                 android:layout_height="15dp"
+                android:id="@+id/IsUrgent"
                 />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:text="Urgent Order Requirement(Fast Delivery)"
-                android:textColor="#b7aeaf"
-                android:layout_marginStart="10dp"/>
+                android:textColor="#b7aeaf" />
 
         </LinearLayout>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#94ABFD"
             android:text="Place Order"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:backgroundTint="#94ABFD"/>
+            android:id="@+id/createOrderBtn"
+            />
 
     </LinearLayout>
 
@@ -268,7 +333,7 @@
         android:layout_height="675dp"
         android:orientation="vertical"
         android:background="@drawable/top_curve_bg"
-        android:paddingHorizontal="40dp"
+        android:paddingHorizontal="20dp"
         android:paddingTop="20dp"
         android:visibility="gone"
         android:id="@+id/selectVendorLayout"
@@ -337,6 +402,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
+            android:id="@+id/vendorRecyclerView"
             android:layout_height="match_parent"/>
     </LinearLayout>
 
@@ -347,7 +413,7 @@
         android:background="@drawable/top_curve_bg"
         android:paddingHorizontal="20dp"
         android:paddingTop="20dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/assignDeliveryPartnerLayout"
         >
         <RelativeLayout

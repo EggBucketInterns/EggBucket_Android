@@ -6,7 +6,9 @@ plugins {
 android {
     namespace = "com.eggbucket.eggbucket_android"
     compileSdk = 34
-
+    viewBinding {
+        enable = true
+    }
     defaultConfig {
         applicationId = "com.eggbucket.eggbucket_android"
         minSdk = 24

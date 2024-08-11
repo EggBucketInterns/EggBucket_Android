@@ -35,11 +35,6 @@ class DeliveryPartnerAdapter(private val deliveryPartners: List<DeliveryPartners
     override fun onBindViewHolder(holder: DeliveryPartnerViewHolder, position: Int) {
         val currentItem = deliveryPartners[position]
         holder.firstnameTextView.text = currentItem.firstName
-        holder.assignBtn.setOnClickListener {
-
-
-
-        }
 
         // Load the image into ImageView
         Glide.with(holder.itemView.context)
