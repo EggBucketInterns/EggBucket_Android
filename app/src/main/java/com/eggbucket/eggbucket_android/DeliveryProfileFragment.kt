@@ -2,16 +2,16 @@ package com.eggbucket.eggbucket_android
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.eggbucket.eggbucket_android.model.data.DeliveryPartnerResponse
-import com.eggbucket.eggbucket_android.model.data.OutletPartnerResponse
+import androidx.fragment.app.Fragment
+import com.eggbucket.eggbucket_android.model.data.DeliveryPartner
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,75 +50,35 @@ class DeliveryProfileFragment : Fragment() {
 
     private fun fetchDeliveryPartnerData(id: String) {
         RetrofitInstance.api.getDeliveryPartner(id)
-            .enqueue(object : Callback<DeliveryPartnerResponse> {
+            .enqueue(object : Callback<DeliveryPartner> {
                 override fun onResponse(
-                    call: Call<DeliveryPartnerResponse>,
-                    response: Response<DeliveryPartnerResponse>
+                    call: Call<DeliveryPartner>,
+                    response: Response<DeliveryPartner>
                 ) {
                     if (response.isSuccessful) {
-                        response.body()?.let {
-                            val partner = it.result
-                            if (partner != null) {
-                                firstNameTextView.text = partner.firstName
-                                lastNameTextView.text = partner.lastName
-                                phoneNumberTextView.text = partner.phoneNumber
-                                driverLicenceNumberTextView.text = partner.driverLicenceNumber
-                                nameTextView.text = partner.firstName
-                                // Picasso.get().load("http://eb-trial.onrender.com/${partner.img}").into(profileImageView)
-                                Log.d(
-                                    "DeliveryProfileFragment",
-                                    "Data fetched successfully: $partner"
-                                )
-                            }
+                        val partner = response.body()
+                        if (partner != null) {
+                            firstNameTextView.text = partner.firstName
+                            lastNameTextView.text = partner.lastName
+                            phoneNumberTextView.text = partner.phoneNumber
+                            driverLicenceNumberTextView.text = partner.driverLicenceNumber
+                            nameTextView.text = partner.firstName
+                            Picasso.get().load(partner.img).into(profileImageView)
+                            Log.d("DeliveryProfileFragment", "Data fetched successfully: $partner")
+                        } else {
+                            Log.e("DeliveryProfileFragment", "Response body is null")
+                            Toast.makeText(context, "Failed to fetch data", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Log.e(
-                            "DeliveryProfileFragment",
-                            "Failed to fetch data: ${response.errorBody()?.string()}"
-                        )
+                        Log.e("DeliveryProfileFragment", "Failed to fetch data: ${response.errorBody()?.string()}")
                         Toast.makeText(context, "Failed to fetch data", Toast.LENGTH_SHORT).show()
                     }
                 }
 
-                override fun onFailure(call: Call<DeliveryPartnerResponse>, t: Throwable) {
+                override fun onFailure(call: Call<DeliveryPartner>, t: Throwable) {
                     Log.e("DeliveryProfileFragment", "Error: ${t.message}")
                     Toast.makeText(context, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
             })
     }
-
-//    private fun fetchDeliveryPartnerData(id: String) {
-//        RetrofitInstance.api.getDeliveryPartner(id)
-//            .enqueue(object : Callback<DeliveryPartnerResponse> {
-//                override fun onResponse(
-//                    call: Call<DeliveryPartnerResponse>,
-//                    response: Response<DeliveryPartnerResponse>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        val body = response.body()
-//                        if (body != null) {
-//                            val partner = body.result
-//                            firstNameTextView.text = partner.firstName
-//                            lastNameTextView.text = partner.lastName
-//                            phoneNumberTextView.text = partner.phoneNumber
-//                            driverLicenceNumberTextView.text = partner.driverLicenceNumber
-//                            nameTextView.text = partner.firstName
-//                            // Picasso.get().load("http://eb-trial.onrender.com/${partner.img}").into(profileImageView)
-//                            Log.d("DeliveryProfileFragment", "Data fetched successfully: $partner")
-//                        } else {
-//                            Log.e("DeliveryProfileFragment", "Response body is null")
-//                            Toast.makeText(context, "Failed to fetch data", Toast.LENGTH_SHORT).show()
-//                        }
-//                    } else {
-//                        Log.e("DeliveryProfileFragment", "Failed to fetch data: ${response.errorBody()?.string()}")
-//                        Toast.makeText(context, "Failed to fetch data", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<DeliveryPartnerResponse>, t: Throwable) {
-//                    Log.e("DeliveryProfileFragment", "Error: ${t.message}")
-//                    Toast.makeText(context, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-//                }
-//            })
-//    }
 }
