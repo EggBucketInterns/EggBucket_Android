@@ -55,16 +55,19 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/avatar1"
+                        android:src="@drawable/car"
                         android:contentDescription="Profile Image"
                         android:layout_marginBottom="8dp"
-                        android:layout_marginTop="8dp"/>
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/circular_shape"
+                        android:clipToOutline="true"/>
 
                     <TextView
                         android:id="@+id/deliveryNameText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Theresa"
+                        android:text="Name"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/black"
@@ -181,36 +184,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:hint="Phone Number"
-                    android:background="@android:color/transparent"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Address Details"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/outline_edit_text_background"
-                android:padding="12dp"
-                android:layout_marginBottom="8dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/outline_home_24"
-                    android:layout_marginEnd="8dp"/>
-
-                <EditText
-                    android:id="@+id/addressTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:hint="Street, City, State, Zipcode"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
 
