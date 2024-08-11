@@ -1,15 +1,20 @@
 package com.eggbucket.eggbucket_android
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import com.eggbucket.eggbucket_android.model.data.DeliveryPartnerResponse
+import com.eggbucket.eggbucket_android.model.data.OutletPartnerResponse
+import com.eggbucket.eggbucket_android.network.RetrofitInstance
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  * A simple [Fragment] subclass.
@@ -17,43 +22,103 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class DeliveryProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var firstNameTextView: TextView
+    private lateinit var lastNameTextView: TextView
+    private lateinit var phoneNumberTextView: TextView
+    private lateinit var driverLicenceNumberTextView: TextView
+    private lateinit var profileImageView: ImageView
+    private lateinit var nameTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_delivery_profile, container, false)
+        val view = inflater.inflate(R.layout.fragment_delivery_profile, container, false)
+
+        firstNameTextView = view.findViewById(R.id.deliveryFirstNameTextView)
+        lastNameTextView = view.findViewById(R.id.deliveryLastNameTextView)
+        phoneNumberTextView = view.findViewById(R.id.deliveryPhoneNumberTextView)
+        profileImageView = view.findViewById(R.id.deliveryProfileImageView)
+        nameTextView = view.findViewById(R.id.deliveryNameText)
+        driverLicenceNumberTextView = view.findViewById(R.id.deliveryVehicleNumberTextView)
+
+        fetchDeliveryPartnerData("66b8b94f8678ebf8692ab1c7")
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DeliveryProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DeliveryProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun fetchDeliveryPartnerData(id: String) {
+        RetrofitInstance.api.getDeliveryPartner(id)
+            .enqueue(object : Callback<DeliveryPartnerResponse> {
+                override fun onResponse(
+                    call: Call<DeliveryPartnerResponse>,
+                    response: Response<DeliveryPartnerResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            val partner = it.result
+                            if (partner != null) {
+                                firstNameTextView.text = partner.firstName
+                                lastNameTextView.text = partner.lastName
+                                phoneNumberTextView.text = partner.phoneNumber
+                                driverLicenceNumberTextView.text = partner.driverLicenceNumber
+                                nameTextView.text = partner.firstName
+                                // Picasso.get().load("http://eb-trial.onrender.com/${partner.img}").into(profileImageView)
+                                Log.d(
+                                    "DeliveryProfileFragment",
+                                    "Data fetched successfully: $partner"
+                                )
+                            }
+                        }
+                    } else {
+                        Log.e(
+                            "DeliveryProfileFragment",
+                            "Failed to fetch data: ${response.errorBody()?.string()}"
+                        )
+                        Toast.makeText(context, "Failed to fetch data", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
+
+                override fun onFailure(call: Call<DeliveryPartnerResponse>, t: Throwable) {
+                    Log.e("DeliveryProfileFragment", "Error: ${t.message}")
+                    Toast.makeText(context, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
+
+//    private fun fetchDeliveryPartnerData(id: String) {
+//        RetrofitInstance.api.getDeliveryPartner(id)
+//            .enqueue(object : Callback<DeliveryPartnerResponse> {
+//                override fun onResponse(
+//                    call: Call<DeliveryPartnerResponse>,
+//                    response: Response<DeliveryPartnerResponse>
+//                ) {
+//                    if (response.isSuccessful) {
+//                        val body = response.body()
+//                        if (body != null) {
+//                            val partner = body.result
+//                            firstNameTextView.text = partner.firstName
+//                            lastNameTextView.text = partner.lastName
+//                            phoneNumberTextView.text = partner.phoneNumber
+//                            driverLicenceNumberTextView.text = partner.driverLicenceNumber
+//                            nameTextView.text = partner.firstName
+//                            // Picasso.get().load("http://eb-trial.onrender.com/${partner.img}").into(profileImageView)
+//                            Log.d("DeliveryProfileFragment", "Data fetched successfully: $partner")
+//                        } else {
+//                            Log.e("DeliveryProfileFragment", "Response body is null")
+//                            Toast.makeText(context, "Failed to fetch data", Toast.LENGTH_SHORT).show()
+//                        }
+//                    } else {
+//                        Log.e("DeliveryProfileFragment", "Failed to fetch data: ${response.errorBody()?.string()}")
+//                        Toast.makeText(context, "Failed to fetch data", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<DeliveryPartnerResponse>, t: Throwable) {
+//                    Log.e("DeliveryProfileFragment", "Error: ${t.message}")
+//                    Toast.makeText(context, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+//                }
+//            })
+//    }
 }

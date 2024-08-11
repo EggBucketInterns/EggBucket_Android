@@ -51,6 +51,7 @@
                     android:padding="16dp">
 
                     <ImageView
+                        android:id="@+id/deliveryProfileImageView"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center_horizontal"
@@ -60,11 +61,13 @@
                         android:layout_marginTop="8dp"/>
 
                     <TextView
+                        android:id="@+id/deliveryNameText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Theresa"
                         android:textSize="20sp"
                         android:textStyle="bold"
+                        android:textColor="@color/black"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="4dp"/>
 
@@ -73,13 +76,14 @@
                         android:layout_height="wrap_content"
                         android:text="Delivery Partner"
                         android:textSize="16sp"
+                        android:textColor="@color/black"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="16dp"/>
 
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Delivery Partner Status"
+                        android:text="Outlet Partner Status"
                         android:backgroundTint="@color/orange"
                         android:textColor="@android:color/white"
                         android:layout_gravity="center_horizontal"/>
@@ -111,8 +115,10 @@
                     android:layout_marginEnd="8dp"/>
 
                 <EditText
+                    android:id="@+id/deliveryFirstNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:hint="First Name"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
@@ -139,8 +145,10 @@
                     android:layout_marginEnd="8dp"/>
 
                 <EditText
+                    android:id="@+id/deliveryLastNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:hint="Last Name"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
@@ -168,8 +176,10 @@
                     android:layout_marginEnd="8dp"/>
 
                 <EditText
+                    android:id="@+id/deliveryPhoneNumberTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:hint="Phone Number"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
@@ -196,8 +206,10 @@
                     android:layout_marginEnd="8dp"/>
 
                 <EditText
+                    android:id="@+id/addressTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:hint="Street, City, State, Zipcode"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
@@ -225,9 +237,11 @@
                     android:layout_marginEnd="8dp"/>
 
                 <EditText
+                    android:id="@+id/deliveryVehicleNumberTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="License Number Plate"
+                    android:textColor="@color/black"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
 

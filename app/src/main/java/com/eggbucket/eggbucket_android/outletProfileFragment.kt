@@ -45,7 +45,7 @@ class outletProfileFragment : Fragment() {
         profileImageView = view.findViewById(R.id.profileImageView)
         nameTextView = view.findViewById(R.id.nameText)
 
-        fetchOutletPartnerData("66b3c62b6ab3f6c1af298582")
+        fetchOutletPartnerData("66b8b8fa8678ebf8692ab1c1")
 
         return view
     }
