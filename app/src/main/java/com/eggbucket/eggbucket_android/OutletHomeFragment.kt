@@ -67,7 +67,7 @@ class OutletHomeFragment : Fragment() {
         binding.pendingOrders.text = pendingOrders.toString();
         binding.pendingCash.text = totalPendingCash.toString();
     }
-    private fun fetchOrders() {
+  /*  private fun fetchOrders() {
         apiService.getAllOrders().enqueue(object : Callback<List<AllOrders>> {
             override fun onResponse(call: Call<List<AllOrders>>, response: Response<List<AllOrders>>) {
                 if (response.isSuccessful && response.body() != null) {
@@ -83,7 +83,7 @@ class OutletHomeFragment : Fragment() {
                 Log.d("checkResponse", "Failed"+t.message)
             }
         })
-    }
+    }*/
     private fun setupRecyclerView() {
         orderAdapter = RecentOrdersAdapter(emptyList())
         binding.recyclerView.apply {
@@ -105,7 +105,7 @@ class OutletHomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        fetchOrders()
+       // fetchOrders()
     }
     override fun onDestroyView() {
         super.onDestroyView()

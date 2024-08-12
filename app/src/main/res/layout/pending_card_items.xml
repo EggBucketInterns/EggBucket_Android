@@ -32,12 +32,11 @@
             <ImageView
                 android:layout_below="@+id/order_id"
                 android:id="@+id/user_image"
-                android:src="@drawable/user_image"
+                android:src="@drawable/generic_avatar"
                 android:layout_marginStart="20dp"
-                android:background="#7E8CD8"
                 android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
             <TextView
                 android:id="@+id/customer_id"
                 android:layout_width="wrap_content"
@@ -123,7 +122,7 @@
                 android:layout_toEndOf="@+id/created_at_text"
                 android:layout_alignParentEnd="true"
                 android:gravity="end"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="10dp"
                 android:layout_below="@+id/created_at_text"
                 android:textStyle="bold"
                 android:textColor="#F37E20"
@@ -136,7 +135,7 @@
                 android:id="@+id/order_money"
                 android:layout_toEndOf="@+id/created_at_text"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="10dp"
                 android:gravity="end"
                 android:layout_below="@+id/order_amount"
                 android:textStyle="bold"
@@ -177,29 +176,34 @@
 
             <LinearLayout
                 android:id="@+id/linear_layout"
-                android:layout_toEndOf="@+id/no_of_tray"
-                android:layout_below="@+id/no_of_tray"
-                android:background="@drawable/order_details_back"
-                android:layout_width="200dp"
-                android:layout_marginStart="5dp"
+                android:layout_width="100dp"
+                android:paddingStart="5dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/no_of_tray"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@+id/no_of_tray"
+                android:background="@drawable/order_details_back"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:paddingTop="8dp"
-                    android:textSize="10sp"
-                    android:textColor="@color/white"
                     android:text="Assign New Order"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_weight=".5"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
+                    android:layout_weight=".5"
                     android:padding="5dp"
-                    android:src="@drawable/order_detail_right_errow"
-                    android:layout_height="wrap_content"/>
+                    android:src="@drawable/order_detail_right_errow" />
             </LinearLayout>
 
 

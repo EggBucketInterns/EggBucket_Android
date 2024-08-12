@@ -17,6 +17,7 @@ class Order_Details_Screen : AppCompatActivity() {
         val reached=findViewById<TextView>(R.id.reached)
         reached.setOnClickListener {
             startActivity(Intent(this,mode_of_payment::class.java))
+            finish()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

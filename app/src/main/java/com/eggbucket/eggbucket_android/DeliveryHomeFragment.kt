@@ -14,6 +14,8 @@ import com.eggbucket.eggbucket_android.adapters.OrderViewModel
 
 class DeliveryHomeFragment : Fragment() {
     private val orderViewModel: OrderViewModel by activityViewModels()
+    lateinit var  amount_col:TextView
+    lateinit var  pendingOrderCount:TextView
    // private var message: String?=null
 
     override fun onCreateView(
@@ -29,21 +31,13 @@ class DeliveryHomeFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val status=false
-        val amount_col=view.findViewById<TextView>(R.id.amount_collected)
-        val pendingOrderCount=view.findViewById<TextView>(R.id.pending_order_count)
+         amount_col=view.findViewById(R.id.amount_collected)
+         pendingOrderCount=view.findViewById(R.id.pending_order_count)
 
         // Initialize the ViewModel
         //orderViewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
 
-        orderViewModel.amount.observe(viewLifecycleOwner, { amount ->
-            amount_col.text=amount
 
-        })
-
-        orderViewModel.pendingItems.observe(viewLifecycleOwner,{pending ->
-            pendingOrderCount.text=pending
-        })
         /*// Get arguments
         val message = arguments?.getString("amount") ?: ""
         val pendingItem = arguments?.getString("Items") ?: ""
@@ -78,4 +72,15 @@ class DeliveryHomeFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        orderViewModel.amount.observe(viewLifecycleOwner, { amount ->
+            amount_col.text="$${amount}"
+        })
+
+        orderViewModel.pendingItems.observe(viewLifecycleOwner,{pending ->
+            pendingOrderCount.text=pending
+        })
+
+    }
 }

@@ -185,7 +185,7 @@ class Create_Order_Screen : AppCompatActivity() {
             })
         }
         fetchDeliveryPartnerDetails();
-        fetchVendorDetails();
+       // fetchVendorDetails();
         assignDeliveryPartnerBtn.setOnClickListener {
 
             showAssignDeliveryPartnerLayout();
