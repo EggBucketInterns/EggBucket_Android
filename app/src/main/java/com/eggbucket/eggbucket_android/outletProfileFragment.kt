@@ -45,7 +45,7 @@ class outletProfileFragment : Fragment() {
         profileImageView = view.findViewById(R.id.profileImageView)
         nameTextView = view.findViewById(R.id.nameText)
 
-        fetchOutletPartnerData("66b3c62b6ab3f6c1af298582")
+        fetchOutletPartnerData("66b8b8fa8678ebf8692ab1c1")
 
         return view
     }
@@ -61,7 +61,7 @@ class outletProfileFragment : Fragment() {
                         phoneNumberTextView.text = partner.phoneNumber
                         aadharNumberTextView.text = partner.aadharNumber
                         nameTextView.text = partner.firstName
-//                        Picasso.get().load("http://eb-trial.onrender.com/${partner.img}").into(profileImageView)
+                        Picasso.get().load(partner.img).into(profileImageView)
                         Log.d("OutletProfileFragment", "Data fetched successfully: $partner")
                     }
                 } else {

@@ -41,7 +41,7 @@ class Create_Order_Screen : AppCompatActivity() {
     public val assignedDeliveryPartners = "";
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContentView(R.layout.activity_create_order_screen)
         val CreateOrderLayout = findViewById<LinearLayout>(R.id.createOrderLayout);
         val SearchVendorLayout = findViewById<LinearLayout>(R.id.selectVendorLayout);

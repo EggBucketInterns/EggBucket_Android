@@ -19,7 +19,7 @@ class delivery_dashboard : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContentView(R.layout.activity_delivery_dashboard)
        /* toolbar=findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)*/

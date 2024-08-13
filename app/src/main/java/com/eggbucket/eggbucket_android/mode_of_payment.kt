@@ -15,7 +15,7 @@ class mode_of_payment : AppCompatActivity() {
    // private lateinit var orderViewModel: OrderViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContentView(R.layout.activity_mode_of_payment)
        val discountAmount=findViewById<EditText>(R.id.discount_amount)
 

@@ -18,7 +18,7 @@ import androidx.core.view.WindowInsetsCompat
 class LoginScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContentView(R.layout.activity_login_screen)
         val outletePartner = findViewById<CheckBox>(R.id.outlet_pertner)
         val deliveryPartner = findViewById<CheckBox>(R.id.delivery_partner)
