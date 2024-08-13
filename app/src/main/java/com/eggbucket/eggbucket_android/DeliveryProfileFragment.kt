@@ -1,5 +1,6 @@
 package com.eggbucket.eggbucket_android
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -43,9 +44,19 @@ class DeliveryProfileFragment : Fragment() {
         nameTextView = view.findViewById(R.id.deliveryNameText)
         driverLicenceNumberTextView = view.findViewById(R.id.deliveryVehicleNumberTextView)
 
-        fetchDeliveryPartnerData("66b8b94f8678ebf8692ab1c7")
+        val userID = getUserId()
+        if (userID != null){
+            fetchDeliveryPartnerData(userID)
+        }else{
+            Toast.makeText(context, "User ID not found", Toast.LENGTH_SHORT).show()
+        }
 
         return view
+    }
+
+    private fun getUserId():String?{
+        val sharedPref = activity?.getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
+        return sharedPref?.getString("USER_ID",null)
     }
 
     private fun fetchDeliveryPartnerData(id: String) {

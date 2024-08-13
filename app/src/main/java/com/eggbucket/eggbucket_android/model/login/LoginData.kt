@@ -6,7 +6,11 @@ data class LoginRequest(
 )
 
 data class LoginResponse(
-    val success: Boolean,
-    val userId: String?,  // Assuming the response contains a userId
-    val message: String
+    val status: String,
+    val token: String,
+    val user: User
+)
+
+data class User(
+    val _id: String
 )

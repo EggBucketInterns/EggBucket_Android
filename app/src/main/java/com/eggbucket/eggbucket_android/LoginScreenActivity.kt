@@ -80,8 +80,7 @@ class LoginScreenActivity : AppCompatActivity() {
                     response: Response<LoginResponse?>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
-                        val userId = response.body()?.userId
-                        // Store the user ID in shared preferences
+                        val userId = response.body()?.user?._id                        // Store the user ID in shared preferences
                         saveUserId(userId)
                         // Navigate to OutletPartner dashboard
                         startActivity(Intent(this@LoginScreenActivity, MainActivity::class.java))
@@ -113,8 +112,7 @@ class LoginScreenActivity : AppCompatActivity() {
                     response: Response<LoginResponse?>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
-                        val userId = response.body()?.userId
-                        // Store the user ID in shared preferences
+                        val userId = response.body()?.user?._id                        // Store the user ID in shared preferences
                         saveUserId(userId)
                         // Navigate to DeliveryPartner dashboard
                         startActivity(
@@ -143,10 +141,15 @@ class LoginScreenActivity : AppCompatActivity() {
     }
 
     private fun saveUserId(userId: String?) {
-        val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
-        with(sharedPref.edit()) {
-            putString("USER_ID", userId)
-            apply()
+        if (userId != null) {
+            val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
+            with(sharedPref.edit()) {
+                putString("USER_ID", userId)
+                apply()
+            }
+            Toast.makeText(this, "Saved User ID", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Failed to save User ID", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -1,5 +1,6 @@
 package com.eggbucket.eggbucket_android
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -45,9 +46,20 @@ class outletProfileFragment : Fragment() {
         profileImageView = view.findViewById(R.id.profileImageView)
         nameTextView = view.findViewById(R.id.nameText)
 
-        fetchOutletPartnerData("66b8b8fa8678ebf8692ab1c1")
+        val userID = getUserId()
+        if (userID != null){
+            fetchOutletPartnerData(userID)
+        }else{
+//            fetchOutletPartnerData("66b8b8fa8678ebf8692ab1c1")
+            Toast.makeText(context, "User ID not found", Toast.LENGTH_SHORT).show()
+        }
 
         return view
+    }
+
+    private fun getUserId():String?{
+        val sharedPref = activity?.getSharedPreferences("EggBucketPrefs",Context.MODE_PRIVATE)
+        return sharedPref?.getString("USER_ID",null)
     }
 
     private fun fetchOutletPartnerData(id: String) {
