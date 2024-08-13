@@ -18,7 +18,6 @@ data class Order(
 data class OrderCreate(
     val outletId: String,
     val customerId: String,
-    val vendorId: String,
     val deliveryId: String,
     val numTrays: String,
     val amount: String,
