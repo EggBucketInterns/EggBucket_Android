@@ -7,6 +7,8 @@ import com.eggbucket.eggbucket_android.model.VendorItem
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.model.data.DeliveryPartner
 import com.eggbucket.eggbucket_android.model.data.OutletPartnerResponse
+import com.eggbucket.eggbucket_android.model.login.LoginRequest
+import com.eggbucket.eggbucket_android.model.login.LoginResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -31,4 +33,11 @@ interface ApiService {
 
     @GET("orders/egg-bucket-b2b/getAllOrder")
     suspend fun getAllOrders():ArrayList<GetAllOrdersItem>
+
+    @POST("auth/egg-bucket-b2b/OutletPartnerLogin")
+    fun outletPartnerLogin(@Body request: LoginRequest): Call<LoginResponse?>
+
+    @POST("auth/egg-bucket-b2b/driverLogin")
+    fun deliveryPartnerLogin(@Body request: LoginRequest): Call<LoginResponse?>
+
 }
