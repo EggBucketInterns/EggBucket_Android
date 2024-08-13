@@ -113,7 +113,7 @@ class Create_Order_Screen : AppCompatActivity() {
             SearchVendorLayout.visibility = View.VISIBLE;
             AssignDeliveryPartnerLayout.visibility = View.GONE;
         }
-        fun fetchVendorDetails() {
+        /*fun fetchVendorDetails() {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val vendors = apiService.getAllVendors()
@@ -127,7 +127,7 @@ class Create_Order_Screen : AppCompatActivity() {
                     e.printStackTrace()
                 }
             }
-        }
+        }*/
         fun fetchDeliveryPartnerDetails() {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
@@ -167,7 +167,7 @@ class Create_Order_Screen : AppCompatActivity() {
                 status="pending",
             )
 
-            apiService.createOrder(order).enqueue(object : Callback<Void> {
+         /*   apiService.createOrder(order).enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
                         Toast.makeText(applicationContext, "Success", Toast.LENGTH_SHORT).show();
@@ -182,7 +182,7 @@ class Create_Order_Screen : AppCompatActivity() {
                 override fun onFailure(call: Call<Void>, t: Throwable) {
                     Toast.makeText(applicationContext, "Failure", Toast.LENGTH_SHORT).show();
                 }
-            })
+            })*/
         }
         fetchDeliveryPartnerDetails();
        // fetchVendorDetails();

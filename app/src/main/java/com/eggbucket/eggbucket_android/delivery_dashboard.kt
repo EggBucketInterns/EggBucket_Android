@@ -4,6 +4,8 @@ import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import android.widget.Toolbar
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
@@ -12,12 +14,16 @@ import com.eggbucket.eggbucket_android.adapters.OrderViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class delivery_dashboard : AppCompatActivity() {
+    lateinit var toolbar:androidx.appcompat.widget.Toolbar
     private val sharedViewModel: OrderViewModel by viewModels()
     private lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_delivery_dashboard)
+       /* toolbar=findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)*/
+
         val amount = intent.getStringExtra("amount").toString()
         sharedViewModel.setAmount(amount)
 

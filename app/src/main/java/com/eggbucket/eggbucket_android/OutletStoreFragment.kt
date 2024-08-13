@@ -7,6 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
+import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
+import com.eggbucket.eggbucket_android.network.RetrofitInstance
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -20,6 +27,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class OutletStoreFragment : Fragment() {
+    lateinit var adapter: OrdersAdapter
+    lateinit var recyclerView: RecyclerView
+    lateinit var dataList:ArrayList<GetAllOrdersItem>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +41,26 @@ class OutletStoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dataList= arrayListOf()
+        // Find the RecyclerView
+        recyclerView = view.findViewById(R.id.recyclerview1)
+
+        // Set layout manager
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // Set the adapter
+        fetchDataAndBindRecyclerview()
 
 
+    }
+    fun fetchDataAndBindRecyclerview(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val dataList = RetrofitInstance.api.getAllOrders()
+
+            withContext(Dispatchers.Main) {
+                adapter = OrdersAdapter(requireContext(),dataList)
+                recyclerView.adapter = adapter
+            }
+        }
     }
 }

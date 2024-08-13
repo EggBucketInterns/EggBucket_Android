@@ -8,10 +8,12 @@
     tools:context=".delivery_dashboard"
     android:background="@color/white">
 
+
     <fragment
         android:id="@+id/fragment2"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
+        android:layout_marginTop="45dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigation2"

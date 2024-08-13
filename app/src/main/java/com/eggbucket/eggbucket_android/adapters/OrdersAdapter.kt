@@ -57,6 +57,7 @@ class OrdersAdapter(
                 holder.orderStatusTextView.setTextColor(context.resources.getColor(android.R.color.white))
             }
             "Pending" -> {
+
                 holder.orderStatusTextView.setBackgroundResource(R.drawable.pending_back)
                 holder.orderStatusTextView.setTextColor(context.resources.getColor(android.R.color.black))
             }
