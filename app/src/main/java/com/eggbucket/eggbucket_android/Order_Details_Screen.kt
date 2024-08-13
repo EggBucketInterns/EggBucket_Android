@@ -11,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 class Order_Details_Screen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
+        enableEdgeToEdge()
         setContentView(R.layout.activity_order_details_screen)
 
         val reached=findViewById<TextView>(R.id.reached)

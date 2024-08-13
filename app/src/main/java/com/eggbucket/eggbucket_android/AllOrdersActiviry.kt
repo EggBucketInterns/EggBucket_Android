@@ -9,7 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 class AllOrdersActiviry : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
+        enableEdgeToEdge()
         setContentView(R.layout.activity_all_orders_activiry)
 
     }
