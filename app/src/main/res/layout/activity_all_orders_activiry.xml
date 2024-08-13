@@ -73,20 +73,23 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="580dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/recyclerview_background"
                 android:nestedScrollingEnabled="true"
-                tools:listitem="@layout/all_orders_cart_items" />
-
+                android:visibility="visible" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="80dp">
             <ImageView
                 android:id="@+id/clockimage1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/recyclerview"
                 android:layout_marginStart="250dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
@@ -130,7 +133,7 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:textSize="24sp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:background="@drawable/referes_background"
                 android:textColor="@color/white"
                 android:layout_marginStart="50dp"
@@ -138,7 +141,7 @@
                 android:text="Refresh Order History"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
+            </RelativeLayout>
 
         </RelativeLayout>
 
