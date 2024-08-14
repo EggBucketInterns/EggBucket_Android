@@ -1,5 +1,6 @@
 package com.eggbucket.eggbucket_android.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import com.eggbucket.eggbucket_android.R
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter.OrderViewHolder
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 
-class LiveOrderAdapter(val dataList:ArrayList<GetAllOrdersItem>):RecyclerView.Adapter<LiveOrderAdapter.LiveOrderViewHolder>() {
+class LiveOrderAdapter(val context:Context,val dataList:ArrayList<GetAllOrdersItem>):RecyclerView.Adapter<LiveOrderAdapter.LiveOrderViewHolder>() {
 
     class LiveOrderViewHolder(itemview:View):RecyclerView.ViewHolder(itemview) {
         val date=itemview.findViewById<TextView>(R.id.live_order_date)

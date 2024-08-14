@@ -58,7 +58,7 @@ class DeliveryHomeFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             liveOrderdataList = RetrofitInstance.api.getOrdersByDeliveryId(getUserId().toString())
             withContext(Dispatchers.Main) {
-                liveOrderAdapter=LiveOrderAdapter(liveOrderdataList)
+                liveOrderAdapter=LiveOrderAdapter(requireContext(),liveOrderdataList)
                 recyclerView.adapter=liveOrderAdapter
 
             }
@@ -132,5 +132,6 @@ class DeliveryHomeFragment : Fragment() {
         val sharedPref = activity?.getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
         return sharedPref?.getString("USER_ID",null)
     }
+
 
 }
