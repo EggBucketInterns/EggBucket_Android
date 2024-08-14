@@ -67,7 +67,7 @@
                         android:id="@+id/nameText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Theresa"
+                        android:text="Name"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/black"
@@ -190,7 +190,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Address Details"
+                android:text="Aadhar Number"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="4dp"/>
 
@@ -205,7 +205,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/outline_home_24"
+                    android:src="@drawable/baseline_credit_card_24"
                     android:layout_marginEnd="8dp"/>
 
                 <EditText
@@ -213,38 +213,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:hint="Street, City, State, Zipcode"
-                    android:background="@android:color/transparent"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vehicle Information"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/outline_edit_text_background"
-                android:padding="12dp"
-                android:layout_marginBottom="16dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/outline_directions_car_24"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="8dp"/>
-
-                <EditText
-                    android:id="@+id/vehicleNumberTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="License Number Plate"
-                    android:textColor="@color/black"
+                    android:hint="Aadhar Number"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
 

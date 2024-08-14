@@ -19,14 +19,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
-    lateinit var  createOrder:ImageView
+    private lateinit var  createOrder:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
-
-
 
         bottomNavigationView = findViewById(R.id.bottomNavigation)
 
@@ -40,8 +37,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-
         createOrder=findViewById<ImageView>(R.id.create_order)
         createOrder.setOnClickListener {
             gotoCreateOrder()
@@ -49,14 +44,13 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         val nevController = findNavController(R.id.fragment)
         bottomNavigationView.setupWithNavController(nevController)
-
-
     }
-    fun gotoCreateOrder(){
+
+    private fun gotoCreateOrder(){
             startActivity(Intent(this,Create_Order_Screen::class.java))
     }
 
-    fun View.isKeyboardVisible(): Boolean {
+    private fun View.isKeyboardVisible(): Boolean {
         val rect = Rect()
         this.getWindowVisibleDisplayFrame(rect)
         val screenHeight = this.rootView.height

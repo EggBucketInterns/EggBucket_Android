@@ -99,13 +99,17 @@
             android:layout_marginLeft="5dp"
             android:layout_marginBottom="10dp"
             android:text="Select/Search Vendor"
-            android:textColor="#b7aeaf" />
+            android:textColor="#b7aeaf"
+            android:visibility="gone"
+            />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="15dp"
-            android:background="@drawable/input_box">
+            android:background="@drawable/input_box"
+            android:visibility="gone"
+            >
 
             <ImageView
                 android:layout_width="match_parent"
@@ -117,7 +121,8 @@
                 android:id="@+id/search_vendor_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <ImageView
 

@@ -14,24 +14,23 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.eggbucket.eggbucket_android.model.loginmodel.LoginRequest
+import com.eggbucket.eggbucket_android.model.login.LoginRequest
+import com.eggbucket.eggbucket_android.model.login.LoginResponse
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginScreenActivity : AppCompatActivity() {
     lateinit var submit:LinearLayout
 
     // Define a CoroutineScope tied to the Activity's lifecycle
-    private val activityScope = CoroutineScope(Dispatchers.Main + Job())
+   // private val activityScope = CoroutineScope(Dispatchers.Main + Job())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_login_screen)
-        val outletePartner = findViewById<CheckBox>(R.id.outlet_pertner)
+
+        val outletPartner = findViewById<CheckBox>(R.id.outlet_pertner)
         val deliveryPartner = findViewById<CheckBox>(R.id.delivery_partner)
         val customerCode = findViewById<EditText>(R.id.customer_code)
         val password = findViewById<EditText>(R.id.password)
@@ -50,7 +49,7 @@ class LoginScreenActivity : AppCompatActivity() {
         }*/
 
         // Set listeners to ensure only one checkbox is checked at a time
-        outletePartner.setOnCheckedChangeListener { _, isChecked ->
+        outletPartner.setOnCheckedChangeListener { _, isChecked ->
             closeKey()
             if (isChecked) {
                 deliveryPartner.isChecked = false
@@ -60,31 +59,117 @@ class LoginScreenActivity : AppCompatActivity() {
         deliveryPartner.setOnCheckedChangeListener { _, isChecked ->
             closeKey()
             if (isChecked) {
-                outletePartner.isChecked = false
+                outletPartner.isChecked = false
             }
         }
 
-        // Set a click listener for the button to perform an action
+        // Set a click listener for the button to perform login
         submit.setOnClickListener {
             if (customerCode.text.toString().isEmpty() || password.text.toString().isEmpty()) {
                 Toast.makeText(this, "Please fill Customer code and Password first", Toast.LENGTH_SHORT).show()
             } else {
-                if (outletePartner.isChecked) {
-                    startActivity(Intent(this, MainActivity::class.java))
+                val loginRequest = LoginRequest(
+                    phone = customerCode.text.toString(),
+                    pass = password.text.toString()
+                )
+
+                if (outletPartner.isChecked) {
+                    //startActivity(Intent(this,MainActivity::class.java))
+                    loginAsOutletPartner(loginRequest)
                 } else if (deliveryPartner.isChecked) {
-                    startActivity(Intent(this, delivery_dashboard::class.java))
+                   // startActivity(Intent(this,delivery_dashboard::class.java))
+                    loginAsDeliveryPartner(loginRequest)
                 } else {
-                    Toast.makeText(this, "Please select a Anyone", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please select an option", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
 
+    private fun loginAsOutletPartner(loginRequest: LoginRequest) {
+        RetrofitInstance.api.outletPartnerLogin(loginRequest)
+            .enqueue(object : Callback<LoginResponse?> {
+                override fun onResponse(
+                    call: Call<LoginResponse?>,
+                    response: Response<LoginResponse?>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        val userId = response.body()?.user?._id                        // Store the user ID in shared preferences
+                        saveUserId(userId)
+                        // Navigate to OutletPartner dashboard
+                        startActivity(Intent(this@LoginScreenActivity, MainActivity::class.java))
+                    } else {
+                        Toast.makeText(
+                            this@LoginScreenActivity,
+                            "Login failed for Outlet Partner",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<LoginResponse?>, t: Throwable) {
+                    Toast.makeText(
+                        this@LoginScreenActivity,
+                        "Error: ${t.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
 
     }
 
-    /* fun show(v:View){
+    private fun loginAsDeliveryPartner(loginRequest: LoginRequest) {
+        RetrofitInstance.api.deliveryPartnerLogin(loginRequest)
+            .enqueue(object : Callback<LoginResponse?> {
+                override fun onResponse(
+                    call: Call<LoginResponse?>,
+                    response: Response<LoginResponse?>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        val userId = response.body()?.user?._id                        // Store the user ID in shared preferences
+                        saveUserId(userId)
+                        // Navigate to DeliveryPartner dashboard
+                        startActivity(
+                            Intent(
+                                this@LoginScreenActivity,
+                                delivery_dashboard::class.java
+                            )
+                        )
+                    } else {
+                        Toast.makeText(
+                            this@LoginScreenActivity,
+                            "Login failed for Delivery Partner",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<LoginResponse?>, t: Throwable) {
+                    Toast.makeText(
+                        this@LoginScreenActivity,
+                        "Error: ${t.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
+    }
+
+    private fun saveUserId(userId: String?) {
+        if (userId != null) {
+            val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
+            with(sharedPref.edit()) {
+                putString("USER_ID", userId)
+                apply()
+            }
+            Toast.makeText(this, "Saved User ID", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Failed to save User ID", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+     fun show(v:View){
          closeKey()
-     }*/
+     }
     private fun closeKey() {
         val view: View? = this.currentFocus
         if (view !== null) {
@@ -93,38 +178,5 @@ class LoginScreenActivity : AppCompatActivity() {
         }
     }
 
-   /* private fun authenticateUser(phone: String, password: String) {
-        // Show a loading indicator if necessary
-
-        activityScope.launch {
-            try {
-                val loginRequest = LoginRequest(phone = phone, pass = password)
-
-                // Choose the appropriate endpoint based on your use case
-                val response = withContext(Dispatchers.IO) {
-                    RetrofitInstance.api.outletPartnerLogin(loginRequest)
-                    // Or for delivery partner login:
-                    // RetrofitClient.apiService.deliveryPartnerLogin(loginRequest)
-                }
-
-                if (response.isSuccessful) {
-                    val loginResponse = response.body()
-                    if (loginResponse != null && loginResponse.success) {
-                        Toast.makeText(this@LoginScreenActivity, "Login successful: ${loginResponse.message}", Toast.LENGTH_LONG).show()
-                        // Navigate to the next screen or perform other actions
-                        startActivity(Intent(this@LoginScreenActivity,MainActivity::class.java))
-                    } else {
-                        Toast.makeText(this@LoginScreenActivity, "Login failed: ${loginResponse?.message ?: "Unknown error"}", Toast.LENGTH_LONG).show()
-                    }
-                } else {
-                    Toast.makeText(this@LoginScreenActivity, "Server Error: ${response.code()}", Toast.LENGTH_LONG).show()
-                }
-            } catch (e: Exception) {
-                Toast.makeText(this@LoginScreenActivity, "Network Error: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
-            } finally {
-                // Hide the loading indicator if necessary
-            }
-        }
-    }*/
 
 }

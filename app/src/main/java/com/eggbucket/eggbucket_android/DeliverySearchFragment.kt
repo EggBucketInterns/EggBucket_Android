@@ -5,29 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
+import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
+import com.eggbucket.eggbucket_android.network.RetrofitInstance
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DeliverySearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DeliverySearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var dataList:ArrayList<GetAllOrdersItem>
+    lateinit var adapter: OrdersAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,23 +26,34 @@ class DeliverySearchFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_delivery_search, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DeliverySearchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DeliverySearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val completed=view.findViewById<TextView>(R.id.filter_completed)
+        val cancelled=view.findViewById<TextView>(R.id.filter_cancelled)
+        val intransit=view.findViewById<TextView>(R.id.filter_intransit)
+        val pending=view.findViewById<TextView>(R.id.filter_pending)
+        val filter=view.findViewById<TextView>(R.id.apply_filter)
+        val reset=view.findViewById<TextView>(R.id.filter_reset)
+
+        filter.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                dataList = RetrofitInstance.api.getAllOrders()
+
+                withContext(Dispatchers.Main) {
+                    adapter = OrdersAdapter(requireContext(),dataList)
+                    pending.text="Pending  ${adapter.getPendingOrdersCount().toString()} "
+                    completed.text="Completed  ${adapter.getCompletedOrdersCount().toString()} "
+                    intransit.text="In-Transit  ${adapter.getInTransitOrdersCount().toString()} "
+                    cancelled.text="Cancelled  ${adapter.getCancelledOrdersCount().toString()} "
                 }
             }
+        }
+        reset.setOnClickListener {
+            pending.text="Pending"
+            completed.text="Completed"
+            intransit.text="In-Transit"
+            cancelled.text="Cancelled"
+        }
+
     }
 }
