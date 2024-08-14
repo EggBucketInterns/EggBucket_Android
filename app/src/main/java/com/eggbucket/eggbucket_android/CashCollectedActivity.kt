@@ -6,8 +6,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eggbucket.eggbucket_android.adapters.CashToCollectAdapter
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.network.ApiService
@@ -18,7 +20,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CashCollectedActivity : AppCompatActivity() {
-    private lateinit var adapter: OrdersAdapter
+    private lateinit var adapter: CashToCollectAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var dataList: ArrayList<GetAllOrdersItem>
 
@@ -45,10 +47,10 @@ class CashCollectedActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             // Fetch data from the API
 
-            dataList = RetrofitInstance.api.getOrderByOutletIdByStatus(getUserId().toString(),"completed")
+            dataList = RetrofitInstance.api.getOrderByOutletIdByStatus(getUserId().toString(),"delivered")
             // Update the RecyclerView on the main thread
             withContext(Dispatchers.Main) {
-                adapter = OrdersAdapter(this@CashCollectedActivity, dataList)
+                adapter = CashToCollectAdapter(this@CashCollectedActivity, dataList,lifecycleScope);
                 recyclerView.adapter = adapter
             }
         }

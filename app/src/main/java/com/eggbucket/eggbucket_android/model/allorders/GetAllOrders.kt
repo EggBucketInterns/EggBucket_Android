@@ -11,7 +11,6 @@ data class GetAllOrdersItem(
     val outletId: OutletId,
     val status:String,
     val updatedAt: String,
-    val vendorId: VendorId
 )
 data class CustomerId(
     val _id: String,
