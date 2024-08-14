@@ -9,82 +9,49 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 import com.eggbucket.eggbucket_android.adapters.PendingOrderAdapter
 import com.eggbucket.eggbucket_android.model.PendingOrder
+import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
+import com.eggbucket.eggbucket_android.network.RetrofitInstance
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PendingOrdersActivity : AppCompatActivity() {
+    lateinit var adapter: OrdersAdapter
+    lateinit var recyclerView: RecyclerView
+    lateinit var dataList:ArrayList<GetAllOrdersItem>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_pending_orders)
         val backDeliveryDash=findViewById<ImageView>(R.id.back_to_deliveryDashboard)
+        /*backDeliveryDash.setOnClickListener {
+            startActivity(Intent(this@PendingOrdersActivity,delivery_dashboard::class.java))
+        }*/
 
-        // Sample data
-        val pendingOrderList = listOf(
-            PendingOrder(
-                orderId = "#3577",
-                customerId = "Customer ID",
-                customerIdNumber = "72382378",
-                numberOfTrays = 12,
-                createdAt = "2023-08-01",
-                deliveredAt = "2023-08-03",
-                orderAmount = 567.88,
-                orderStatus = "Pending"
-            ),
-            PendingOrder(
-                orderId = "#3578",
-                customerId = "Customer ID",
-                customerIdNumber = "12345678",
-                numberOfTrays = 10,
-                createdAt = "2023-08-02",
-                deliveredAt = "2023-08-04",
-                orderAmount = 345.67,
-                orderStatus = "Pending"
-            ),
-            PendingOrder(
-                orderId = "#3579",
-                customerId = "Customer ID",
-                customerIdNumber = "87654321",
-                numberOfTrays = 8,
-                createdAt = "2023-08-03",
-                deliveredAt = "2023-08-05",
-                orderAmount = 765.45,
-                orderStatus = "Pending"
-            ),
-            PendingOrder(
-                orderId = "#3580",
-                customerId = "Customer ID",
-                customerIdNumber = "24681357",
-                numberOfTrays = 15,
-                createdAt = "2023-08-04",
-                deliveredAt = "2023-08-06",
-                orderAmount = 890.12,
-                orderStatus = "Pending"
-            )
-            // Add more dummy items if needed
-        )
-        var pending=pendingOrderList.size.toString()
-
+        dataList= arrayListOf()
         // Find the RecyclerView
-        val recyclerView: RecyclerView = findViewById(R.id.pendingOrder_recyclerview)
+        recyclerView = findViewById(R.id.pendingOrder_recyclerview)
 
         // Set layout manager
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Set the adapter
-        recyclerView.adapter = PendingOrderAdapter(this, pendingOrderList)
+        fetchDataAndBindRecyclerview()
 
-        // Create an Intent to start SecondActivity
-        backDeliveryDash.setOnClickListener {
-            val intent = Intent(this, delivery_dashboard::class.java)
+    }
+    fun fetchDataAndBindRecyclerview(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val dataList = RetrofitInstance.api.getAllOrders()
 
-            // Put the EditText value into the Intent
-            intent.putExtra("pendingItem", pending)
-
-            // Start SecondActivity
-            startActivity(intent)
+            withContext(Dispatchers.Main) {
+                adapter = OrdersAdapter(this@PendingOrdersActivity,dataList)
+                recyclerView.adapter = adapter
+            }
         }
-
-
     }
 }

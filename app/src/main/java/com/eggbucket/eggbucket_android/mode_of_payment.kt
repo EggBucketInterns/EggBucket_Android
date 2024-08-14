@@ -12,7 +12,7 @@ import com.eggbucket.eggbucket_android.R
 import com.eggbucket.eggbucket_android.adapters.OrderViewModel
 
 class mode_of_payment : AppCompatActivity() {
-   // private lateinit var orderViewModel: OrderViewModel
+    private lateinit var orderViewModel: OrderViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,7 +29,7 @@ class mode_of_payment : AppCompatActivity() {
             val discount=discountAmount.text.toString().toInt()
             val amount = amountR.text.toString().toInt()
             var finalAmount=(amount - discount).toString()
-           // orderViewModel.setAmount(amount)
+           // orderViewModel.setAmount(finalAmount)
 
             // Create an Intent to start SecondActivity
             val intent = Intent(this, delivery_dashboard::class.java)
@@ -37,6 +37,7 @@ class mode_of_payment : AppCompatActivity() {
 
             // Start SecondActivity
             startActivity(intent)
+            finish()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

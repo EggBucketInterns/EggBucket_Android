@@ -11,11 +11,21 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.eggbucket.eggbucket_android.adapters.OrderViewModel
+import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
+import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
+import com.eggbucket.eggbucket_android.network.RetrofitInstance
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DeliveryHomeFragment : Fragment() {
     private val orderViewModel: OrderViewModel by activityViewModels()
     lateinit var  amount_col:TextView
     lateinit var  pendingOrderCount:TextView
+    lateinit var completed_order:TextView
+    lateinit var dataList:ArrayList<GetAllOrdersItem>
+    lateinit var adapter: OrdersAdapter
    // private var message: String?=null
 
     override fun onCreateView(
@@ -33,6 +43,22 @@ class DeliveryHomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
          amount_col=view.findViewById(R.id.amount_collected)
          pendingOrderCount=view.findViewById(R.id.pending_order_count)
+        completed_order=view.findViewById(R.id.txt_completed)
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+             dataList = RetrofitInstance.api.getAllOrders()
+
+            withContext(Dispatchers.Main) {
+                adapter = OrdersAdapter(requireContext(),dataList)
+                pendingOrderCount.text=adapter.getPendingOrdersCount().toString()
+
+                completed_order.text=adapter.getCompletedOrdersCount().toString()
+
+
+            }
+        }
+
 
         // Initialize the ViewModel
         //orderViewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
@@ -58,10 +84,10 @@ class DeliveryHomeFragment : Fragment() {
 
 */
         val confirmOrder=view.findViewById<Button>(R.id.confirm_order)
-        val pendingOd=view.findViewById<CardView>(R.id.pendingOd)
-        pendingOd.setOnClickListener {
+       // val pendingOd=view.findViewById<CardView>(R.id.pendingOd)
+        /*pendingOd.setOnClickListener {
             startActivity(Intent(requireContext(),PendingOrdersActivity::class.java))
-        }
+        }*/
         /*val amount_collected=view.findViewById<TextView>(R.id.amount_collected)
         amount_collected.text=message.toString()*/
 
@@ -78,9 +104,9 @@ class DeliveryHomeFragment : Fragment() {
             amount_col.text="$${amount}"
         })
 
-        orderViewModel.pendingItems.observe(viewLifecycleOwner,{pending ->
+       /* orderViewModel.pendingItems.observe(viewLifecycleOwner,{pending ->
             pendingOrderCount.text=pending
-        })
+        })*/
 
     }
 }

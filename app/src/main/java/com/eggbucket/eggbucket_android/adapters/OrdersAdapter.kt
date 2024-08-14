@@ -70,4 +70,11 @@ class OrdersAdapter(
         // Return the size of the order list
         return orderList.size
     }
+    fun getCompletedOrdersCount(): Int = orderList.count { it.status == "completed" }
+
+    fun getPendingOrdersCount(): Int = orderList.count { it.status == "pending" }
+    fun getInTransitOrdersCount(): Int = orderList.count { it.status == "intransit" }
+    fun getCancelledOrdersCount(): Int = orderList.count { it.status == "cancelled" }
+
+
 }
