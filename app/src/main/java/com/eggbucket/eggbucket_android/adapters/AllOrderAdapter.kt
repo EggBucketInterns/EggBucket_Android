@@ -20,6 +20,8 @@ class AllOrderAdapter(
     class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val noOfTrays: TextView = itemView.findViewById(R.id.no_of_trays)
         val status :TextView = itemView.findViewById(R.id.order_status)
+        val amount :TextView = itemView.findViewById(R.id.order_location)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
@@ -33,6 +35,7 @@ class AllOrderAdapter(
         val order = orderList[position]
         holder.noOfTrays.text = order.numTrays;
         holder.status.text = order.status;
+        holder.amount.text = order.amount;
         when (order.status) {
             "completed" -> {
               holder.status.setBackgroundResource(R.drawable.completed_back)
@@ -45,6 +48,9 @@ class AllOrderAdapter(
             }
             "canceled" ->{
                 holder.status.setBackgroundResource(R.drawable.cancelled_bg)
+            }
+            "delivered"->{
+                holder.status.setBackgroundResource(R.drawable.button)
             }
             // Add more statuses as needed
         }

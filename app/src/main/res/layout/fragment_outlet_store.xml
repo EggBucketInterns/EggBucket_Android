@@ -78,10 +78,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview1"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginStart="30dp"
+                android:layout_height="700dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="30dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/recyclerview_background"
                 android:nestedScrollingEnabled="true"
@@ -103,21 +103,24 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/clockimage12"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/freepik_floor" />
+                android:src="@drawable/freepik_floor"
+                android:visibility="gone"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/clockimage12"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/freepik_deviceinject2" />
+                android:src="@drawable/freepik_deviceinject2"
+                android:visibility="gone"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/clockimage12"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/freepik_character_inject2" />
+                android:src="@drawable/freepik_character_inject2"
+                android:visibility="gone"/>
             <TextView
                 android:id="@+id/history1"
                 android:textStyle="bold"
@@ -129,7 +132,8 @@
                 android:textSize="28sp"
                 android:gravity="center"
                 android:layout_below="@+id/floor1"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
             <TextView
                 android:layout_below="@+id/history1"
                 android:gravity="center"
@@ -142,7 +146,9 @@
                 android:layout_marginEnd="50dp"
                 android:text="Refresh Order History"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                />
 
 
         </RelativeLayout>

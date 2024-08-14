@@ -4,7 +4,6 @@ data class Order(
     val _id: String,
     val outletId: String,
     val customerId: String,
-    val vendorId: String,
     val deliveryId: String,
     val numTrays: String,
     val amount: String,
@@ -26,5 +25,7 @@ data class OrderCreate(
     val updatedAt: String,
     val status : String,
 )
-
+data class StatusUpdate(
+    val status: String
+)
 

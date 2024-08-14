@@ -133,7 +133,7 @@ class OutletHomeFragment : Fragment() {
             startActivity(intent)
         }
         binding.completedOrderBtn.setOnClickListener {
-            val intent = Intent(requireContext(), AllOrdersActiviry::class.java)
+            val intent = Intent(requireContext(), CompletedOrders::class.java)
             startActivity(intent)
         }
         binding.pendingOrdersBtn.setOnClickListener {
