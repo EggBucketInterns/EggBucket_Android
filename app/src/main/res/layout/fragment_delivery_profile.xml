@@ -123,6 +123,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:hint="First Name"
+                    android:editable="false"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
 
@@ -153,6 +154,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:hint="Last Name"
+                    android:editable="false"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
 
@@ -184,6 +186,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:hint="Phone Number"
+                    android:editable="false"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
 
@@ -214,6 +217,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="License Number Plate"
+                    android:editable="false"
                     android:textColor="@color/black"
                     android:background="@android:color/transparent"/>
             </LinearLayout>

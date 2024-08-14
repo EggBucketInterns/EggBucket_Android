@@ -94,14 +94,14 @@ class LoginScreenActivity : AppCompatActivity() {
                     response: Response<LoginResponse?>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
-                        val userId = response.body()?.user?._id                        // Store the user ID in shared preferences
+                        val userId = response.body()?.user?._id
                         saveUserId(userId)
                         // Navigate to OutletPartner dashboard
                         startActivity(Intent(this@LoginScreenActivity, MainActivity::class.java))
                     } else {
                         Toast.makeText(
                             this@LoginScreenActivity,
-                            "Login failed for Outlet Partner",
+                            "Please check phone no or password for Outlet Partner",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -138,7 +138,7 @@ class LoginScreenActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(
                             this@LoginScreenActivity,
-                            "Login failed for Delivery Partner",
+                            "Please check phone no or password for Delivery Partner",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
