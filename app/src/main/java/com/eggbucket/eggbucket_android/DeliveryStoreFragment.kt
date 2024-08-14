@@ -1,5 +1,6 @@
 package com.eggbucket.eggbucket_android
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,7 +46,7 @@ class DeliveryStoreFragment : Fragment() {
     }
     fun fetchDataAndBindRecyclerview(){
         CoroutineScope(Dispatchers.IO).launch {
-            val dataList = RetrofitInstance.api.getAllOrders()
+            val dataList = RetrofitInstance.api.getOrdersByDeliveryId(getUserId().toString())
 
             withContext(Dispatchers.Main) {
                 adapter = OrdersAdapter(requireContext(),dataList)
@@ -54,5 +55,8 @@ class DeliveryStoreFragment : Fragment() {
         }
     }
 
-
+    private fun getUserId():String?{
+        val sharedPref = activity?.getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
+        return sharedPref?.getString("USER_ID",null)
+    }
 }
