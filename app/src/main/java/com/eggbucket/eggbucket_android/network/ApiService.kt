@@ -31,13 +31,13 @@ interface ApiService {
     suspend fun getAllDeliveryPartners(): List<DeliveryPartnersItem>
 
     @GET("vendors/egg-bucket-b2b/getAllVendor")
-    suspend fun getAllVendors():ArrayList<VendorItem>
+    suspend fun getAllVendors(): ArrayList<VendorItem>
 
     @POST("orders/egg-bucket-b2b/create-order")
     fun createOrder(@Body order: OrderCreate): Call<Void>
 
     @GET("orders/egg-bucket-b2b/getAllOrder")
-    suspend fun getAllOrders():ArrayList<GetAllOrdersItem>
+    suspend fun getAllOrders(): ArrayList<GetAllOrdersItem>
 
 
     @POST("auth/egg-bucket-b2b/OutletPartnerLogin")
@@ -64,9 +64,14 @@ interface ApiService {
             @Path("id") orderId: String,
             @Body status: StatusUpdate
         ):Call<Order>
-}
 
     @GET("orders/egg-bucket-b2b/getAllOrder")
     suspend fun getOrdersByDeliveryId(@Query("customerId") customerId: String): ArrayList<GetAllOrdersItem>
+
+    @GET("orders/egg-bucket-b2b/getAllOrder")
+    suspend fun getOrderByDeliveryIdByStatus(
+        @Query("customerId") customerId: String,
+        @Query("status") status: String
+    ): ArrayList<GetAllOrdersItem>
 
 }

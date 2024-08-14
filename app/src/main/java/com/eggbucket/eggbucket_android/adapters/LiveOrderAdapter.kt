@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.R
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter.OrderViewHolder
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class LiveOrderAdapter(val context:Context,val dataList:ArrayList<GetAllOrdersItem>):RecyclerView.Adapter<LiveOrderAdapter.LiveOrderViewHolder>() {
 
@@ -35,10 +37,20 @@ class LiveOrderAdapter(val context:Context,val dataList:ArrayList<GetAllOrdersIt
         holder.date.text=currentItem.createdAt
         holder.trays.text=currentItem.numTrays
         holder.amountlive.text=currentItem.amount
-        holder.venderName.text=currentItem.vendorId.vendorName
+        holder.venderName.text = currentItem.customerId?.customerName ?: "Unknown Customer"
     }
 
     override fun getItemCount(): Int {
         return dataList.size
     }
+
+    private fun formatDate(dateString: String?): String {
+        // Assuming dateString is in ISO format, e.g., "2024-08-15T12:34:56Z"
+        // You can use SimpleDateFormat to convert it to a more readable format
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.getDefault())
+        val date = inputFormat.parse(dateString)
+        return outputFormat.format(date)
+    }
+
 }
