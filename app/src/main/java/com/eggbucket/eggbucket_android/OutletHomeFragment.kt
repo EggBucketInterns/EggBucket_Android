@@ -65,11 +65,13 @@ class OutletHomeFragment : Fragment() {
             totalOrders++
 
             when (order.status) {
-                "pending" -> {
-                    pendingOrders++
-                    totalPendingCash += Integer.parseInt(order.amount);
-                }
-                "completed" -> completedOrders++
+//                "pending" -> {
+//                    pendingOrders++
+//                    totalPendingCash += Integer.parseInt(order.amount);
+//                }
+//                "completed" -> completedOrders++
+//                "delivered" -> totalPendingCash += Integer.parseInt(order.amount);
+//                "intransit" -> totalPendingCash += Integer.parseInt(order.amount);
             }
         }
         // Now you have the counts and total pending cash.
@@ -84,6 +86,7 @@ class OutletHomeFragment : Fragment() {
         binding.pendingOrders.text = pendingOrders.toString();
         binding.pendingCash.text = totalPendingCash.toString();
     }
+
 
 
 //  private suspend fun fetchOrders() {
@@ -119,9 +122,15 @@ class OutletHomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {_binding = FragmentOutletHomeBinding.inflate(inflater, container, false)
+    ): View? {
+        _binding = FragmentOutletHomeBinding.inflate(inflater, container, false)
         // Return the root view
+
         return binding.root
+    }
+    override fun onResume() {
+        fetchDataAndBindRecyclerview()
+        super.onResume()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -167,9 +176,6 @@ class OutletHomeFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
             dataList = RetrofitInstance.api.getOrdersByOutletId(getUserId().toString());
-//            dataList = ArrayList(allOrders.filter { order ->
-//                order.outletId.toString() == "66b8b8fa8678ebf8692ab1c1"
-//            })
 
             withContext(Dispatchers.Main) {
                 adapter = AllOrderAdapter(requireContext(),dataList)
@@ -188,7 +194,8 @@ class OutletHomeFragment : Fragment() {
                         totalPendingCash += Integer.parseInt(order.amount);
                     }
                     "completed" -> completedOrders++
-                    "intrasit" -> totalPendingCash += Integer.parseInt(order.amount);
+                    "delivered" -> totalPendingCash += Integer.parseInt(order.amount);
+                    "intransit" -> totalPendingCash += Integer.parseInt(order.amount);
 
                 }
             }

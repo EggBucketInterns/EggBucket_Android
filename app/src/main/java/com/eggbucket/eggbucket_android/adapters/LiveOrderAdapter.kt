@@ -34,7 +34,6 @@ class LiveOrderAdapter(val dataList:ArrayList<GetAllOrdersItem>):RecyclerView.Ad
         holder.date.text=currentItem.createdAt
         holder.trays.text=currentItem.numTrays
         holder.amountlive.text=currentItem.amount
-        holder.venderName.text=currentItem.vendorId.vendorName
     }
 
     override fun getItemCount(): Int {

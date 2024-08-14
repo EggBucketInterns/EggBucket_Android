@@ -1,5 +1,6 @@
 package com.eggbucket.eggbucket_android.network
 
+import com.eggbucket.eggbucket_android.model.DeliveryPartnerModel
 import com.eggbucket.eggbucket_android.model.DeliveryPartnersItem
 import com.eggbucket.eggbucket_android.model.Order
 import com.eggbucket.eggbucket_android.model.OrderCreate
@@ -39,7 +40,6 @@ interface ApiService {
     @GET("orders/egg-bucket-b2b/getAllOrder")
     suspend fun getAllOrders():ArrayList<GetAllOrdersItem>
 
-
     @POST("auth/egg-bucket-b2b/OutletPartnerLogin")
     fun outletPartnerLogin(@Body request: LoginRequest): Call<LoginResponse?>
 
@@ -54,19 +54,29 @@ interface ApiService {
         @Query("outletId") outletId: String,
         @Query("status") status: String): ArrayList<GetAllOrdersItem>
 
-    @PATCH("orders/egg-bucket-b2b/order/{id}")
-    suspend fun updateOrderStatus(
-        @Path("id") orderId: String,
-        @Body statusUpdate: Map<String, String>): GetAllOrdersItem
+//    @PATCH("orders/egg-bucket-b2b/order/{id}")
+//    suspend fun updateOrderStatus(
+//        @Path("id") orderId: String,
+//        @Body statusUpdate: Map<String, String>): GetAllOrdersItem
+//
+//        @PATCH("orders/egg-bucket-b2b/order/{id}")
+//        suspend fun updateOrderStatus(
+//            @Path("id") orderId: String,
+//            @Body status: StatusUpdate
+//        ):Call<Order>
 
-        @PATCH("orders/egg-bucket-b2b/order/{id}")
-        suspend fun updateOrderStatus(
-            @Path("id") orderId: String,
-            @Body status: StatusUpdate
-        ):Call<Order>
-}
+    @PATCH("orders/egg-bucket-b2b/order/{id}")
+    suspend fun updateStatusCompleted(
+        @Path("id") orderId: String,
+        @Body statusUpdate: Map<String, String>
+    ): Order
+
+    @GET("egg-bucket-b2b/get-all-outlets")
+    suspend fun getDeliveryPartnerByOutlet(@Query("outletPartner") outletId: String):ArrayList<DeliveryPartnerModel>
 
     @GET("orders/egg-bucket-b2b/getAllOrder")
     suspend fun getOrdersByDeliveryId(@Query("customerId") customerId: String): ArrayList<GetAllOrdersItem>
+
+
 
 }
