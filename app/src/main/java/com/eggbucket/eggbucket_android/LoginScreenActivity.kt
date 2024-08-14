@@ -77,7 +77,7 @@ class LoginScreenActivity : AppCompatActivity() {
                     //startActivity(Intent(this,MainActivity::class.java))
                     loginAsOutletPartner(loginRequest)
                 } else if (deliveryPartner.isChecked) {
-                   // startActivity(Intent(this,delivery_dashboard::class.java))
+                    //startActivity(Intent(this,delivery_dashboard::class.java))
                     loginAsDeliveryPartner(loginRequest)
                 } else {
                     Toast.makeText(this, "Please select an option", Toast.LENGTH_SHORT).show()
@@ -85,7 +85,6 @@ class LoginScreenActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun loginAsOutletPartner(loginRequest: LoginRequest) {
         RetrofitInstance.api.outletPartnerLogin(loginRequest)
             .enqueue(object : Callback<LoginResponse?> {

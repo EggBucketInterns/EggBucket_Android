@@ -35,6 +35,31 @@ class OutletSearchFragment : Fragment() {
         val filter=view.findViewById<TextView>(R.id.fil_apply)
         val reset=view.findViewById<TextView>(R.id.fil_reset)
 
+        completed.setOnClickListener {
+            completed.setBackgroundResource(R.drawable.apply_filter_back)
+            cancelled.setBackgroundResource(R.drawable.no_background)
+            intransit.setBackgroundResource(R.drawable.no_background)
+            pending.setBackgroundResource(R.drawable.no_background)
+        }
+        cancelled.setOnClickListener {
+            completed.setBackgroundResource(R.drawable.no_background)
+            cancelled.setBackgroundResource(R.drawable.apply_filter_back)
+            intransit.setBackgroundResource(R.drawable.no_background)
+            pending.setBackgroundResource(R.drawable.no_background)
+        }
+        intransit.setOnClickListener {
+            completed.setBackgroundResource(R.drawable.no_background)
+            cancelled.setBackgroundResource(R.drawable.no_background)
+            intransit.setBackgroundResource(R.drawable.apply_filter_back)
+            pending.setBackgroundResource(R.drawable.no_background)
+        }
+        pending.setOnClickListener {
+            completed.setBackgroundResource(R.drawable.no_background)
+            cancelled.setBackgroundResource(R.drawable.no_background)
+            intransit.setBackgroundResource(R.drawable.no_background)
+            pending.setBackgroundResource(R.drawable.apply_filter_back)
+        }
+
         filter.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 dataList = RetrofitInstance.api.getAllOrders()

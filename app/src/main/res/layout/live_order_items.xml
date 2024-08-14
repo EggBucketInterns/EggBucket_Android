@@ -62,6 +62,7 @@
                     android:background="@drawable/rounded_background_green"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="6dp"
+                    android:singleLine="true"
                     android:text="Super Fast Delivery"
                     android:textColor="@android:color/white"
                     android:textSize="14sp" />
