@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"/>
         <TextView
-            android:id="@+id/locationd1"
+            android:id="@+id/deliveryPartnerName"
             android:layout_width="wrap_content"
             android:layout_toEndOf="@id/imagev1"
             android:textSize="16sp"
@@ -26,19 +26,36 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_below="@+id/locationd1"
+            android:layout_below="@+id/deliveryPartnerName"
             android:textColor="@color/textcolor"
             android:layout_toEndOf="@id/imagev1"
             android:text="Location Details"
             android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:layout_margin="5dp">
         <TextView
             android:layout_width="wrap_content"
+            android:id="@+id/amount"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:textSize="34sp"
+            android:text="2500"
             android:textColor="#FEAD1D"
-            android:text="$7"
-            android:layout_marginEnd="20dp"
-            android:layout_height="wrap_content"/>
+            android:textSize="24sp"
+            />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/tick"
+            android:id="@+id/completedBtn"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            />
+        </LinearLayout>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

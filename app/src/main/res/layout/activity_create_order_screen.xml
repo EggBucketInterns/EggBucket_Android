@@ -86,7 +86,7 @@
                     android:textColor="#b7aeaf"
                     android:textSize="16dp"
                     android:textStyle="normal"
-                    android:text="66b3c7226ab3f6c1af298593"
+                    android:text=""
                     android:enabled="false"
                     />
             </LinearLayout>

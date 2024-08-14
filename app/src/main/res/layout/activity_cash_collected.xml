@@ -21,20 +21,23 @@
 
   <ScrollView
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:fillViewport="true">
+      android:layout_height="match_parent"
+      android:fillViewport="true"
+      android:background="@drawable/top_curve_bg">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="1dp"
         android:elevation="24dp"
-        android:layout_marginEnd="3dp"
+        android:layout_marginEnd="1dp"
         app:cardCornerRadius="30dp"
-        android:layout_height="1000dp">
+        android:layout_height="1000dp"
+        >
 
       <RelativeLayout
           android:layout_width="match_parent"
-          android:layout_height="match_parent">
+          android:layout_height="match_parent"
+          android:background="@drawable/top_curve_bg">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -50,22 +53,26 @@
               android:textColor="@color/textcolor"
               android:background="@drawable/search_back"
               android:text="Search by Outlet Name"
-              android:layout_height="wrap_content"/>
+              android:layout_height="50dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/outletRecyclerView"
+            android:id="@+id/cashRecyclerView"
             android:layout_below="@+id/search_outlet"
-            tools:listitem="@layout/returned_cash_card_items"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
-
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="150dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/outletRecyclerView"
+
             android:src="@drawable/bg_design"
             android:layout_height="wrap_content"/>
 
@@ -73,7 +80,6 @@
             android:id="@+id/person_image"
             android:layout_width="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/outletRecyclerView"
             android:src="@drawable/illestration_design"
             android:layout_height="wrap_content"/>
 
@@ -98,8 +104,9 @@
             android:layout_marginEnd="120dp"
             android:layout_marginStart="120dp"
             android:layout_height="wrap_content"/>
-
+        </RelativeLayout>
       </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
   </ScrollView>
 </LinearLayout>

@@ -31,7 +31,7 @@
             android:gravity="center"
             android:textSize="24dp"
             android:textColor="@color/white"
-            android:text="All Orders"
+            android:text="Pending Orders"
             android:id="@+id/pageName"
             android:layout_height="35dp" />
 
@@ -75,7 +75,7 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/allOrdersRecyclerview"
+                android:id="@+id/PendingOrdersRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="630dp"
                 android:layout_marginStart="20dp"
@@ -90,61 +90,61 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:layout_marginTop="80dp">
-            <ImageView
-                android:id="@+id/clockimage1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="250dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:src="@drawable/clock_img" />
+                <ImageView
+                    android:id="@+id/clockimage1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="250dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/clock_img" />
 
-            <ImageView
-                android:id="@+id/floor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/clockimage1"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/freepik_floor" />
+                <ImageView
+                    android:id="@+id/floor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/clockimage1"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/freepik_floor" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/clockimage1"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/freepik_deviceinject2" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/clockimage1"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/freepik_deviceinject2" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/clockimage1"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/freepik_character_inject2" />
-            <TextView
-                android:id="@+id/history"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:text="No Order History Found !"
-                android:layout_width="match_parent"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="20dp"
-                android:textSize="28sp"
-                android:gravity="center"
-                android:layout_below="@+id/floor"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_below="@+id/history"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textSize="24sp"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/referes_background"
-                android:textColor="@color/white"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:text="Refresh Order History"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/clockimage1"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/freepik_character_inject2" />
+                <TextView
+                    android:id="@+id/history"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:text="No Order History Found !"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="20dp"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/floor"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_below="@+id/history"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textSize="24sp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/referes_background"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:text="Refresh Order History"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
             </RelativeLayout>
 
         </RelativeLayout>

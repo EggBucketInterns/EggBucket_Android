@@ -1,6 +1,8 @@
 package com.eggbucket.eggbucket_android
 
 import RecentOrdersAdapter
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,11 +14,19 @@ import retrofit2.Callback
 import retrofit2.Response
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eggbucket.eggbucket_android.adapters.AllOrderAdapter
+import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 //import com.eggbucket.eggbucket_android.adapters.ResentOrdersAdapter
 import com.eggbucket.eggbucket_android.databinding.FragmentOutletHomeBinding
 import com.eggbucket.eggbucket_android.model.AllOrders
 import com.eggbucket.eggbucket_android.model.RecentOrdersData
+import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
+import com.eggbucket.eggbucket_android.network.RetrofitInstance
 import com.eggbucket.eggbucket_android.network.RetrofitInstance.apiService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,10 +39,17 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class OutletHomeFragment : Fragment() {
-
+    lateinit var adapter: AllOrderAdapter
+    lateinit var recyclerView: RecyclerView
+    lateinit var dataList:ArrayList<GetAllOrdersItem>
+    lateinit var allOrders:ArrayList<GetAllOrdersItem>
     private var _binding: FragmentOutletHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var orderAdapter: RecentOrdersAdapter
+    var totalOrders = 0
+    var pendingOrders = 0
+    var completedOrders = 0
+    var totalPendingCash = 0
 
     private fun processOrders(orders: List<AllOrders>) {
 
@@ -67,23 +84,25 @@ class OutletHomeFragment : Fragment() {
         binding.pendingOrders.text = pendingOrders.toString();
         binding.pendingCash.text = totalPendingCash.toString();
     }
-  /*  private fun fetchOrders() {
-        apiService.getAllOrders().enqueue(object : Callback<List<AllOrders>> {
-            override fun onResponse(call: Call<List<AllOrders>>, response: Response<List<AllOrders>>) {
-                if (response.isSuccessful && response.body() != null) {
-                    val orders = response.body()!!
-                    Log.d("checkResponse", response.body().toString())
-                    processOrders(orders)
-                } else {
-                    Log.d("checkResponse", response.message())
-                }
-            }
 
-            override fun onFailure(call: Call<List<AllOrders>>, t: Throwable) {
-                Log.d("checkResponse", "Failed"+t.message)
-            }
-        })
-    }*/
+
+//  private suspend fun fetchOrders() {
+//        apiService.getAllOrders().enqueue(object : Callback<List<AllOrders>> {
+//            override fun onResponse(call: Call<List<AllOrders>>, response: Response<List<AllOrders>>) {
+//                if (response.isSuccessful && response.body() != null) {
+//                    val orders = response.body()!!
+//                    Log.d("checkResponse", response.body().toString())
+//                    processOrders(orders)
+//                } else {
+//                    Log.d("checkResponse", response.message())
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<AllOrders>>, t: Throwable) {
+//                Log.d("checkResponse", "Failed"+t.message)
+//            }
+//        })
+//    }
     private fun setupRecyclerView() {
         orderAdapter = RecentOrdersAdapter(emptyList())
         binding.recyclerView.apply {
@@ -91,7 +110,10 @@ class OutletHomeFragment : Fragment() {
             adapter = orderAdapter
         }
     }
-
+    private fun getUserId():String?{
+        val sharedPref = activity?.getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
+        return sharedPref?.getString("USER_ID",null)
+    }
 
 
     override fun onCreateView(
@@ -104,12 +126,76 @@ class OutletHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.totalOrderBtn.setOnClickListener {
+            val intent = Intent(requireContext(), AllOrdersActiviry::class.java).apply {
+                putExtra("name","Total Orders");            }
+            startActivity(intent)
+        }
+        binding.completedOrderBtn.setOnClickListener {
+            val intent = Intent(requireContext(), AllOrdersActiviry::class.java)
+            startActivity(intent)
+        }
+        binding.pendingOrdersBtn.setOnClickListener {
+            val intent = Intent(requireContext(), PendingOrders::class.java)
+            startActivity(intent)
+        }
+        binding.pendingCashBtn.setOnClickListener {
+            val intent = Intent(requireContext(), CashCollectedActivity::class.java)
+            startActivity(intent)
+        }
+        Log.d("aaaaaaaaaaaaaa", getUserId().toString())
         setupRecyclerView()
        // fetchOrders()
+        dataList= arrayListOf()
+        // Find the RecyclerView
+        recyclerView = view.findViewById(R.id.recyclerView)
+
+        // Set layout manager
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        // Set the adapter
+        fetchDataAndBindRecyclerview()
     }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         // Clear the binding reference when the view is destroyed
         _binding = null
+    }
+    fun fetchDataAndBindRecyclerview(){
+
+        CoroutineScope(Dispatchers.IO).launch {
+            dataList = RetrofitInstance.api.getOrdersByOutletId(getUserId().toString());
+//            dataList = ArrayList(allOrders.filter { order ->
+//                order.outletId.toString() == "66b8b8fa8678ebf8692ab1c1"
+//            })
+
+            withContext(Dispatchers.Main) {
+                adapter = AllOrderAdapter(requireContext(),dataList)
+                recyclerView.adapter = adapter
+            }
+            var totalOrders = 0
+            var pendingOrders = 0
+            var completedOrders = 0
+            var totalPendingCash = 0
+            for (order in dataList) {
+                totalOrders++
+
+                when (order.status) {
+                    "pending" -> {
+                        pendingOrders++
+                        totalPendingCash += Integer.parseInt(order.amount);
+                    }
+                    "completed" -> completedOrders++
+                    "intrasit" -> totalPendingCash += Integer.parseInt(order.amount);
+
+                }
+            }
+            binding.totalOrders.text = totalOrders.toString();
+            binding.completedOrders.text = completedOrders.toString();
+            binding.pendingOrders.text = pendingOrders.toString();
+            binding.pendingCash.text = totalPendingCash.toString();
+        }
     }
 }

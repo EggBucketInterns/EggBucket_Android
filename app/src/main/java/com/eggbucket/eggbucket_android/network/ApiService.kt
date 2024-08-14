@@ -15,6 +15,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
     @GET("outletPartners/egg-bucket-b2b/outlet_partner/{id}")
@@ -41,5 +42,11 @@ interface ApiService {
 
     @POST("auth/egg-bucket-b2b/driverLogin")
     fun deliveryPartnerLogin(@Body request: LoginRequest): Call<LoginResponse?>
+
+    @GET("orders/egg-bucket-b2b/getAllOrder")
+    suspend fun getOrdersByOutletId(@Query("outletId") outletId: String): ArrayList<GetAllOrdersItem>
+
+    @GET("orders/egg-bucket-b2b/getAllOrder")
+    suspend fun getOrderByOutletIdByStatus(@Query("outletId") outletId: String,@Query("status") status: String): ArrayList<GetAllOrdersItem>
 
 }

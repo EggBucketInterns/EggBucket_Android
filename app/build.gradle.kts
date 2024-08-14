@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.navigation.runtime.ktx)
     var nav_version = "2.7.7"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

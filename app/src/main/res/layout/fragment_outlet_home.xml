@@ -117,6 +117,7 @@
                             android:layout_marginBottom="12dp">
                         <!-- Total Orders Card -->
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/totalOrderBtn"
                             android:layout_width="140dp"
                             android:layout_height="118dp"
                             android:elevation="4dp"
@@ -160,7 +161,7 @@
                             android:layout_width="140dp"
                             android:layout_height="118dp"
                          android:layout_marginStart="16dp"
-
+                            android:id="@+id/pendingOrdersBtn"
                             android:elevation="4dp"
                             app:cardCornerRadius="23dp">
 
@@ -210,6 +211,7 @@
                             android:layout_margin="1dp"
                             android:elevation="4dp"
                             app:cardCornerRadius="23dp"
+                            android:id="@+id/completedOrderBtn"
                            >
 
                             <LinearLayout
@@ -250,6 +252,7 @@
                         android:layout_marginStart="16dp"
                             android:elevation="4dp"
                             app:cardCornerRadius="23dp"
+                            android:id="@+id/pendingCashBtn"
                             >
 
                             <LinearLayout

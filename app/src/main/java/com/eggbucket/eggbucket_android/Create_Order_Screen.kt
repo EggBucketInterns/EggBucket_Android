@@ -36,6 +36,8 @@ import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import android.content.Context
+import android.content.SharedPreferences
 
 class Create_Order_Screen : AppCompatActivity() {
     public val assignedDeliveryPartners = "";
@@ -55,8 +57,7 @@ class Create_Order_Screen : AppCompatActivity() {
         val amountText = findViewById<EditText>(R.id.amount);
         val traysText = findViewById<EditText>(R.id.trays);
         val createOrderBtn = findViewById<Button>(R.id.createOrderBtn);
-
-
+        val outletIdTextView = findViewById<EditText>(R.id.OutleId);
         lateinit var recyclerView: RecyclerView
         lateinit var adapter: DeliveryPartnerAdapter
         lateinit var vendorAdapter : VendorAdapter
@@ -69,10 +70,12 @@ class Create_Order_Screen : AppCompatActivity() {
         var trays : String
         var amount : String
         var isUrgent : Boolean
-        //have to chancge when authentication is implemented
-        OutletIdInp = "66b3c7226ab3f6c1af298593";
+        val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
+// Retrieve the stored USER_ID
+        val userId = sharedPref.getString("USER_ID", null)
+        outletIdTextView.setText(userId);
+        OutletIdInp = userId.toString();
         customerIdInp = "66b3c8aa6ab3f6c1af2985a0";
-
 
 
         recyclerView = findViewById(R.id.vendorRecyclerView)

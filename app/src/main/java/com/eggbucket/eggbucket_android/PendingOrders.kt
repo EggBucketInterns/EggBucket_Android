@@ -1,9 +1,7 @@
 package com.eggbucket.eggbucket_android
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,19 +16,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AllOrdersActiviry : AppCompatActivity() {
+class PendingOrders : AppCompatActivity() {
     private lateinit var adapter: OrdersAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var dataList: ArrayList<GetAllOrdersItem>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_all_orders_activiry)
+        setContentView(R.layout.activity_pending_orders2)
         dataList = arrayListOf()
 
-
         // Find the RecyclerView
-        recyclerView = findViewById(R.id.allOrdersRecyclerview)
+        recyclerView = findViewById(R.id.PendingOrdersRecyclerview)
 
         // Set layout manager
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -46,10 +43,10 @@ class AllOrdersActiviry : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             // Fetch data from the API
 
-            dataList = RetrofitInstance.api.getOrdersByOutletId(getUserId().toString())
+            dataList = RetrofitInstance.api.getOrderByOutletIdByStatus(getUserId().toString(),"pending")
             // Update the RecyclerView on the main thread
             withContext(Dispatchers.Main) {
-                adapter = OrdersAdapter(this@AllOrdersActiviry, dataList)
+                adapter = OrdersAdapter(this@PendingOrders, dataList)
                 recyclerView.adapter = adapter
             }
         }

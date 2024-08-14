@@ -24,7 +24,7 @@ class RecentOrdersAdapter(private val orders: List<AllOrders>) : RecyclerView.Ad
     }
 
     class RecentOrdersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val numTraysTextView: TextView = itemView.findViewById(R.id.order_trays)
+        private val numTraysTextView: TextView = itemView.findViewById(R.id.no_of_trays)
         private val locationTextView: TextView = itemView.findViewById(R.id.order_location)
         private val statusTextView: TextView = itemView.findViewById(R.id.order_status)
 
