@@ -7,6 +7,7 @@ import com.eggbucket.eggbucket_android.model.StatusUpdate
 import com.eggbucket.eggbucket_android.model.VendorItem
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.model.data.DeliveryPartner
+import com.eggbucket.eggbucket_android.model.data.OrderDetailsResponse
 import com.eggbucket.eggbucket_android.model.data.OutletPartnerResponse
 
 import com.eggbucket.eggbucket_android.model.login.LoginRequest
@@ -39,6 +40,8 @@ interface ApiService {
     @GET("orders/egg-bucket-b2b/getAllOrder")
     suspend fun getAllOrders(): ArrayList<GetAllOrdersItem>
 
+    @GET("orders/egg-bucket-b2b/order/{orderId}")
+    fun getOrderDetails(@Path("orderId") orderId: String): Call<OrderDetailsResponse>
 
     @POST("auth/egg-bucket-b2b/OutletPartnerLogin")
     fun outletPartnerLogin(@Body request: LoginRequest): Call<LoginResponse?>
@@ -52,18 +55,20 @@ interface ApiService {
     @GET("orders/egg-bucket-b2b/getAllOrder")
     suspend fun getOrderByOutletIdByStatus(
         @Query("outletId") outletId: String,
-        @Query("status") status: String): ArrayList<GetAllOrdersItem>
+        @Query("status") status: String
+    ): ArrayList<GetAllOrdersItem>
 
     @PATCH("orders/egg-bucket-b2b/order/{id}")
     suspend fun updateOrderStatus(
         @Path("id") orderId: String,
-        @Body statusUpdate: Map<String, String>): GetAllOrdersItem
+        @Body statusUpdate: Map<String, String>
+    ): GetAllOrdersItem
 
-        @PATCH("orders/egg-bucket-b2b/order/{id}")
-        suspend fun updateOrderStatus(
-            @Path("id") orderId: String,
-            @Body status: StatusUpdate
-        ):Call<Order>
+    @PATCH("orders/egg-bucket-b2b/order/{id}")
+    suspend fun updateOrderStatus(
+        @Path("id") orderId: String,
+        @Body status: StatusUpdate
+    ): Call<Order>
 
     @GET("orders/egg-bucket-b2b/getAllOrder")
     suspend fun getOrdersByDeliveryId(@Query("customerId") customerId: String): ArrayList<GetAllOrdersItem>

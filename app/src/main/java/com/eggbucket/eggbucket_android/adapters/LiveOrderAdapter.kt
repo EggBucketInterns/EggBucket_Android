@@ -1,13 +1,14 @@
 package com.eggbucket.eggbucket_android.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.eggbucket.eggbucket_android.Order_Details_Screen
 import com.eggbucket.eggbucket_android.R
-import com.eggbucket.eggbucket_android.adapters.OrdersAdapter.OrderViewHolder
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -38,6 +39,16 @@ class LiveOrderAdapter(val context:Context,val dataList:ArrayList<GetAllOrdersIt
         holder.trays.text=currentItem.numTrays
         holder.amountlive.text=currentItem.amount
         holder.venderName.text = currentItem.customerId?.customerName ?: "Unknown Customer"
+        holder.confirm.setOnClickListener {
+            // Create an Intent to navigate to the Order_Details_Screen
+            val intent = Intent(context, Order_Details_Screen::class.java)
+
+            // Pass the order ID to the next screen using a Bundle
+            intent.putExtra("ORDER_ID", currentItem._id)
+
+            // Start the activity with the Intent
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
