@@ -64,9 +64,16 @@ interface ApiService {
             @Path("id") orderId: String,
             @Body status: StatusUpdate
         ):Call<Order>
-}
 
     @GET("orders/egg-bucket-b2b/getAllOrder")
-    suspend fun getOrdersByDeliveryId(@Query("customerId") customerId: String): ArrayList<GetAllOrdersItem>
+    suspend fun getOrdersByDeliveryId(@Query("deliveryId") deliveryId: String): ArrayList<GetAllOrdersItem>
+
+
+    @GET("orders/egg-bucket-b2b/getAllOrder")
+    suspend fun getOrdersByDeliveryIdByStatus(@Query("deliveryId") deliveryId: String,@Query("status") status: String): ArrayList<GetAllOrdersItem>
 
 }
+
+
+
+

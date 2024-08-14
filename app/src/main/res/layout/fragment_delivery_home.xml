@@ -268,7 +268,7 @@
             android:id="@+id/live_order_RV"
             android:layout_width="match_parent"
             tools:listitem="@layout/live_order_items"
-            android:layout_height="match_parent">
+            android:layout_height="310dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 

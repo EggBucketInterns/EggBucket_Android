@@ -35,7 +35,8 @@ class LiveOrderAdapter(val context:Context,val dataList:ArrayList<GetAllOrdersIt
         holder.date.text=currentItem.createdAt
         holder.trays.text=currentItem.numTrays
         holder.amountlive.text=currentItem.amount
-        holder.venderName.text=currentItem.vendorId.vendorName
+        holder.venderName.text=currentItem.deliveryId.firstName
+
     }
 
     override fun getItemCount(): Int {
