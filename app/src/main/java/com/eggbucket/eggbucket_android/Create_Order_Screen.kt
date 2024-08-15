@@ -70,6 +70,7 @@ class Create_Order_Screen : AppCompatActivity() {
         var trays: String
         var amount: String
         var isUrgent: Boolean
+        var outletIDFinal: String = ""
         val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
 // Retrieve the stored USER_ID
         val userId = sharedPref.getString("USER_ID", null)
@@ -144,10 +145,11 @@ class Create_Order_Screen : AppCompatActivity() {
                         }
                         if (customerList != null) {
                             customerIdInp = customerList[0]._id.toString()
+                            Log.d("checkResponse",customerList[0]._id.toString() )
                         } else {
                             Toast.makeText(
                                 applicationContext,
-                                "Invalid Customer ID",
+                                "Invalid Customer Id",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -180,10 +182,13 @@ class Create_Order_Screen : AppCompatActivity() {
                     val response = apiService.getOutletByOutletPartnerID(id)
                     withContext(Dispatchers.Main) {
                         val outlets = response.data
+
                         // Handle the list of outlets as needed
                         Log.d("checkResponse", "Fetched outlets: $outlets")
+
                         for(outlet in outlets){
                             Log.d("checkResponse", outlet.deliveryPartner.toString())
+                            outletIDFinal = outlet._id;
 //                            outlet.deliveryPartner?.let {
 //                                refinedDeliveryPartnerList.addAll(it) // Directly add the List<DeliveryPartner>
 //                            }
@@ -235,7 +240,7 @@ class Create_Order_Screen : AppCompatActivity() {
 
 
             val order = OrderCreate(
-                outletId = OutletIdInp,
+                outletId = outletIDFinal,
                 customerId = customerIdInp,
                 deliveryId = deliveryPartnerIdInp,
                 numTrays = trays,
@@ -254,6 +259,7 @@ class Create_Order_Screen : AppCompatActivity() {
                             Intent(this@Create_Order_Screen, Order_Placed_Screen::class.java)
                         startActivity(intent)
                     } else {
+                        Log.d("checkResponse", order.toString())
                         Toast.makeText(applicationContext, "Invalid Customer ID", Toast.LENGTH_SHORT).show();
                         Log.d("checkResponse1", response.message());
                     }
@@ -289,11 +295,11 @@ class Create_Order_Screen : AppCompatActivity() {
             showSelectVendorLayout();
         }
         createOrderBtn.setOnClickListener {
-            val id = CustomerId.text;
-            fetchCustomerByOutlet(id.toString());
             createOrder();
         }
         assignDeliveryPartnerBtn.setOnClickListener {
+            val id = CustomerId.text;
+            fetchCustomerByOutlet(id.toString());
             fetchOutletByOutletPartnerID(getUserId().toString());
             showAssignDeliveryPartnerLayout();
         }

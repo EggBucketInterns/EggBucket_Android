@@ -81,10 +81,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview123"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginStart="30dp"
+                android:layout_height="600dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="30dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/recyclerview_background"
                 android:nestedScrollingEnabled="true"
@@ -94,6 +94,7 @@
                 android:id="@+id/clockimage1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_below="@+id/recyclerview123"
                 android:layout_marginStart="250dp"
                 android:layout_marginTop="20dp"
@@ -104,6 +105,7 @@
                 android:id="@+id/floor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_below="@+id/clockimage1"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/freepik_floor" />
@@ -111,6 +113,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_below="@+id/clockimage1"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/freepik_deviceinject2" />
@@ -119,6 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/clockimage1"
+                android:visibility="gone"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/freepik_character_inject2" />
             <TextView
@@ -130,11 +134,13 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp"
                 android:textSize="28sp"
+                android:visibility="gone"
                 android:gravity="center"
                 android:layout_below="@+id/floor"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_below="@+id/history"
+                android:visibility="gone"
                 android:gravity="center"
                 android:padding="10dp"
                 android:textSize="24sp"

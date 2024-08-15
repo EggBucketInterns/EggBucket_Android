@@ -50,7 +50,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pendingOrder_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_height="700dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"

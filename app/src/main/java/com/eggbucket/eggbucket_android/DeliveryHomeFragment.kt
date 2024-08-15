@@ -17,7 +17,7 @@ import com.eggbucket.eggbucket_android.adapters.LiveOrderAdapter
 import com.eggbucket.eggbucket_android.adapters.OrderViewModel
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
-import com.eggbucket.eggbucket_android.model.data.DeliveryPartner
+import com.eggbucket.eggbucket_android.model.data.DeliveryPartnerrr
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -113,10 +113,10 @@ class DeliveryHomeFragment : Fragment() {
         val userId = getUserId()
         if (userId != null) {
             RetrofitInstance.api.getDeliveryPartner(userId).enqueue(object :
-                Callback<DeliveryPartner> {
+                Callback<DeliveryPartnerrr> {
                 override fun onResponse(
-                    call: Call<DeliveryPartner>,
-                    response: Response<DeliveryPartner>
+                    call: Call<DeliveryPartnerrr>,
+                    response: Response<DeliveryPartnerrr>
                 ) {
                     if (response.isSuccessful) {
                         val partner = response.body()
@@ -141,7 +141,7 @@ class DeliveryHomeFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<DeliveryPartner>, t: Throwable) {
+                override fun onFailure(call: Call<DeliveryPartnerrr>, t: Throwable) {
                     Log.e(
                         "DeliveryHomeFragment",
                         "Error fetching delivery partner data: ${t.message}"
