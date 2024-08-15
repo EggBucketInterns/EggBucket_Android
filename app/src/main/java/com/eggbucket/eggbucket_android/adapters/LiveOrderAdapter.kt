@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class LiveOrderAdapter(
+
     val context:Context,
     val dataList:ArrayList<GetAllOrdersItem>
 ):RecyclerView.Adapter<LiveOrderAdapter.LiveOrderViewHolder>() {
@@ -37,6 +38,7 @@ class LiveOrderAdapter(
         val venderName=itemview.findViewById<TextView>(R.id.vender_name_live)
         val amountlive=itemview.findViewById<TextView>(R.id.live_order_amount)
         val confirm=itemview.findViewById<TextView>(R.id.confirm_order)
+
 
     }
 
@@ -68,6 +70,7 @@ class LiveOrderAdapter(
 
                     updateOrder(currentItem._id)
 
+
                     //Navigation
                     // Create an Intent to navigate to the Order_Details_Screen
                     val intent = Intent(context, Order_Details_Screen::class.java)
@@ -83,6 +86,7 @@ class LiveOrderAdapter(
                     Log.e("MyAdapter", "Failed to update order", e)
                 }
             }
+
         }
     }
 

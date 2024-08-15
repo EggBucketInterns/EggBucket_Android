@@ -103,7 +103,7 @@ interface ApiService {
 
     @GET("orders/egg-bucket-b2b/getAllOrder")
     suspend fun getOrderByDeliveryIdByStatus(
-        @Query("customerId") customerId: String,
+        @Query("deliveryId") customerId: String,
         @Query("status") status: String
     ): ArrayList<GetAllOrdersItem>
 

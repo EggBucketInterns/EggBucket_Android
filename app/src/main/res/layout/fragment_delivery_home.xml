@@ -84,6 +84,7 @@
             app:cardBackgroundColor="@android:color/white">
 
             <LinearLayout
+                android:id="@+id/completed_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -140,6 +141,7 @@
             app:cardElevation="4dp">
 
             <LinearLayout
+                android:id="@+id/pending_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

@@ -1,11 +1,13 @@
 package com.eggbucket.eggbucket_android
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
@@ -61,6 +63,47 @@ class OutletSearchFragment : Fragment() {
         }
 
         filter.setOnClickListener {
+            when {
+                completed.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
+                    // Action for 'completed' being selected
+                    Toast.makeText(context, "Completed is selected", Toast.LENGTH_SHORT).show()
+                    // Navigate to another activity or perform any action you want
+                    val intent = Intent(activity, CompletedOutletActivity::class.java)
+                    startActivity(intent)
+                }
+
+                cancelled.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
+                    // Action for 'cancelled' being selected
+                    Toast.makeText(context, "Cancelled is selected", Toast.LENGTH_SHORT).show()
+                    // Navigate to another activity or perform any action you want
+                    val intent = Intent(activity, CancelledOutletActivity::class.java)
+                    startActivity(intent)
+                }
+
+                intransit.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
+                    // Action for 'intransit' being selected
+                    Toast.makeText(context, "In Transit is selected", Toast.LENGTH_SHORT).show()
+                    // Navigate to another activity or perform any action you want
+                    val intent = Intent(activity, IntransitOutletActivity::class.java)
+                    startActivity(intent)
+                }
+
+                pending.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
+                    // Action for 'pending' being selected
+                    Toast.makeText(context, "Pending is selected", Toast.LENGTH_SHORT).show()
+                    // Navigate to another activity or perform any action you want
+                    val intent = Intent(activity, PendingOutletActivity::class.java)
+                    startActivity(intent)
+                }
+
+                else -> {
+                    // Default action if no button is selected
+                    Toast.makeText(context, "No filter selected", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+       /* filter.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 dataList = RetrofitInstance.api.getAllOrders()
 
@@ -78,7 +121,7 @@ class OutletSearchFragment : Fragment() {
             completed.text="Completed "
             intransit.text= "In-Transit "
             cancelled.text="Cancelled "
-        }
+        }*/
 
 
 
