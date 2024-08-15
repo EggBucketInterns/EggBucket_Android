@@ -17,10 +17,14 @@ import com.eggbucket.eggbucket_android.adapters.LiveOrderAdapter
 import com.eggbucket.eggbucket_android.adapters.OrderViewModel
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
+import com.eggbucket.eggbucket_android.model.data.DeliveryPartner
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DeliveryHomeFragment : Fragment() {
     private val orderViewModel: OrderViewModel by activityViewModels()
@@ -43,6 +47,7 @@ class DeliveryHomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews(view)
+        fetchDeliveryPartnerData()
         fetchOrders()
         observeViewModel()
     }
@@ -74,6 +79,16 @@ class DeliveryHomeFragment : Fragment() {
                     Log.d("DeliveryHomeFragment", "Filtered live orders: $liveOrderDataList")
                     Log.d("DeliveryHomeFragment", "User Id: $userId")
 
+                    // Calculate the number of completed and pending orders
+                    val completedOrders =
+                        dataList.filter { it.deliveryId._id == userId && it.status == "delivered" }
+                    val pendingOrders = liveOrderDataList.size
+
+                    val totalAmountCollected = completedOrders.sumOf { it.amount.toDouble() }
+
+                    pendingOrderCount.text = pendingOrders.toString()
+                    completedOrder.text = completedOrders.size.toString()
+
                     // Set up the live order adapter
                     liveOrderAdapter = LiveOrderAdapter(requireContext(), liveOrderDataList)
                     recyclerView.adapter = liveOrderAdapter
@@ -84,7 +99,7 @@ class DeliveryHomeFragment : Fragment() {
 
                     // Set up the orders adapter
                     adapter = OrdersAdapter(requireContext(), dataList)
-                    updateOrderStats()
+//                    updateOrderStats()
                 } else {
                     Log.d("DeliveryHomeFragment", "User ID is null")
                 }
@@ -93,6 +108,51 @@ class DeliveryHomeFragment : Fragment() {
             }
         }
     }
+
+    private fun fetchDeliveryPartnerData() {
+        val userId = getUserId()
+        if (userId != null) {
+            RetrofitInstance.api.getDeliveryPartner(userId).enqueue(object :
+                Callback<DeliveryPartner> {
+                override fun onResponse(
+                    call: Call<DeliveryPartner>,
+                    response: Response<DeliveryPartner>
+                ) {
+                    if (response.isSuccessful) {
+                        val partner = response.body()
+                        if (partner != null) {
+                            // Calculate total amount collected
+                            val totalAmountCollected = partner.payments.sumOf { it.returnAmt.toDouble() }
+                            amountCollected.text = "₹${totalAmountCollected}"
+                            Log.d(
+                                "DeliveryHomeFragment",
+                                "Amount collected: ₹${totalAmountCollected}"
+                            )
+                        } else {
+                            Log.e("DeliveryHomeFragment", "Response body is null")
+                        }
+                    } else {
+                        Log.e(
+                            "DeliveryHomeFragment",
+                            "Failed to fetch delivery partner data: ${
+                                response.errorBody()?.string()
+                            }"
+                        )
+                    }
+                }
+
+                override fun onFailure(call: Call<DeliveryPartner>, t: Throwable) {
+                    Log.e(
+                        "DeliveryHomeFragment",
+                        "Error fetching delivery partner data: ${t.message}"
+                    )
+                }
+            })
+        } else {
+            Log.d("DeliveryHomeFragment", "User ID is null")
+        }
+    }
+
 
     private fun updateOrderStats() {
         val pendingOrdersCount = adapter.getPendingOrdersCount()
@@ -120,7 +180,7 @@ class DeliveryHomeFragment : Fragment() {
     }
 
     fun onButtonClick(position: Int) {
-       startActivity(Intent(requireContext(),Order_Details_Screen::class.java))
+        startActivity(Intent(requireContext(), Order_Details_Screen::class.java))
     }
 
     /*override fun onTextViewClick(position: Int) {
