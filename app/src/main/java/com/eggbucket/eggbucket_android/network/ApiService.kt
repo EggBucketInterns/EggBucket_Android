@@ -114,6 +114,12 @@ interface ApiService {
     suspend fun getCustomerByOutlet(
         @Query("outlet") outlet: String
     ) : ArrayList<Customer>
+
+    @POST("payment/egg-bucket-b2b/incReturnAmt")
+    fun increaseReturnAmount(@Body requestBody: UpdateReturnAmountRequest): Call<UpdateReturnAmtResponse>
+
+    @POST("payment/egg-bucket-b2b/incCollectionAmt")
+    fun increaseCollectionAmount(@Body requestBody: UpdateReturnAmountRequest): Call<UpdateReturnAmtResponse>
 }
 
 data class UpdateReturnAmountRequest(
