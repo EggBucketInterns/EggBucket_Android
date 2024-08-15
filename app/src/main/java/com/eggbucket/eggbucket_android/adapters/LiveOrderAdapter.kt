@@ -16,14 +16,14 @@ import java.util.Locale
 class LiveOrderAdapter(
     val context: Context,
     val dataList: ArrayList<GetAllOrdersItem>,
-    private val listener: OnItemClickListener
+
 ) : RecyclerView.Adapter<LiveOrderAdapter.LiveOrderViewHolder>() {
 
-    // Interface for click events
+   /* // Interface for click events
     interface OnItemClickListener {
         fun onButtonClick(position: Int)
         //fun onTextViewClick(position: Int)
-    }
+    }*/
 
     class LiveOrderViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
         val date = itemview.findViewById<TextView>(R.id.live_order_date)
@@ -59,15 +59,16 @@ class LiveOrderAdapter(
             listener.onTextViewClick(position)
         }*/
 
+    holder.confirm.setOnClickListener {
+        // Create an Intent to navigate to the Order_Details_Screen
+        val intent = Intent(context, Order_Details_Screen::class.java)
 
-            // Create an Intent to navigate to the Order_Details_Screen
-            val intent = Intent(context, Order_Details_Screen::class.java)
+        // Pass the order ID to the next screen using a Bundle
+        intent.putExtra("ORDER_ID", currentItem._id)
 
-            // Pass the order ID to the next screen using a Bundle
-            intent.putExtra("ORDER_ID", currentItem._id)
-
-            // Start the activity with the Intent
-            context.startActivity(intent)
+        // Start the activity with the Intent
+        context.startActivity(intent)
+    }
         }
 
 

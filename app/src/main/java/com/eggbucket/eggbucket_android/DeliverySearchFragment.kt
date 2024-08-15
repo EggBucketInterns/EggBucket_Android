@@ -73,11 +73,11 @@ class DeliverySearchFragment : Fragment() {
                     startActivity(intent)
                 }
 
-                /*cancelled.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
+                cancelled.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
                     // Action for 'cancelled' being selected
                     Toast.makeText(context, "Cancelled is selected", Toast.LENGTH_SHORT).show()
                     // Navigate to another activity or perform any action you want
-                    val intent = Intent(activity, CancelledActivity::class.java)
+                    val intent = Intent(activity, CancelledDeliveryActivity::class.java)
                     startActivity(intent)
                 }
 
@@ -85,9 +85,9 @@ class DeliverySearchFragment : Fragment() {
                     // Action for 'intransit' being selected
                     Toast.makeText(context, "In Transit is selected", Toast.LENGTH_SHORT).show()
                     // Navigate to another activity or perform any action you want
-                    val intent = Intent(activity, InTransitActivity::class.java)
+                    val intent = Intent(activity, IntransitDeliveryActivity::class.java)
                     startActivity(intent)
-                }*/
+                }
 
                 pending.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
                     // Action for 'pending' being selected

@@ -16,17 +16,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CompletedDeliveryOrders : AppCompatActivity() {
+class IntransitDeliveryActivity : AppCompatActivity() {
     private lateinit var adapter: OrdersAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var dataList: ArrayList<GetAllOrdersItem>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_completed_delivery_orders)
-
+        setContentView(R.layout.activity_intransit_delivery)
         // Find the RecyclerView
-        recyclerView = findViewById(R.id.completed_orders_recyclerview)
+        recyclerView = findViewById(R.id.intransit_orders_recyclerview)
 
         // Set layout manager
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -42,12 +41,13 @@ class CompletedDeliveryOrders : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             // Fetch data from the API
 
-            dataList = RetrofitInstance.api.getOrderByDeliveryIdByStatus(getUserId().toString(),"completed")
+            dataList = RetrofitInstance.api.getOrderByDeliveryIdByStatus(getUserId().toString(),"intransit")
             // Update the RecyclerView on the main thread
             withContext(Dispatchers.Main) {
-                adapter = OrdersAdapter(this@CompletedDeliveryOrders, dataList)
+                adapter = OrdersAdapter(this@IntransitDeliveryActivity, dataList)
                 recyclerView.adapter = adapter
             }
         }
+
     }
 }
