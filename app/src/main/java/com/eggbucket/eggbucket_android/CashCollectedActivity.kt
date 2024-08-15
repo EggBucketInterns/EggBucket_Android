@@ -19,7 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CashCollectedActivity : AppCompatActivity() {
+class CashCollectedActivity : AppCompatActivity(){
     private lateinit var adapter: CashToCollectAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var dataList: ArrayList<GetAllOrdersItem>

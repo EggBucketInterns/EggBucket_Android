@@ -1,19 +1,19 @@
 package com.eggbucket.eggbucket_android.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eggbucket.eggbucket_android.R
-import com.eggbucket.eggbucket_android.model.DeliveryPartnersItem
+import com.eggbucket.eggbucket_android.model.DeliveryPartner
+import com.eggbucket.eggbucket_android.model.DeliveryPartnerModel
 
-class DeliveryPartnerAdapter(private val deliveryPartners: List<DeliveryPartnersItem>,
-                             private val onAssignButtonClick: (String,String) -> Unit
+class DeliveryPartnerAdapter(private val deliveryPartners: List<DeliveryPartnerModel>,
+                             private val onAssignButtonClick: (String, String) -> Unit
 ) :
     RecyclerView.Adapter<DeliveryPartnerAdapter.DeliveryPartnerViewHolder>() {
 
@@ -33,13 +33,14 @@ class DeliveryPartnerAdapter(private val deliveryPartners: List<DeliveryPartners
     }
 
     override fun onBindViewHolder(holder: DeliveryPartnerViewHolder, position: Int) {
-        val currentItem = deliveryPartners[position]
-        holder.firstnameTextView.text = currentItem.firstName
+        val currentItem = deliveryPartners[holder.adapterPosition]
+        Log.d("ChcekResponse", currentItem.toString())
+        holder.firstnameTextView.text = currentItem
 
         // Load the image into ImageView
-        Glide.with(holder.itemView.context)
-            .load(currentItem.img) // Use a placeholder or error image if needed
-            .into(holder.profileImageView)
+//        Glide.with(holder.itemView.context)
+//            .load(currentItem.img) // Use a placeholder or error image if needed
+//            .into(holder.profileImageView)
 
 
         if (position == selectedPosition) {
@@ -60,7 +61,11 @@ class DeliveryPartnerAdapter(private val deliveryPartners: List<DeliveryPartners
             notifyItemChanged(position)
 
             // Pass the selected delivery partner's ID back to the activity/fragment
-            onAssignButtonClick(currentItem._id,currentItem.firstName);
+            currentItem._id?.let { it1 -> currentItem.firstName?.let { it2 ->
+                onAssignButtonClick(it1,
+                    it2
+                )
+            } };
         }
 
     }

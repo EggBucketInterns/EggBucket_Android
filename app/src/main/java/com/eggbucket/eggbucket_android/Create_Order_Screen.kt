@@ -2,7 +2,6 @@ package com.eggbucket.eggbucket_android
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -15,16 +14,12 @@ import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.adapters.DeliveryPartnerAdapter
 import com.eggbucket.eggbucket_android.adapters.VendorAdapter
 import com.eggbucket.eggbucket_android.model.DeliveryPartnersItem
-import com.eggbucket.eggbucket_android.model.Order
 import com.eggbucket.eggbucket_android.model.OrderCreate
 import com.eggbucket.eggbucket_android.model.VendorItem
 import com.eggbucket.eggbucket_android.network.RetrofitInstance.apiService
@@ -32,12 +27,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import android.content.Context
-import android.content.SharedPreferences
+import com.eggbucket.eggbucket_android.model.DeliveryPartnerModel
+import com.eggbucket.eggbucket_android.network.RetrofitInstance
 
 class Create_Order_Screen : AppCompatActivity() {
     public val assignedDeliveryPartners = "";
@@ -62,6 +57,7 @@ class Create_Order_Screen : AppCompatActivity() {
         lateinit var adapter: DeliveryPartnerAdapter
         lateinit var vendorAdapter : VendorAdapter
         val deliveryPartnerList = mutableListOf<DeliveryPartnersItem>()
+        val refinedDeliveryPartnerList = mutableListOf<DeliveryPartnerModel>()
         val vendorList = mutableListOf<VendorItem>()
         var OutletIdInp : String;
         var vendorIdInp : String ="";
@@ -74,6 +70,7 @@ class Create_Order_Screen : AppCompatActivity() {
 // Retrieve the stored USER_ID
         val userId = sharedPref.getString("USER_ID", null)
         outletIdTextView.setText(userId);
+        //have to chancge when authentication is implemented
         OutletIdInp = userId.toString();
         customerIdInp = "66b3c8aa6ab3f6c1af2985a0";
 
@@ -91,7 +88,7 @@ class Create_Order_Screen : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.deliveryPartnerRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = DeliveryPartnerAdapter(deliveryPartnerList){ selectedId ,selectedName->
+        adapter = DeliveryPartnerAdapter(refinedDeliveryPartnerList){ selectedId ,selectedName->
             // Handle the selected delivery partner's ID
 //            Log.d("SelectedID", "Selected Delivery Partner ID: $selectedId");
             assignDeliveryPartnerBtn.setText("$selectedName");
@@ -115,6 +112,27 @@ class Create_Order_Screen : AppCompatActivity() {
             CreateOrderLayout.visibility = View.GONE;
             SearchVendorLayout.visibility = View.VISIBLE;
             AssignDeliveryPartnerLayout.visibility = View.GONE;
+        }
+        fun fetchDeliveryPartners(outletId: String) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitInstance.apiService.getDeliveryPartnerByOutlet(outletId)
+                    val refinedDeliveryPartnerList = response.flatMap { it.deliveryPartner!! }
+
+                    withContext(Dispatchers.Main) {
+                        adapter = DeliveryPartnerAdapter(refinedDeliveryPartnerList){
+                                selectedId ,selectedName->
+                            // Handle the selected delivery partner's ID
+//            Log.d("SelectedID", "Selected Delivery Partner ID: $selectedId");
+                            assignDeliveryPartnerBtn.setText("$selectedName");
+                            deliveryPartnerIdInp = "$selectedId";
+                        }
+                        recyclerView.adapter = adapter
+                    }
+                } catch (e: Exception) {
+                    Log.e("API Error", "Failed to fetch data: ${e.message}")
+                }
+            }
         }
         fun fetchVendorDetails() {
             CoroutineScope(Dispatchers.IO).launch {

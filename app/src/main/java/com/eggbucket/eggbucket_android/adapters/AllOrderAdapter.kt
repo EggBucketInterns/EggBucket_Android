@@ -13,7 +13,7 @@ import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 
 class AllOrderAdapter(
     private val context: Context,
-    private val orderList: ArrayList<GetAllOrdersItem>
+    private var orderList: ArrayList<GetAllOrdersItem>
 ) : RecyclerView.Adapter<AllOrderAdapter.OrderViewHolder>() {
 
     // ViewHolder class to hold references to the views
@@ -23,7 +23,10 @@ class AllOrderAdapter(
         val amount :TextView = itemView.findViewById(R.id.order_location)
 
     }
-
+    fun updateData(newData: ArrayList<GetAllOrdersItem>) {
+        orderList = newData
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         // Inflate the layout for each item
         val view = LayoutInflater.from(context).inflate(R.layout.item_outletorder, parent, false)
