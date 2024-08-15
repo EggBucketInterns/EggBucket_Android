@@ -26,13 +26,14 @@ import retrofit2.Response
 class mode_of_payment : AppCompatActivity() {
     private lateinit var orderViewModel: OrderViewModel
     private lateinit var orderId: String
+    private var Amount: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
         setContentView(R.layout.activity_mode_of_payment)
 
         val discountAmount = findViewById<EditText>(R.id.discount_amount)
-        val amountR = findViewById<EditText>(R.id.amount_rs)
         val deli_completed = findViewById<Button>(R.id.deli_completed)
         // orderViewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
 
@@ -51,8 +52,8 @@ class mode_of_payment : AppCompatActivity() {
         // Set up the listener for the 'Delivery Completed' button
         deli_completed.setOnClickListener {
             val discount = discountAmount.text.toString().toIntOrNull() ?: 0
-            val amount = amountR.text.toString().toIntOrNull() ?: 0
-            val finalAmount = amount - discount
+//            val amount = intent.getStringExtra("amount")?.toIntOrNull() ?: 0
+            val finalAmount:Int = Amount - discount
 
             // Update the order and return/collection amounts
             updateReturnAmount(orderId, finalAmount)
@@ -61,7 +62,7 @@ class mode_of_payment : AppCompatActivity() {
 
             // Navigate to the delivery dashboard
             val intent = Intent(this, delivery_dashboard::class.java)
-            intent.putExtra("amount", finalAmount)
+            intent.putExtra("amount", finalAmount.toString())
             startActivity(intent)
             finish()
         }
@@ -98,6 +99,8 @@ class mode_of_payment : AppCompatActivity() {
                         Toast.makeText(this@mode_of_payment, "Order details fetched successfully", Toast.LENGTH_SHORT).show()
                         Log.d("OrderDetails", "Order details fetched successfully: $orderDetails")
                         populateOrderDetails(orderDetails)
+                        // Update finalAmount after fetching data
+                        Amount = orderDetails.amount.toInt()
                     } else {
                         Toast.makeText(this@mode_of_payment, "Order details are null", Toast.LENGTH_SHORT).show()
                         Log.e("OrderDetails", "Order details are null.")
@@ -116,7 +119,7 @@ class mode_of_payment : AppCompatActivity() {
     private fun updateReturnAmount(orderId: String, amount: Int) {
         val requestBody = UpdateReturnAmountRequest(orderId, amount)
 
-        RetrofitInstance.apiService.increaseReturnAmount(requestBody).enqueue(object :
+        RetrofitInstance.apiService.updateReturnAmount(requestBody).enqueue(object :
             Callback<UpdateReturnAmtResponse> {
             override fun onResponse(
                 call: Call<UpdateReturnAmtResponse>,
@@ -124,6 +127,7 @@ class mode_of_payment : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     Log.d("ReturnAmount", "Successfully updated return amount for delivery partner.")
+                    Log.d("CollectionAmount", "Response: ${response.body()}")
                 } else {
                     Log.e("ReturnAmount", "Failed to update return amount: ${response.code()}")
                 }
@@ -138,7 +142,7 @@ class mode_of_payment : AppCompatActivity() {
     private fun updateCollectionAmount(orderId: String, amount: Int) {
         val requestBody = UpdateReturnAmountRequest(orderId, amount)
 
-        RetrofitInstance.apiService.increaseCollectionAmount(requestBody).enqueue(object :
+        RetrofitInstance.apiService.updateCollectionAmount(requestBody).enqueue(object :
             Callback<UpdateReturnAmtResponse> {
             override fun onResponse(
                 call: Call<UpdateReturnAmtResponse>,
@@ -146,6 +150,7 @@ class mode_of_payment : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     Log.d("CollectionAmount", "Successfully updated collection amount for outlet partner.")
+                    Log.d("CollectionAmount", "Response: ${response.body()}")
                 } else {
                     Log.e("CollectionAmount", "Failed to update collection amount: ${response.code()}")
                 }
