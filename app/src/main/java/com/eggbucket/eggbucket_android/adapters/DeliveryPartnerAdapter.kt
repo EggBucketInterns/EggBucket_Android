@@ -1,5 +1,6 @@
 package com.eggbucket.eggbucket_android.adapters
 
+import DeliveryPartner
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.R
-import com.eggbucket.eggbucket_android.model.DeliveryPartner
 
 class DeliveryPartnerAdapter(private val deliveryPartners: List<DeliveryPartner>,
                              private val onAssignButtonClick: (String, String) -> Unit

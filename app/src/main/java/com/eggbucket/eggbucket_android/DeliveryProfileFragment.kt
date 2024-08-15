@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.eggbucket.eggbucket_android.model.data.DeliveryPartner
+import com.eggbucket.eggbucket_android.model.data.DeliveryPartnerrr
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
 import com.squareup.picasso.Picasso
 import retrofit2.Call
@@ -61,10 +61,10 @@ class DeliveryProfileFragment : Fragment() {
 
     private fun fetchDeliveryPartnerData(id: String) {
         RetrofitInstance.api.getDeliveryPartner(id)
-            .enqueue(object : Callback<DeliveryPartner> {
+            .enqueue(object : Callback<DeliveryPartnerrr> {
                 override fun onResponse(
-                    call: Call<DeliveryPartner>,
-                    response: Response<DeliveryPartner>
+                    call: Call<DeliveryPartnerrr>,
+                    response: Response<DeliveryPartnerrr>
                 ) {
                     if (response.isSuccessful) {
                         val partner = response.body()
@@ -86,7 +86,7 @@ class DeliveryProfileFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<DeliveryPartner>, t: Throwable) {
+                override fun onFailure(call: Call<DeliveryPartnerrr>, t: Throwable) {
                     Log.e("DeliveryProfileFragment", "Error: ${t.message}")
                     Toast.makeText(context, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }

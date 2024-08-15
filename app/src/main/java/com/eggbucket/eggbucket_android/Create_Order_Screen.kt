@@ -31,9 +31,8 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import android.content.Context
+import com.eggbucket.eggbucket_android.model.Customer
 import com.eggbucket.eggbucket_android.model.DeliveryPartner
-import com.eggbucket.eggbucket_android.model.DeliveryPartnerModel
-import com.eggbucket.eggbucket_android.network.RetrofitInstance
 
 class Create_Order_Screen : AppCompatActivity() {
     public val assignedDeliveryPartners = "";
@@ -43,7 +42,8 @@ class Create_Order_Screen : AppCompatActivity() {
         setContentView(R.layout.activity_create_order_screen)
         val CreateOrderLayout = findViewById<LinearLayout>(R.id.createOrderLayout);
         val SearchVendorLayout = findViewById<LinearLayout>(R.id.selectVendorLayout);
-        val AssignDeliveryPartnerLayout = findViewById<LinearLayout>(R.id.assignDeliveryPartnerLayout);
+        val AssignDeliveryPartnerLayout =
+            findViewById<LinearLayout>(R.id.assignDeliveryPartnerLayout);
         val assignDeliveryPartnerBtn = findViewById<TextView>(R.id.assignDelivreyPartnerBtn);
         val selectVendorBtn = findViewById<LinearLayout>(R.id.search_vendor_btn);
         val closeDeliveryPartnerBtn = findViewById<ImageView>(R.id.closeLayout2);
@@ -54,29 +54,31 @@ class Create_Order_Screen : AppCompatActivity() {
         val traysText = findViewById<EditText>(R.id.trays);
         val createOrderBtn = findViewById<Button>(R.id.createOrderBtn);
         val outletIdTextView = findViewById<EditText>(R.id.OutleId);
+        val CustomerId = findViewById<EditText>(R.id.customerID)
         lateinit var recyclerView: RecyclerView
         lateinit var adapter: DeliveryPartnerAdapter
-        lateinit var vendorAdapter : VendorAdapter
+        lateinit var vendorAdapter: VendorAdapter
         val deliveryPartnerList = mutableListOf<DeliveryPartnersItem>()
         var refinedDeliveryPartnerList = mutableListOf<DeliveryPartner>()
+        var customerList = mutableListOf<Customer>()
         val vendorList = mutableListOf<VendorItem>()
-        var OutletIdInp : String;
-        var vendorIdInp : String ="";
-        var customerIdInp : String;
-        var deliveryPartnerIdInp : String ="";
-        var trays : String
-        var amount : String
-        var isUrgent : Boolean
+        val outletList = mutableListOf<DeliveryPartner>()
+        var OutletIdInp: String;
+        var vendorIdInp: String = "";
+        var customerIdInp: String = "";
+        var deliveryPartnerIdInp: String = "";
+        var trays: String
+        var amount: String
+        var isUrgent: Boolean
         val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
 // Retrieve the stored USER_ID
         val userId = sharedPref.getString("USER_ID", null)
         outletIdTextView.setText(userId);
         //have to chancge when authentication is implemented
         OutletIdInp = userId.toString();
-        customerIdInp = "66b3c8aa6ab3f6c1af2985a0";
         recyclerView = findViewById(R.id.vendorRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        vendorAdapter = VendorAdapter(vendorList){ selectedId ,selectedName->
+        vendorAdapter = VendorAdapter(vendorList) { selectedId, selectedName ->
 //            Log.d("SelectedID", "Selected Delivery Partner ID: $selectedId");
             SearchVendorText.setText("$selectedName");
             vendorIdInp = "$selectedId";
@@ -87,25 +89,25 @@ class Create_Order_Screen : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.deliveryPartnerRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = DeliveryPartnerAdapter(refinedDeliveryPartnerList){ selectedId ,selectedName->
-            assignDeliveryPartnerBtn.setText("$selectedName");
-            deliveryPartnerIdInp = "$selectedId";
-        }
-        recyclerView.adapter = adapter
+//        adapter = DeliveryPartnerAdapter(refinedDeliveryPartnerList) { selectedId, selectedName ->
+//            assignDeliveryPartnerBtn.setText("$selectedName");
+//            deliveryPartnerIdInp = "$selectedId";
+//        }
+//        recyclerView.adapter = adapter
 
-        fun showCreateOrderLayout(){
+        fun showCreateOrderLayout() {
             CreateOrderLayout.visibility = View.VISIBLE;
             SearchVendorLayout.visibility = View.GONE;
             AssignDeliveryPartnerLayout.visibility = View.GONE
         }
 
-        fun showAssignDeliveryPartnerLayout(){
+        fun showAssignDeliveryPartnerLayout() {
             CreateOrderLayout.visibility = View.GONE;
             SearchVendorLayout.visibility = View.GONE;
             AssignDeliveryPartnerLayout.visibility = View.VISIBLE;
         }
 
-        fun showSelectVendorLayout(){
+        fun showSelectVendorLayout() {
             CreateOrderLayout.visibility = View.GONE;
             SearchVendorLayout.visibility = View.VISIBLE;
             AssignDeliveryPartnerLayout.visibility = View.GONE;
@@ -127,6 +129,83 @@ class Create_Order_Screen : AppCompatActivity() {
                 }
             }
         }
+
+        fun fetchCustomerByOutlet(id: String) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val customer = apiService.getCustomerByID(id);
+                    withContext(Dispatchers.Main) {
+                        customerList.clear()
+                        customerList.addAll(customer)
+                        Log.d("checkResponse", customerList.toString());
+                        adapter.notifyDataSetChanged()
+                        for (data in customerList) {
+                            Log.d("checkResponse", data._id.toString() + data.customerName)
+                        }
+                        if (customerList != null) {
+                            customerIdInp = customerList[0]._id.toString()
+                        } else {
+                            Toast.makeText(
+                                applicationContext,
+                                "Invalid Customer ID",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+
+//        fun fetchOutletByOutletPartnerID(id: String) {
+//            CoroutineScope(Dispatchers.IO).launch {
+//                try {
+//                    val outlets = apiService.getOutletByOutletPartnerID(id);
+//                    withContext(Dispatchers.Main) {
+//                        outletList.clear()
+//                        outletList.addAll(outlets)
+//                        Log.d("checkResponse11", "outlet" + outletList.toString());
+//                        adapter.notifyDataSetChanged()
+//                    }
+//                } catch (e: Exception) {
+//                    Log.e("checkResponse11", e.message.toString() )
+//                }
+//            }
+//        }
+
+        fun fetchOutletByOutletPartnerID(id: String) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = apiService.getOutletByOutletPartnerID(id)
+                    withContext(Dispatchers.Main) {
+                        val outlets = response.data
+                        // Handle the list of outlets as needed
+                        Log.d("checkResponse", "Fetched outlets: $outlets")
+                        for(outlet in outlets){
+                            Log.d("checkResponse", outlet.deliveryPartner.toString())
+//                            outlet.deliveryPartner?.let {
+//                                refinedDeliveryPartnerList.addAll(it) // Directly add the List<DeliveryPartner>
+//                            }
+//                            for ( del in outlet.deliveryPartner ){
+//                                refinedDeliveryPartnerList.add(del);
+//                            }
+                            adapter = DeliveryPartnerAdapter(outlet.deliveryPartner) { selectedId, selectedName ->
+                                assignDeliveryPartnerBtn.setText("$selectedName");
+                                deliveryPartnerIdInp = "$selectedId";
+                            }
+                            recyclerView.adapter = adapter
+                        }
+
+
+
+                    }
+                } catch (e: Exception) {
+                    Log.e("checkResponse", "Error: ${e.message}")
+                }
+            }
+        }
+
         fun fetchDeliveryPartnerDetails() {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
@@ -142,10 +221,12 @@ class Create_Order_Screen : AppCompatActivity() {
                 }
             }
         }
+
         fun getCurrentTimestamp(): String {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault())
             return dateFormat.format(Date())
         }
+
         fun createOrder() {
             val currentTimestamp = getCurrentTimestamp()
             amount = amountText.text.toString();
@@ -156,7 +237,7 @@ class Create_Order_Screen : AppCompatActivity() {
             val order = OrderCreate(
                 outletId = OutletIdInp,
                 customerId = customerIdInp,
-                deliveryId =deliveryPartnerIdInp,
+                deliveryId = deliveryPartnerIdInp,
                 numTrays = trays,
                 amount = amount,
                 isUrgent = isUrgent,
@@ -165,15 +246,16 @@ class Create_Order_Screen : AppCompatActivity() {
                 status = "pending",
             )
 
-           apiService.createOrder(order).enqueue(object : Callback<Void> {
+            apiService.createOrder(order).enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
                         Toast.makeText(applicationContext, "Success", Toast.LENGTH_SHORT).show();
-                        val intent = Intent(this@Create_Order_Screen, Order_Placed_Screen::class.java)
+                        val intent =
+                            Intent(this@Create_Order_Screen, Order_Placed_Screen::class.java)
                         startActivity(intent)
                     } else {
-                        Toast.makeText(applicationContext, "Error", Toast.LENGTH_SHORT).show();
-                        Log.d("checkResponse", response.message());
+                        Toast.makeText(applicationContext, "Invalid Customer ID", Toast.LENGTH_SHORT).show();
+                        Log.d("checkResponse1", response.message());
                     }
                 }
 
@@ -182,15 +264,18 @@ class Create_Order_Screen : AppCompatActivity() {
                 }
             })
         }
-        fetchDeliveryPartnerDetails();
 
-       // fetchVendorDetails();
-        assignDeliveryPartnerBtn.setOnClickListener {
-            if (userId != null) {
-//                fetchDeliveryPartners(userId)
-            };
-            showAssignDeliveryPartnerLayout();
+        fun getUserId(): String? {
+            val sharedPrefer = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
+            return sharedPrefer?.getString("USER_ID", null)
         }
+//        fetchDeliveryPartnerDetails();
+        fetchOutletByOutletPartnerID(getUserId().toString());
+
+//        assignDeliveryPartnerBtn.setOnClickListener {
+//            fetchOutletByOutletPartnerID(getUserId().toString())
+//            showAssignDeliveryPartnerLayout();
+//        }
         selectVendorBtn.setOnClickListener {
             showSelectVendorLayout();
         }
@@ -204,7 +289,13 @@ class Create_Order_Screen : AppCompatActivity() {
             showSelectVendorLayout();
         }
         createOrderBtn.setOnClickListener {
+            val id = CustomerId.text;
+            fetchCustomerByOutlet(id.toString());
             createOrder();
+        }
+        assignDeliveryPartnerBtn.setOnClickListener {
+            fetchOutletByOutletPartnerID(getUserId().toString());
+            showAssignDeliveryPartnerLayout();
         }
     }
 

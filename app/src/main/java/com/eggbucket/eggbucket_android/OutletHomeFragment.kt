@@ -191,11 +191,9 @@ class OutletHomeFragment : Fragment() {
                 when (order.status) {
                     "pending" -> {
                         pendingOrders++
-                        totalPendingCash += Integer.parseInt(order.amount);
                     }
                     "completed" -> completedOrders++
                     "delivered" -> totalPendingCash += Integer.parseInt(order.amount);
-                    "intransit" -> totalPendingCash += Integer.parseInt(order.amount);
 
                 }
             }

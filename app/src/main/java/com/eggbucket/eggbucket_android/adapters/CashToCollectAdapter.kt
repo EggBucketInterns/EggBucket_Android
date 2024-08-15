@@ -76,6 +76,7 @@ class CashToCollectAdapter(
                     Log.e("MyAdapter", "Failed to update order", e)
                 }
             }
+
         }
     }
 

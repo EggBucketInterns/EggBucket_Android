@@ -1,6 +1,6 @@
 package com.eggbucket.eggbucket_android.model.data
 
-data class DeliveryPartner(
+data class DeliveryPartnerrr(
     val _id: String,
     val firstName: String,
     val lastName: String,

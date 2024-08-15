@@ -1,5 +1,6 @@
 package com.eggbucket.eggbucket_android.network
 
+import OutletResponse
 import com.eggbucket.eggbucket_android.model.Customer
 import com.eggbucket.eggbucket_android.model.DeliveryPartnerModel
 import com.eggbucket.eggbucket_android.model.DeliveryPartnersItem
@@ -9,7 +10,7 @@ import com.eggbucket.eggbucket_android.model.StatusUpdate
 import com.eggbucket.eggbucket_android.model.UpdateReturnAmtResponse
 import com.eggbucket.eggbucket_android.model.VendorItem
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
-import com.eggbucket.eggbucket_android.model.data.DeliveryPartner
+import com.eggbucket.eggbucket_android.model.data.DeliveryPartnerrr
 import com.eggbucket.eggbucket_android.model.data.OrderDetailsResponse
 import com.eggbucket.eggbucket_android.model.data.OutletPartnerResponse
 
@@ -29,7 +30,7 @@ interface ApiService {
     fun getOutletPartner(@Path("id") id: String): Call<OutletPartnerResponse>
 
     @GET("deliveryDrivers/egg-bucket-b2b/delivery_partner/{id}")
-    fun getDeliveryPartner(@Path("id") id: String): Call<DeliveryPartner>
+    fun getDeliveryPartner(@Path("id") id: String): Call<DeliveryPartnerrr>
 
     @GET("deliveryDrivers/egg-bucket-b2b/displayAll-delivery_partner")
     suspend fun getAllDeliveryPartners(): List<DeliveryPartnersItem>
@@ -111,9 +112,25 @@ interface ApiService {
     fun updateReturnAmount(@Body body: UpdateReturnAmountRequest): Call<UpdateReturnAmtResponse>
 
     @GET("customers/egg-bucket-b2b/getAllCustomer")
-    suspend fun getCustomerByOutlet(
-        @Query("outlet") outlet: String
+    suspend fun getCustomerByID(
+        @Query("customerId") customerId: String
     ) : ArrayList<Customer>
+
+//    @GET("egg-bucket-b2b/get-all-outlets")
+//    suspend fun getOutletByOutletPartnerID(
+//        @Query("outletPartner") outletPartner : String
+//    ) : Array<OutletModel>
+
+    @GET("egg-bucket-b2b/get-all-outlets")
+    suspend fun getOutletByOutletPartnerID(
+        @Query("outletPartner") outletPartner: String
+    ): OutletResponse
+
+
+
+
+
+
 }
 
 data class UpdateReturnAmountRequest(
