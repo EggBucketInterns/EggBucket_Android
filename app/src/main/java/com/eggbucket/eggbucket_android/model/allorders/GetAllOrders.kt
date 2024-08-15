@@ -4,7 +4,7 @@ data class GetAllOrdersItem(
     val _id: String,
     val amount: String,
     val createdAt: String,
-    val customerId: CustomerId,
+    val customerId: CustomerId?,
     val deliveryId: DeliveryId,
     val isUrgent: Boolean,
     val numTrays: String,

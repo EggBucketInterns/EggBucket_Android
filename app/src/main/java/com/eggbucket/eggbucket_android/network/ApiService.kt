@@ -110,10 +110,14 @@ interface ApiService {
     @PATCH("payment/egg-bucket-b2b/incReturnAmt")
     fun updateReturnAmount(@Body body: UpdateReturnAmountRequest): Call<UpdateReturnAmtResponse>
 
+    @PATCH("payment/egg-bucket-b2b/incCollectionAmt")
+    fun updateCollectionAmount(@Body body: UpdateReturnAmountRequest): Call<UpdateReturnAmtResponse>
+
     @GET("customers/egg-bucket-b2b/getAllCustomer")
     suspend fun getCustomerByOutlet(
         @Query("outlet") outlet: String
     ) : ArrayList<Customer>
+
 }
 
 data class UpdateReturnAmountRequest(

@@ -24,14 +24,17 @@ class Order_Details_Screen : AppCompatActivity() {
 
         // Retrieve the order ID from intent or use a default one
         orderId = intent.getStringExtra("ORDER_ID") ?: "66b764ddf2476d8c6f2770cb"
-        intent.putExtra("orderId",orderId);
+//        intent.putExtra("order_ID",orderId);
+
         // Call API to fetch order details
         getOrderDetails(orderId)
 
         val reached = findViewById<TextView>(R.id.reached)
         reached.setOnClickListener {
-            startActivity(Intent(this, mode_of_payment::class.java))
-
+            // Pass the order ID to the mode_of_payment screen
+            val paymentIntent = Intent(this, mode_of_payment::class.java)
+            paymentIntent.putExtra("order_ID", orderId)  // Pass the order ID correctly
+            startActivity(paymentIntent)
             finish()
         }
     }
@@ -60,11 +63,12 @@ class Order_Details_Screen : AppCompatActivity() {
     }
 
     private fun populateOrderDetails(orderDetails: OrderDetailsResponse) {
+        val customerName = orderDetails.customerId?.customerName ?: "Unknown Customer"
         // Update the UI elements with data
         findViewById<TextView>(R.id.orderIdTextView).text = orderDetails._id
         findViewById<TextView>(R.id.numTraysTextView).text = orderDetails.numTrays
         findViewById<TextView>(R.id.amountTextView).text = orderDetails.amount
         findViewById<TextView>(R.id.vendorNameTextView).text = orderDetails.deliveryId.firstName
-        findViewById<TextView>(R.id.shopNameTextView).text = orderDetails.customerId.customerName
+        findViewById<TextView>(R.id.shopNameTextView).text = customerName
     }
 }

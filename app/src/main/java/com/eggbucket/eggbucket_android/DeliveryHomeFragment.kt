@@ -4,14 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.widget.*
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,12 +18,12 @@ import com.eggbucket.eggbucket_android.adapters.OrderViewModel
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DeliveryHomeFragment : Fragment()  {
+
+class DeliveryHomeFragment : Fragment() {
     private val orderViewModel: OrderViewModel by activityViewModels()
     lateinit var recyclerView: RecyclerView
     lateinit var liveOrderAdapter: LiveOrderAdapter
@@ -35,8 +33,8 @@ class DeliveryHomeFragment : Fragment()  {
     lateinit var completedOrder: TextView
     lateinit var dataList: ArrayList<GetAllOrdersItem>
     lateinit var adapter: OrdersAdapter
-    lateinit var pendingOrders:LinearLayout
-    lateinit var CompletedOrders:LinearLayout
+   /* lateinit var pendingOrders:LinearLayout
+    lateinit var CompletedOrders:LinearLayout*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,12 +49,12 @@ class DeliveryHomeFragment : Fragment()  {
         fetchOrders()
         observeViewModel()
 
-        pendingOrders.setOnClickListener {
+        /*pendingOrders.setOnClickListener {
             startActivity(Intent(requireContext(),PendingDeliveryOrders::class.java))
         }
         CompletedOrders.setOnClickListener {
             startActivity(Intent(requireContext(),CompletedDeliveryOrders::class.java))
-        }
+        }*/
     }
 
     private fun initViews(view: View) {
@@ -64,8 +62,8 @@ class DeliveryHomeFragment : Fragment()  {
         pendingOrderCount = view.findViewById(R.id.pending_order_count)
         completedOrder = view.findViewById(R.id.txt_completed)
         recyclerView = view.findViewById(R.id.live_order_RV)
-        pendingOrders=view.findViewById(R.id.pending_layout)
-        CompletedOrders=view.findViewById(R.id.completed_layout)
+       /* pendingOrders=view.findViewById(R.id.pending_layout)
+        CompletedOrders=view.findViewById(R.id.completed_layout)*/
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
@@ -83,13 +81,18 @@ class DeliveryHomeFragment : Fragment()  {
                     Log.d("DeliveryHomeFragment", "All orders response: $dataList")
 
                     // Filter live orders based on user ID
-                    liveOrderDataList = dataList.filter { it.deliveryId._id == userId } as ArrayList<GetAllOrdersItem>
+                    liveOrderDataList =
+                        dataList.filter { it.deliveryId._id == userId && it.status == "pending" } as ArrayList<GetAllOrdersItem>
                     Log.d("DeliveryHomeFragment", "Filtered live orders: $liveOrderDataList")
+                    Log.d("DeliveryHomeFragment", "User Id: $userId")
 
                     // Set up the live order adapter
                     liveOrderAdapter = LiveOrderAdapter(requireContext(), liveOrderDataList)
                     recyclerView.adapter = liveOrderAdapter
-                    Log.d("DeliveryHomeFragment", "Live order adapter set with ${liveOrderDataList.size} items")
+                    Log.d(
+                        "DeliveryHomeFragment",
+                        "Live order adapter set with ${liveOrderDataList.size} items"
+                    )
 
                     // Set up the orders adapter
                     adapter = OrdersAdapter(requireContext(), dataList)
@@ -128,10 +131,12 @@ class DeliveryHomeFragment : Fragment()  {
         return userId
     }
 
-    /*override fun onButtonClick(position: Int) {
+
+    fun onButtonClick(position: Int) {
+
        startActivity(Intent(requireContext(),Order_Details_Screen::class.java))
     }
-*/
+
     /*override fun onTextViewClick(position: Int) {
         TODO("Not yet implemented")
     }*/
