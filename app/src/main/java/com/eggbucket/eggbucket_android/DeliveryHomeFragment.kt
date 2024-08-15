@@ -4,14 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.widget.*
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,13 +17,16 @@ import com.eggbucket.eggbucket_android.adapters.LiveOrderAdapter
 import com.eggbucket.eggbucket_android.adapters.OrderViewModel
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
+import com.eggbucket.eggbucket_android.model.data.DeliveryPartner
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class DeliveryHomeFragment : Fragment() , LiveOrderAdapter.OnItemClickListener{
+class DeliveryHomeFragment : Fragment() {
     private val orderViewModel: OrderViewModel by activityViewModels()
     lateinit var recyclerView: RecyclerView
     lateinit var liveOrderAdapter: LiveOrderAdapter
@@ -46,6 +47,7 @@ class DeliveryHomeFragment : Fragment() , LiveOrderAdapter.OnItemClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews(view)
+        fetchDeliveryPartnerData()
         fetchOrders()
         observeViewModel()
     }
@@ -72,17 +74,32 @@ class DeliveryHomeFragment : Fragment() , LiveOrderAdapter.OnItemClickListener{
                     Log.d("DeliveryHomeFragment", "All orders response: $dataList")
 
                     // Filter live orders based on user ID
-                    liveOrderDataList = dataList.filter { it.deliveryId._id == userId } as ArrayList<GetAllOrdersItem>
+                    liveOrderDataList =
+                        dataList.filter { it.deliveryId._id == userId && it.status == "pending" } as ArrayList<GetAllOrdersItem>
                     Log.d("DeliveryHomeFragment", "Filtered live orders: $liveOrderDataList")
+                    Log.d("DeliveryHomeFragment", "User Id: $userId")
+
+                    // Calculate the number of completed and pending orders
+                    val completedOrders =
+                        dataList.filter { it.deliveryId._id == userId && it.status == "delivered" }
+                    val pendingOrders = liveOrderDataList.size
+
+                    val totalAmountCollected = completedOrders.sumOf { it.amount.toDouble() }
+
+                    pendingOrderCount.text = pendingOrders.toString()
+                    completedOrder.text = completedOrders.size.toString()
 
                     // Set up the live order adapter
-                    liveOrderAdapter = LiveOrderAdapter(requireContext(), liveOrderDataList,this@DeliveryHomeFragment)
+                    liveOrderAdapter = LiveOrderAdapter(requireContext(), liveOrderDataList)
                     recyclerView.adapter = liveOrderAdapter
-                    Log.d("DeliveryHomeFragment", "Live order adapter set with ${liveOrderDataList.size} items")
+                    Log.d(
+                        "DeliveryHomeFragment",
+                        "Live order adapter set with ${liveOrderDataList.size} items"
+                    )
 
                     // Set up the orders adapter
                     adapter = OrdersAdapter(requireContext(), dataList)
-                    updateOrderStats()
+//                    updateOrderStats()
                 } else {
                     Log.d("DeliveryHomeFragment", "User ID is null")
                 }
@@ -91,6 +108,51 @@ class DeliveryHomeFragment : Fragment() , LiveOrderAdapter.OnItemClickListener{
             }
         }
     }
+
+    private fun fetchDeliveryPartnerData() {
+        val userId = getUserId()
+        if (userId != null) {
+            RetrofitInstance.api.getDeliveryPartner(userId).enqueue(object :
+                Callback<DeliveryPartner> {
+                override fun onResponse(
+                    call: Call<DeliveryPartner>,
+                    response: Response<DeliveryPartner>
+                ) {
+                    if (response.isSuccessful) {
+                        val partner = response.body()
+                        if (partner != null) {
+                            // Calculate total amount collected
+                            val totalAmountCollected = partner.payments.sumOf { it.returnAmt.toDouble() }
+                            amountCollected.text = "₹${totalAmountCollected}"
+                            Log.d(
+                                "DeliveryHomeFragment",
+                                "Amount collected: ₹${totalAmountCollected}"
+                            )
+                        } else {
+                            Log.e("DeliveryHomeFragment", "Response body is null")
+                        }
+                    } else {
+                        Log.e(
+                            "DeliveryHomeFragment",
+                            "Failed to fetch delivery partner data: ${
+                                response.errorBody()?.string()
+                            }"
+                        )
+                    }
+                }
+
+                override fun onFailure(call: Call<DeliveryPartner>, t: Throwable) {
+                    Log.e(
+                        "DeliveryHomeFragment",
+                        "Error fetching delivery partner data: ${t.message}"
+                    )
+                }
+            })
+        } else {
+            Log.d("DeliveryHomeFragment", "User ID is null")
+        }
+    }
+
 
     private fun updateOrderStats() {
         val pendingOrdersCount = adapter.getPendingOrdersCount()
@@ -117,8 +179,8 @@ class DeliveryHomeFragment : Fragment() , LiveOrderAdapter.OnItemClickListener{
         return userId
     }
 
-    override fun onButtonClick(position: Int) {
-       startActivity(Intent(requireContext(),Order_Details_Screen::class.java))
+    fun onButtonClick(position: Int) {
+        startActivity(Intent(requireContext(), Order_Details_Screen::class.java))
     }
 
     /*override fun onTextViewClick(position: Int) {

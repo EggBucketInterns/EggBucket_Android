@@ -2,7 +2,7 @@ package com.eggbucket.eggbucket_android.model.data
 
 data class OrderDetailsResponse(
     val _id: String,
-    val outletId: Any?, // Since outletId is null, we use Any? to accommodate any future data type
+    val outletId: Any?,
     val customerId: CustomerId,
     val deliveryId: DeliveryId,
     val numTrays: String,
@@ -26,3 +26,8 @@ data class DeliveryId(
     val firstName: String,
     val phoneNumber: String
 )
+
+data class OrderStatusUpdate(
+    val status: String
+)
+

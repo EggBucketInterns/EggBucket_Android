@@ -15,36 +15,54 @@ import com.eggbucket.eggbucket_android.model.UpdateReturnAmtResponse
 import com.eggbucket.eggbucket_android.model.data.OrderDetailsResponse
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
 import com.eggbucket.eggbucket_android.network.UpdateReturnAmountRequest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class mode_of_payment : AppCompatActivity() {
     private lateinit var orderViewModel: OrderViewModel
+    private lateinit var orderId: String
+    private var Amount: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
         setContentView(R.layout.activity_mode_of_payment)
-       val discountAmount=findViewById<EditText>(R.id.discount_amount)
-        val amountR=findViewById<EditText>(R.id.amount_rs)
+
+        val discountAmount = findViewById<EditText>(R.id.discount_amount)
         val deli_completed = findViewById<Button>(R.id.deli_completed)
-       // orderViewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
-        val orderId = intent.getStringExtra("orderId")?:"";
+        // orderViewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
+
+        // Retrieve the order ID from the intent
+        orderId = intent.getStringExtra("order_ID") ?: ""
+        if (orderId.isEmpty()) {
+            Log.e("OrderID", "Order ID is missing!")
+            finish()
+            return
+        }
+        Log.d("OrderID", "Order ID in mode_of_payment: $orderId")
+
         getOrderDetails(orderId)
+        Log.d("OrderDetails", "Order Details fetched ${getOrderDetails(orderId)}")
 
-
+        // Set up the listener for the 'Delivery Completed' button
         deli_completed.setOnClickListener {
-            // Get the value from EditText
-            val discount=discountAmount.text.toString().toInt()
-            val amount = amountR.text.toString().toInt()
-            var finalAmount=(amount - discount).toString()
-           // orderViewModel.setAmount(finalAmount)
+            val discount = discountAmount.text.toString().toIntOrNull() ?: 0
+//            val amount = intent.getStringExtra("amount")?.toIntOrNull() ?: 0
+            val finalAmount:Int = Amount - discount
 
-            // Create an Intent to start SecondActivity
+            // Update the order and return/collection amounts
+            updateReturnAmount(orderId, finalAmount)
+            updateOrderStatus(orderId)
+            updateCollectionAmount(orderId, finalAmount)
+
+            // Navigate to the delivery dashboard
             val intent = Intent(this, delivery_dashboard::class.java)
-            intent.putExtra("amount",finalAmount)
-
-            // Start SecondActivity
+            intent.putExtra("amount", finalAmount.toString())
             startActivity(intent)
             finish()
         }
@@ -56,52 +74,96 @@ class mode_of_payment : AppCompatActivity() {
         }
     }
 
-private fun getOrderDetails(orderId: String) {
-    val apiService = RetrofitInstance.apiService
-    val call = apiService.getOrderDetails(orderId)
+    private fun updateOrderStatus(orderId: String) {
+        val statusUpdate = mapOf("status" to "delivered")
 
-    call.enqueue(object : Callback<OrderDetailsResponse> {
-        override fun onResponse(call: Call<OrderDetailsResponse>, response: Response<OrderDetailsResponse>) {
-            if (response.isSuccessful) {
-                val orderDetails = response.body()
-
-            } else {
-                Log.e("OrderDetails", "Failed to fetch order details: ${response.code()}")
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitInstance.apiService.updateOrderStatus(orderId, statusUpdate)
+                Log.d("OrderUpdate", "Order updated successfully: $response")
+            } catch (e: Exception) {
+                Log.e("OrderUpdate", "Failed to update order status: ${e.message}")
             }
         }
+    }
 
-        override fun onFailure(call: Call<OrderDetailsResponse>, t: Throwable) {
-            Log.e("OrderDetails", "Error fetching order details", t)
-        }
-    })
-}
-fun updateReturnAmount(orderId: String, amount: Int) {
-    val requestBody = UpdateReturnAmountRequest(orderId, amount)
+    private fun getOrderDetails(orderId: String) {
+        val apiService = RetrofitInstance.apiService
+        val call = apiService.getOrderDetails(orderId)
 
-    RetrofitInstance.instance.updateReturnAmount(requestBody).enqueue(object :
-        Callback<UpdateReturnAmtResponse> {
-        override fun onResponse(call: Call<UpdateReturnAmtResponse>, response: Response<UpdateReturnAmtResponse>) {
-            if (response.isSuccessful) {
-                val deliveryPartner = response.body()?.deleveryPartner
-
-                deliveryPartner?.let {
-                    println("Delivery Partner ID: ${it._id}")
-                    println("Name: ${it.firstName} ${it.lastName}")
-                    println("Driver License: ${it.driverLicenceNumber}")
-                    println("Phone Number: ${it.phoneNumber}")
-                    println("Image URL: ${it.img}")
-                    println("Payments: ${it.payments}")
+        call.enqueue(object : Callback<OrderDetailsResponse> {
+            override fun onResponse(call: Call<OrderDetailsResponse>, response: Response<OrderDetailsResponse>) {
+                if (response.isSuccessful) {
+                    val orderDetails = response.body()
+                    if (orderDetails != null) {
+                        Toast.makeText(this@mode_of_payment, "Order details fetched successfully", Toast.LENGTH_SHORT).show()
+                        Log.d("OrderDetails", "Order details fetched successfully: $orderDetails")
+                        populateOrderDetails(orderDetails)
+                        // Update finalAmount after fetching data
+                        Amount = orderDetails.amount.toInt()
+                    } else {
+                        Toast.makeText(this@mode_of_payment, "Order details are null", Toast.LENGTH_SHORT).show()
+                        Log.e("OrderDetails", "Order details are null.")
+                    }
+                } else {
+                    Log.e("OrderDetails", "Failed to fetch order details: ${response.code()}")
                 }
-            } else {
-                println("Response error: ${response.code()}")
             }
-        }
 
-        override fun onFailure(call: Call<UpdateReturnAmtResponse>, t: Throwable) {
-            // Handle error
-            t.printStackTrace()
-        }
-    })
-}
+            override fun onFailure(call: Call<OrderDetailsResponse>, t: Throwable) {
+                Log.e("OrderDetails", "Error fetching order details", t)
+            }
+        })
+    }
 
+    private fun updateReturnAmount(orderId: String, amount: Int) {
+        val requestBody = UpdateReturnAmountRequest(orderId, amount)
+
+        RetrofitInstance.apiService.updateReturnAmount(requestBody).enqueue(object :
+            Callback<UpdateReturnAmtResponse> {
+            override fun onResponse(
+                call: Call<UpdateReturnAmtResponse>,
+                response: Response<UpdateReturnAmtResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Log.d("ReturnAmount", "Successfully updated return amount for delivery partner.")
+                    Log.d("CollectionAmount", "Response: ${response.body()}")
+                } else {
+                    Log.e("ReturnAmount", "Failed to update return amount: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<UpdateReturnAmtResponse>, t: Throwable) {
+                Log.e("ReturnAmount", "Error updating return amount", t)
+            }
+        })
+    }
+
+    private fun updateCollectionAmount(orderId: String, amount: Int) {
+        val requestBody = UpdateReturnAmountRequest(orderId, amount)
+
+        RetrofitInstance.apiService.updateCollectionAmount(requestBody).enqueue(object :
+            Callback<UpdateReturnAmtResponse> {
+            override fun onResponse(
+                call: Call<UpdateReturnAmtResponse>,
+                response: Response<UpdateReturnAmtResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Log.d("CollectionAmount", "Successfully updated collection amount for outlet partner.")
+                    Log.d("CollectionAmount", "Response: ${response.body()}")
+                } else {
+                    Log.e("CollectionAmount", "Failed to update collection amount: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<UpdateReturnAmtResponse>, t: Throwable) {
+                Log.e("CollectionAmount", "Error updating collection amount", t)
+            }
+        })
+    }
+
+    private fun populateOrderDetails(orderDetails: OrderDetailsResponse) {
+        // Update the UI elements with data from orderDetails
+        findViewById<EditText>(R.id.amount_rs).setText(orderDetails.amount)
+    }
 }

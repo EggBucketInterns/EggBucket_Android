@@ -104,12 +104,15 @@ interface ApiService {
 
     @GET("orders/egg-bucket-b2b/getAllOrder")
     suspend fun getOrderByDeliveryIdByStatus(
-        @Query("customerId") customerId: String,
+        @Query("deliveryId") customerId: String,
         @Query("status") status: String
     ): ArrayList<GetAllOrdersItem>
 
     @PATCH("payment/egg-bucket-b2b/incReturnAmt")
     fun updateReturnAmount(@Body body: UpdateReturnAmountRequest): Call<UpdateReturnAmtResponse>
+
+    @PATCH("payment/egg-bucket-b2b/incCollectionAmt")
+    fun updateCollectionAmount(@Body body: UpdateReturnAmountRequest): Call<UpdateReturnAmtResponse>
 
     @GET("customers/egg-bucket-b2b/getAllCustomer")
     suspend fun getCustomerByID(

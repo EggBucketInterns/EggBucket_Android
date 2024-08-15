@@ -17,6 +17,24 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".CancelledOutletActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IntransitOutletActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PendingOutletActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CompletedOutletActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CancelledDeliveryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IntransitDeliveryActivity"
+            android:exported="false" />
+        <activity
             android:name=".PendingDeliveryOrders"
             android:exported="false" />
         <activity
