@@ -257,8 +257,8 @@
     <!-- Order Detail Card -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_height="320dp"
+        android:layout_margin="8dp"
         app:layout_constraintTop_toBottomOf="@id/liveOrdersText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -3,12 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:id="@+id/main"
     android:background="#FFA500"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="30dp"
-    tools:context=".AllOrdersActiviry">
-
+    tools:context=".PendingDeliveryOrders">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_margin="10dp"
@@ -75,14 +74,14 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/CompletedOrdersRecyclerview"
+                android:id="@+id/pending_delivery_orders_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="630dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
+                tools:listitem="@layout/all_orders_cart_items"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="0dp"
-                tools:listitem="@layout/all_orders_cart_items"
                 android:background="@drawable/recyclerview_background"
                 android:nestedScrollingEnabled="true"
                 android:visibility="visible" />
@@ -151,4 +150,6 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+
+
 </LinearLayout>

@@ -8,14 +8,15 @@ data class GetAllOrdersItem(
     val deliveryId: DeliveryId,
     val isUrgent: Boolean,
     val numTrays: String,
-    val outletId: OutletId,
+    val outletId: OutletId?,
     val status:String,
     val updatedAt: String,
 )
+
 data class CustomerId(
     val _id: String,
     val customerId: String,
-    val customerName: String,
+    val customerName: String?,
     val phoneNumber: String
 )
  class GetAllOrders:ArrayList<GetAllOrdersItem>()

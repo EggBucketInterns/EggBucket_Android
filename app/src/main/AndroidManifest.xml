@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".PendingDeliveryOrders"
+            android:exported="false" />
+        <activity
+            android:name=".CompletedDeliveryOrders"
+            android:exported="false" />
+        <activity
             android:name=".CompletedOrders"
             android:exported="false" />
         <activity

@@ -1,11 +1,14 @@
 package com.eggbucket.eggbucket_android
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
@@ -15,9 +18,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DeliverySearchFragment : Fragment() {
-    lateinit var dataList:ArrayList<GetAllOrdersItem>
-    lateinit var adapter: OrdersAdapter
-
+    private lateinit var adapter: OrdersAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var dataList: ArrayList<GetAllOrdersItem>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,6 +64,53 @@ class DeliverySearchFragment : Fragment() {
         }
 
         filter.setOnClickListener {
+            when {
+                completed.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
+                    // Action for 'completed' being selected
+                    Toast.makeText(context, "Completed is selected", Toast.LENGTH_SHORT).show()
+                    // Navigate to another activity or perform any action you want
+                    val intent = Intent(activity, CompletedDeliveryOrders::class.java)
+                    startActivity(intent)
+                }
+
+                /*cancelled.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
+                    // Action for 'cancelled' being selected
+                    Toast.makeText(context, "Cancelled is selected", Toast.LENGTH_SHORT).show()
+                    // Navigate to another activity or perform any action you want
+                    val intent = Intent(activity, CancelledActivity::class.java)
+                    startActivity(intent)
+                }
+
+                intransit.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
+                    // Action for 'intransit' being selected
+                    Toast.makeText(context, "In Transit is selected", Toast.LENGTH_SHORT).show()
+                    // Navigate to another activity or perform any action you want
+                    val intent = Intent(activity, InTransitActivity::class.java)
+                    startActivity(intent)
+                }*/
+
+                pending.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
+                    // Action for 'pending' being selected
+                    Toast.makeText(context, "Pending is selected", Toast.LENGTH_SHORT).show()
+                    // Navigate to another activity or perform any action you want
+                    val intent = Intent(activity, PendingDeliveryOrders::class.java)
+                    startActivity(intent)
+                }
+
+                else -> {
+                    // Default action if no button is selected
+                    Toast.makeText(context, "No filter selected", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+
+       /* filter.setOnClickListener {
+            when(R.drawable.apply_filter_back){
+
+            }
+
+
             CoroutineScope(Dispatchers.IO).launch {
                 dataList = RetrofitInstance.api.getAllOrders()
                 withContext(Dispatchers.Main) {
@@ -77,7 +127,7 @@ class DeliverySearchFragment : Fragment() {
             completed.text="Completed"
             intransit.text="In-Transit"
             cancelled.text="Cancelled"
-        }
+        }*/
 
     }
 }
