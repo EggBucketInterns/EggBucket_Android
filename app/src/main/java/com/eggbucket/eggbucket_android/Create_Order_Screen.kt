@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import android.content.Context
+import com.eggbucket.eggbucket_android.model.DeliveryPartner
 import com.eggbucket.eggbucket_android.model.DeliveryPartnerModel
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
 
@@ -57,7 +58,7 @@ class Create_Order_Screen : AppCompatActivity() {
         lateinit var adapter: DeliveryPartnerAdapter
         lateinit var vendorAdapter : VendorAdapter
         val deliveryPartnerList = mutableListOf<DeliveryPartnersItem>()
-        val refinedDeliveryPartnerList = mutableListOf<DeliveryPartnerModel>()
+        var refinedDeliveryPartnerList = mutableListOf<DeliveryPartner>()
         val vendorList = mutableListOf<VendorItem>()
         var OutletIdInp : String;
         var vendorIdInp : String ="";
@@ -73,8 +74,6 @@ class Create_Order_Screen : AppCompatActivity() {
         //have to chancge when authentication is implemented
         OutletIdInp = userId.toString();
         customerIdInp = "66b3c8aa6ab3f6c1af2985a0";
-
-
         recyclerView = findViewById(R.id.vendorRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         vendorAdapter = VendorAdapter(vendorList){ selectedId ,selectedName->
@@ -89,8 +88,6 @@ class Create_Order_Screen : AppCompatActivity() {
         recyclerView = findViewById(R.id.deliveryPartnerRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = DeliveryPartnerAdapter(refinedDeliveryPartnerList){ selectedId ,selectedName->
-            // Handle the selected delivery partner's ID
-//            Log.d("SelectedID", "Selected Delivery Partner ID: $selectedId");
             assignDeliveryPartnerBtn.setText("$selectedName");
             deliveryPartnerIdInp = "$selectedId";
         }
@@ -113,27 +110,8 @@ class Create_Order_Screen : AppCompatActivity() {
             SearchVendorLayout.visibility = View.VISIBLE;
             AssignDeliveryPartnerLayout.visibility = View.GONE;
         }
-        fun fetchDeliveryPartners(outletId: String) {
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    val response = RetrofitInstance.apiService.getDeliveryPartnerByOutlet(outletId)
-                    val refinedDeliveryPartnerList = response.flatMap { it.deliveryPartner!! }
 
-                    withContext(Dispatchers.Main) {
-                        adapter = DeliveryPartnerAdapter(refinedDeliveryPartnerList){
-                                selectedId ,selectedName->
-                            // Handle the selected delivery partner's ID
-//            Log.d("SelectedID", "Selected Delivery Partner ID: $selectedId");
-                            assignDeliveryPartnerBtn.setText("$selectedName");
-                            deliveryPartnerIdInp = "$selectedId";
-                        }
-                        recyclerView.adapter = adapter
-                    }
-                } catch (e: Exception) {
-                    Log.e("API Error", "Failed to fetch data: ${e.message}")
-                }
-            }
-        }
+
         fun fetchVendorDetails() {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
@@ -205,9 +183,12 @@ class Create_Order_Screen : AppCompatActivity() {
             })
         }
         fetchDeliveryPartnerDetails();
+
        // fetchVendorDetails();
         assignDeliveryPartnerBtn.setOnClickListener {
-
+            if (userId != null) {
+//                fetchDeliveryPartners(userId)
+            };
             showAssignDeliveryPartnerLayout();
         }
         selectVendorBtn.setOnClickListener {

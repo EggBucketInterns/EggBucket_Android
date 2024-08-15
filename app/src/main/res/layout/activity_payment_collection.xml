@@ -81,6 +81,7 @@
                 android:text="DELIVERY COMPLETED"
                 android:background="@drawable/delibery_completed_back"
                 android:gravity="center"
+                android:id="@+id/deliveryCompletedBtn"
                 android:layout_marginTop="350dp"
                 android:paddingTop="20dp"
                 android:paddingEnd="40dp"

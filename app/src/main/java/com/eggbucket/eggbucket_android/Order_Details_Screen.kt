@@ -24,14 +24,14 @@ class Order_Details_Screen : AppCompatActivity() {
 
         // Retrieve the order ID from intent or use a default one
         orderId = intent.getStringExtra("ORDER_ID") ?: "66b764ddf2476d8c6f2770cb"
-
+        intent.putExtra("orderId",orderId);
         // Call API to fetch order details
         getOrderDetails(orderId)
 
-        // Handle the 'Reached' button click
         val reached = findViewById<TextView>(R.id.reached)
         reached.setOnClickListener {
             startActivity(Intent(this, mode_of_payment::class.java))
+
             finish()
         }
     }

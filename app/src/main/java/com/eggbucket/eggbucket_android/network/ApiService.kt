@@ -1,10 +1,12 @@
 package com.eggbucket.eggbucket_android.network
 
+import com.eggbucket.eggbucket_android.model.Customer
 import com.eggbucket.eggbucket_android.model.DeliveryPartnerModel
 import com.eggbucket.eggbucket_android.model.DeliveryPartnersItem
 import com.eggbucket.eggbucket_android.model.Order
 import com.eggbucket.eggbucket_android.model.OrderCreate
 import com.eggbucket.eggbucket_android.model.StatusUpdate
+import com.eggbucket.eggbucket_android.model.UpdateReturnAmtResponse
 import com.eggbucket.eggbucket_android.model.VendorItem
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.model.data.DeliveryPartner
@@ -77,7 +79,8 @@ interface ApiService {
     ): Order
 
     @GET("egg-bucket-b2b/get-all-outlets")
-    suspend fun getDeliveryPartnerByOutlet(@Query("outletPartner") outletId: String):ArrayList<DeliveryPartnerModel>
+    suspend fun getDeliveryPartnerByOutlet(@Query("outletPartner") outletId: String): DeliveryPartnerModel
+
     @PATCH("orders/egg-bucket-b2b/order/{id}")
     suspend fun updateOrderStatus(
         @Path("id") orderId: String,
@@ -104,7 +107,19 @@ interface ApiService {
         @Query("status") status: String
     ): ArrayList<GetAllOrdersItem>
 
+    @PATCH("payment/egg-bucket-b2b/incReturnAmt")
+    fun updateReturnAmount(@Body body: UpdateReturnAmountRequest): Call<UpdateReturnAmtResponse>
+
+    @GET("customers/egg-bucket-b2b/getAllCustomer")
+    suspend fun getCustomerByOutlet(
+        @Query("outlet") outlet: String
+    ) : ArrayList<Customer>
 }
+
+data class UpdateReturnAmountRequest(
+    val orderId: String,
+    val amount: Int
+)
 
 
 

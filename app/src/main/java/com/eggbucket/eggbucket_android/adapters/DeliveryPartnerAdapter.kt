@@ -7,12 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.eggbucket.eggbucket_android.R
 import com.eggbucket.eggbucket_android.model.DeliveryPartner
-import com.eggbucket.eggbucket_android.model.DeliveryPartnerModel
 
-class DeliveryPartnerAdapter(private val deliveryPartners: List<DeliveryPartnerModel>,
+class DeliveryPartnerAdapter(private val deliveryPartners: List<DeliveryPartner>,
                              private val onAssignButtonClick: (String, String) -> Unit
 ) :
     RecyclerView.Adapter<DeliveryPartnerAdapter.DeliveryPartnerViewHolder>() {
@@ -35,7 +33,7 @@ class DeliveryPartnerAdapter(private val deliveryPartners: List<DeliveryPartnerM
     override fun onBindViewHolder(holder: DeliveryPartnerViewHolder, position: Int) {
         val currentItem = deliveryPartners[holder.adapterPosition]
         Log.d("ChcekResponse", currentItem.toString())
-        holder.firstnameTextView.text = currentItem
+        holder.firstnameTextView.text = currentItem.firstName
 
         // Load the image into ImageView
 //        Glide.with(holder.itemView.context)
