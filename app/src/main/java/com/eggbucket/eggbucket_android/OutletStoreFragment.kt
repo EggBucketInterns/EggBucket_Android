@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
@@ -42,6 +43,10 @@ class OutletStoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val gotoFilter = view.findViewById<LinearLayout>(R.id.filter_layout)
+        gotoFilter.setOnClickListener {
+
+        }
         dataList= arrayListOf()
         // Find the RecyclerView
         recyclerView = view.findViewById(R.id.recyclerview1)

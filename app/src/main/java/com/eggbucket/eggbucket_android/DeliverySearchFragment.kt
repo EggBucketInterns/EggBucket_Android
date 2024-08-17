@@ -2,6 +2,7 @@ package com.eggbucket.eggbucket_android
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +39,7 @@ class DeliverySearchFragment : Fragment() {
         val filter=view.findViewById<TextView>(R.id.apply_filter)
         val reset=view.findViewById<TextView>(R.id.filter_reset)
 
+
         completed.setOnClickListener {
             completed.setBackgroundResource(R.drawable.apply_filter_back)
             cancelled.setBackgroundResource(R.drawable.no_background)
@@ -64,22 +66,27 @@ class DeliverySearchFragment : Fragment() {
         }
 
         filter.setOnClickListener {
+            try {
             when {
-                completed.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
-                    // Action for 'completed' being selected
-                    Toast.makeText(context, "Completed is selected", Toast.LENGTH_SHORT).show()
-                    // Navigate to another activity or perform any action you want
-                    val intent = Intent(activity, CompletedDeliveryOrders::class.java)
-                    startActivity(intent)
-                }
 
-                cancelled.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
-                    // Action for 'cancelled' being selected
-                    Toast.makeText(context, "Cancelled is selected", Toast.LENGTH_SHORT).show()
-                    // Navigate to another activity or perform any action you want
-                    val intent = Intent(activity, CancelledDeliveryActivity::class.java)
-                    startActivity(intent)
-                }
+                    completed.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
+                        // Action for 'completed' being selected
+                        Toast.makeText(context, "Completed is selected", Toast.LENGTH_SHORT).show()
+                        // Navigate to another activity or perform any action you want
+                        val intent = Intent(activity, CompletedDeliveryOrders::class.java)
+                        startActivity(intent)
+                    }
+
+
+
+                    cancelled.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
+                        // Action for 'cancelled' being selected
+                        Toast.makeText(context, "Cancelled is selected", Toast.LENGTH_SHORT).show()
+                        // Navigate to another activity or perform any action you want
+                        val intent = Intent(activity, CancelledDeliveryActivity::class.java)
+                        startActivity(intent)
+                    }
+
 
                 intransit.background.constantState == resources.getDrawable(R.drawable.apply_filter_back).constantState -> {
                     // Action for 'intransit' being selected
@@ -99,35 +106,18 @@ class DeliverySearchFragment : Fragment() {
 
                 else -> {
                     // Default action if no button is selected
-                    Toast.makeText(context, "No filter selected", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Pending filter selected", Toast.LENGTH_SHORT).show()
                 }
             }
+            }catch (e: Exception){
+                Log.e("FilterSelectionError", "Error occurred during filter selection: ${e.message}")
+                Toast.makeText(context, "First Select.", Toast.LENGTH_SHORT).show()
+            }
+
+
         }
 
 
-       /* filter.setOnClickListener {
-            when(R.drawable.apply_filter_back){
-
-            }
-
-
-            CoroutineScope(Dispatchers.IO).launch {
-                dataList = RetrofitInstance.api.getAllOrders()
-                withContext(Dispatchers.Main) {
-                    adapter = OrdersAdapter(requireContext(),dataList)
-                    pending.text="Pending  ${adapter.getPendingOrdersCount().toString()} "
-                    completed.text="Completed  ${adapter.getCompletedOrdersCount().toString()} "
-                    intransit.text="In-Transit  ${adapter.getInTransitOrdersCount().toString()} "
-                    cancelled.text="Cancelled  ${adapter.getCancelledOrdersCount().toString()} "
-                }
-            }
-        }
-        reset.setOnClickListener {
-            pending.text="Pending"
-            completed.text="Completed"
-            intransit.text="In-Transit"
-            cancelled.text="Cancelled"
-        }*/
 
     }
 }

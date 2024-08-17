@@ -179,7 +179,7 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/linear_layout"
+                android:id="@+id/linear_layout_all_order_item"
                 android:layout_toEndOf="@+id/no_of_tray"
                 android:layout_below="@+id/no_of_tray"
                 android:background="@drawable/order_details_back"
