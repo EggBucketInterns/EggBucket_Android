@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eggbucket.eggbucket_android.adapters.OrderAdapter_2
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DeliveryStoreFragment : Fragment() {
-    lateinit var adapter: OrdersAdapter
+    lateinit var adapter: OrderAdapter_2
     lateinit var recyclerView: RecyclerView
     lateinit var dataList:ArrayList<GetAllOrdersItem>
 
@@ -49,7 +50,7 @@ class DeliveryStoreFragment : Fragment() {
             val dataList = RetrofitInstance.api.getOrdersByDeliveryId(getUserId().toString())
 
             withContext(Dispatchers.Main) {
-                adapter = OrdersAdapter(requireContext(),dataList)
+                adapter = OrderAdapter_2(requireContext(),dataList)
                 recyclerView.adapter = adapter
             }
         }
