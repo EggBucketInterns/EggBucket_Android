@@ -15,6 +15,7 @@ import retrofit2.Response
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.adapters.AllOrderAdapter
+import com.eggbucket.eggbucket_android.adapters.DeliveryPartnerAdapter
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 //import com.eggbucket.eggbucket_android.adapters.ResentOrdersAdapter
 import com.eggbucket.eggbucket_android.databinding.FragmentOutletHomeBinding
@@ -129,41 +130,56 @@ class OutletHomeFragment : Fragment() {
         return binding.root
     }
     override fun onResume() {
-        fetchDataAndBindRecyclerview()
+        try {
+            fetchDataAndBindRecyclerview()
+        }
+        catch (e : Exception){
+            Log.e("ExceptionError", e.message.toString() )
+        }
+
         super.onResume()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        try {
+            binding.totalOrderBtn.setOnClickListener {
+                val intent = Intent(requireContext(), AllOrdersActiviry::class.java).apply {
+                    putExtra("name", "Total Orders");
+                }
+                startActivity(intent)
+            }
+            binding.completedOrderBtn.setOnClickListener {
+                val intent = Intent(requireContext(), CompletedOrders::class.java)
+                startActivity(intent)
+            }
+            binding.pendingOrdersBtn.setOnClickListener {
+                val intent = Intent(requireContext(), PendingOrders::class.java)
+                startActivity(intent)
+            }
+            binding.pendingCashBtn.setOnClickListener {
+                val intent = Intent(requireContext(), CashCollectedActivity::class.java)
+                startActivity(intent)
+            }
+            Log.d("aaaaaaaaaaaaaa", getUserId().toString())
+            setupRecyclerView()
+            // fetchOrders()
+            dataList = arrayListOf()
+            // Find the RecyclerView
+            recyclerView = view.findViewById(R.id.recyclerView)
 
-        binding.totalOrderBtn.setOnClickListener {
-            val intent = Intent(requireContext(), AllOrdersActiviry::class.java).apply {
-                putExtra("name","Total Orders");            }
-            startActivity(intent)
+            // Set layout manager
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            // Set the adapter
+            try {
+                fetchDataAndBindRecyclerview()
+            } catch (e: Exception) {
+                Log.e("ExceptionError", e.message.toString())
+            }
         }
-        binding.completedOrderBtn.setOnClickListener {
-            val intent = Intent(requireContext(), CompletedOrders::class.java)
-            startActivity(intent)
+        catch (e : Exception){
+            Log.e("ExceptionError", e.message.toString() )
         }
-        binding.pendingOrdersBtn.setOnClickListener {
-            val intent = Intent(requireContext(), PendingOrders::class.java)
-            startActivity(intent)
-        }
-        binding.pendingCashBtn.setOnClickListener {
-            val intent = Intent(requireContext(), CashCollectedActivity::class.java)
-            startActivity(intent)
-        }
-        Log.d("aaaaaaaaaaaaaa", getUserId().toString())
-        setupRecyclerView()
-       // fetchOrders()
-        dataList= arrayListOf()
-        // Find the RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerView)
-
-        // Set layout manager
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        // Set the adapter
-        fetchDataAndBindRecyclerview()
     }
 
 
@@ -173,6 +189,30 @@ class OutletHomeFragment : Fragment() {
         _binding = null
     }
     fun fetchDataAndBindRecyclerview(){
+
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+            val response = apiService.getOutletByOutletPartnerID(getUserId().toString())
+            withContext(Dispatchers.Main) {
+                val outlets = response.data
+                // Handle the list of outlets as needed
+                Log.d("checkResponse", "Fetched outlets: $outlets")
+                for(outlet in outlets){
+                    Log.d("checkResponse", outlet.deliveryPartner.toString())
+                    try {
+                        binding.outletName.text= outlet.outletArea ;
+                    }
+                    catch (e : Exception){
+                        e.message.toString()
+                    }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("checkResponse", "Error: ${e.message}")
+        }
+
+
 
         CoroutineScope(Dispatchers.IO).launch {
             dataList = RetrofitInstance.api.getOrdersByOutletId(getUserId().toString());

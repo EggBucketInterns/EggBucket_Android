@@ -27,7 +27,12 @@ class Order_Details_Screen : AppCompatActivity() {
 //        intent.putExtra("order_ID",orderId);
 
         // Call API to fetch order details
-        getOrderDetails(orderId)
+        try {
+            getOrderDetails(orderId)
+        }
+        catch (e : Exception){
+            Log.e("ExceptionError", e.message.toString() )
+        }
 
         val reached = findViewById<TextView>(R.id.reached)
         reached.setOnClickListener {

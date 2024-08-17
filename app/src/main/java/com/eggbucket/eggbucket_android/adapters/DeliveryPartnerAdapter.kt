@@ -1,6 +1,8 @@
 package com.eggbucket.eggbucket_android.adapters
 
 import DeliveryPartner
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +10,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.eggbucket.eggbucket_android.Create_Order_Screen
+import com.eggbucket.eggbucket_android.MainActivity
 import com.eggbucket.eggbucket_android.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-class DeliveryPartnerAdapter(private val deliveryPartners: List<DeliveryPartner>,
-                             private val onAssignButtonClick: (String, String) -> Unit
-) :
+class DeliveryPartnerAdapter(
+                             private val deliveryPartners: List<DeliveryPartner>,
+                             private val onAssignButtonClick: (String, String) -> Unit,
+                            ) :
     RecyclerView.Adapter<DeliveryPartnerAdapter.DeliveryPartnerViewHolder>() {
 
         private var selectedPosition:Int?=null;

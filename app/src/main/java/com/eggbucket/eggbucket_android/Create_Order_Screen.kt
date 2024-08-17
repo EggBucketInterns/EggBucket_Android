@@ -1,7 +1,10 @@
 package com.eggbucket.eggbucket_android
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -11,14 +14,13 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.adapters.DeliveryPartnerAdapter
 import com.eggbucket.eggbucket_android.adapters.VendorAdapter
+import com.eggbucket.eggbucket_android.model.Customer
+import com.eggbucket.eggbucket_android.model.DeliveryPartner
 import com.eggbucket.eggbucket_android.model.DeliveryPartnersItem
 import com.eggbucket.eggbucket_android.model.OrderCreate
 import com.eggbucket.eggbucket_android.model.VendorItem
@@ -27,12 +29,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import android.content.Context
-import com.eggbucket.eggbucket_android.model.Customer
-import com.eggbucket.eggbucket_android.model.DeliveryPartner
+
 
 class Create_Order_Screen : AppCompatActivity() {
     public val assignedDeliveryPartners = "";
@@ -74,7 +77,7 @@ class Create_Order_Screen : AppCompatActivity() {
         val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
 // Retrieve the stored USER_ID
         val userId = sharedPref.getString("USER_ID", null)
-        outletIdTextView.setText(userId);
+        //outletIdTextView.setText(userId);
         //have to chancge when authentication is implemented
         OutletIdInp = userId.toString();
         recyclerView = findViewById(R.id.vendorRecyclerView)
@@ -182,13 +185,13 @@ class Create_Order_Screen : AppCompatActivity() {
                     val response = apiService.getOutletByOutletPartnerID(id)
                     withContext(Dispatchers.Main) {
                         val outlets = response.data
-
                         // Handle the list of outlets as needed
                         Log.d("checkResponse", "Fetched outlets: $outlets")
 
                         for(outlet in outlets){
                             Log.d("checkResponse", outlet.deliveryPartner.toString())
                             outletIDFinal = outlet._id;
+                            outletIdTextView.setText(outlet.outletArea + " EggBucket");
 //                            outlet.deliveryPartner?.let {
 //                                refinedDeliveryPartnerList.addAll(it) // Directly add the List<DeliveryPartner>
 //                            }
@@ -199,18 +202,22 @@ class Create_Order_Screen : AppCompatActivity() {
                                 assignDeliveryPartnerBtn.setText("$selectedName");
                                 deliveryPartnerIdInp = "$selectedId";
                             }
+                            val handler = Handler(Looper.getMainLooper())
+                            handler.postDelayed({
+                                if (deliveryPartnerIdInp != ""){
+                                    showCreateOrderLayout();
+                                }
+                            }, 300)
+
+
                             recyclerView.adapter = adapter
                         }
-
-
-
                     }
                 } catch (e: Exception) {
                     Log.e("checkResponse", "Error: ${e.message}")
                 }
             }
         }
-
         fun fetchDeliveryPartnerDetails() {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
