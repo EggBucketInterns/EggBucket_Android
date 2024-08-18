@@ -76,6 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/completed_order_delivey"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -131,7 +132,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/pendingOd"
+            android:id="@+id/pending_order_delivery"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -33,6 +34,8 @@ class DeliveryHomeFragment : Fragment() {
     lateinit var liveOrderDataList: ArrayList<GetAllOrdersItem>
     lateinit var amountCollected: TextView
     lateinit var pendingOrderCount: TextView
+    lateinit var completedOrderCard: CardView
+    lateinit var pendingOrderCard: CardView
     lateinit var completedOrder: TextView
     lateinit var dataList: ArrayList<GetAllOrdersItem>
     lateinit var adapter: OrdersAdapter
@@ -50,9 +53,18 @@ class DeliveryHomeFragment : Fragment() {
         fetchDeliveryPartnerData()
         fetchOrders()
         observeViewModel()
+
+        completedOrderCard.setOnClickListener {
+            startActivity(Intent(requireContext(), CompletedDeliveryOrders::class.java))
+        }
+        pendingOrderCard.setOnClickListener {
+            startActivity(Intent(requireContext(), PendingDeliveryOrders::class.java))
+        }
     }
 
     private fun initViews(view: View) {
+        completedOrderCard = view.findViewById(R.id.completed_order_delivey)
+        pendingOrderCard = view.findViewById(R.id.pending_order_delivery)
         amountCollected = view.findViewById(R.id.amount_collected)
         pendingOrderCount = view.findViewById(R.id.pending_order_count)
         completedOrder = view.findViewById(R.id.txt_completed)
