@@ -47,6 +47,7 @@ class OutletHomeFragment : Fragment() {
     private var _binding: FragmentOutletHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var orderAdapter: RecentOrdersAdapter
+    private var outletId = "";
     var totalOrders = 0
     var pendingOrders = 0
     var completedOrders = 0
@@ -123,7 +124,7 @@ class OutletHomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentOutletHomeBinding.inflate(inflater, container, false)
         // Return the root view
 
@@ -191,7 +192,7 @@ class OutletHomeFragment : Fragment() {
     fun fetchDataAndBindRecyclerview(){
 
         try {
-            CoroutineScope(Dispatchers.IO).launch {
+            CoroutineScope(Dispatchers.Main).launch {
             val response = apiService.getOutletByOutletPartnerID(getUserId().toString())
             withContext(Dispatchers.Main) {
                 val outlets = response.data
@@ -200,7 +201,9 @@ class OutletHomeFragment : Fragment() {
                 for(outlet in outlets){
                     Log.d("checkResponse", outlet.deliveryPartner.toString())
                     try {
-                        binding.outletName.text= outlet.outletArea ;
+                        binding.outletName.text= outlet.outletArea;
+                        outletId = outlet._id;sa
+                        Log.d("checkResponse", "Set outletId: $outletId")
                     }
                     catch (e : Exception){
                         e.message.toString()
@@ -214,12 +217,20 @@ class OutletHomeFragment : Fragment() {
 
 
 
-        CoroutineScope(Dispatchers.IO).launch {
-            dataList = RetrofitInstance.api.getOrdersByOutletId(getUserId().toString());
-
-            withContext(Dispatchers.Main) {
-                adapter = AllOrderAdapter(requireContext(),dataList)
-                recyclerView.adapter = adapter
+        CoroutineScope(Dispatchers.Main).launch {
+            // Add log to check outletId before making the API call
+            Log.d("checkResponse", "Using outletId: $outletId for new outlet API call")
+            if (outletId.isNotEmpty()) {
+                dataList = RetrofitInstance.api.getOrdersByOutletId(outletId)
+                withContext(Dispatchers.Main) {
+                    adapter = AllOrderAdapter(requireContext(), dataList)
+                    recyclerView.adapter = adapter
+                }
+//            dataList = RetrofitInstance.api.getOrdersByOutletId();
+//
+//            withContext(Dispatchers.Main) {
+//                adapter = AllOrderAdapter(requireContext(),dataList)
+//                recyclerView.adapter = adapter
             }
             var totalOrders = 0
             var pendingOrders = 0
