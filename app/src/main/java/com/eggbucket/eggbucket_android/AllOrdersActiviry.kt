@@ -45,7 +45,6 @@ class AllOrdersActiviry : AppCompatActivity() {
     private fun fetchDataAndBindRecyclerview() {
         CoroutineScope(Dispatchers.IO).launch {
             // Fetch data from the API
-
             dataList = RetrofitInstance.api.getOrdersByOutletId(getUserId().toString())
             // Update the RecyclerView on the main thread
             withContext(Dispatchers.Main) {

@@ -3,6 +3,7 @@ package com.eggbucket.eggbucket_android
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethod
 import android.view.inputmethod.InputMethodManager
@@ -17,6 +18,11 @@ import androidx.core.view.WindowInsetsCompat
 import com.eggbucket.eggbucket_android.model.login.LoginRequest
 import com.eggbucket.eggbucket_android.model.login.LoginResponse
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
+import com.eggbucket.eggbucket_android.network.RetrofitInstance.apiService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,7 +35,6 @@ class LoginScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
-
         val outletPartner = findViewById<CheckBox>(R.id.outlet_pertner)
         val deliveryPartner = findViewById<CheckBox>(R.id.delivery_partner)
         val customerCode = findViewById<EditText>(R.id.customer_code)
@@ -154,10 +159,23 @@ class LoginScreenActivity : AppCompatActivity() {
     }
 
     private fun saveUserId(userId: String?) {
+        var idOutlet : String = "";
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = apiService.getOutletByOutletPartnerID(userId.toString())
+            withContext(Dispatchers.Main) {
+                val outlets = response.data
+                Log.d("checkResponse", "Fetched outlets: $outlets")
+                for(outlet in outlets){
+                    Log.d("checkResponse", outlet.deliveryPartner.toString())
+                    idOutlet = outlet._id.toString();
+                }
+            }
+        }
         if (userId != null) {
             val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
             with(sharedPref.edit()) {
                 putString("USER_ID", userId)
+                Log.d("qwerty", idOutlet)
                 apply()
             }
             Toast.makeText(this, "Saved User ID", Toast.LENGTH_SHORT).show()

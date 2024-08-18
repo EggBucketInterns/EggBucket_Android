@@ -4,6 +4,7 @@ import RecentOrdersAdapter
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,42 +52,42 @@ class OutletHomeFragment : Fragment() {
     var pendingOrders = 0
     var completedOrders = 0
     var totalPendingCash = 0
-
-    private fun processOrders(orders: List<AllOrders>) {
-
-        orderAdapter = RecentOrdersAdapter(orders)
-        binding.recyclerView.adapter = orderAdapter
-
-        var totalOrders = 0
-        var pendingOrders = 0
-        var completedOrders = 0
-        var totalPendingCash = 0
-
-        for (order in orders) {
-            totalOrders++
-
-            when (order.status) {
-//                "pending" -> {
-//                    pendingOrders++
-//                    totalPendingCash += Integer.parseInt(order.amount);
-//                }
-//                "completed" -> completedOrders++
-//                "delivered" -> totalPendingCash += Integer.parseInt(order.amount);
-//                "intransit" -> totalPendingCash += Integer.parseInt(order.amount);
-            }
-        }
-        // Now you have the counts and total pending cash.
-        // You can update the UI or handle these values as needed.
-        // For example, updating TextViews:
-//        view?.findViewById<TextView>(R.id.totalOrdersTextView)?.text = "Total Orders: $totalOrders"
-//        view?.findViewById<TextView>(R.id.pendingOrdersTextView)?.text = "Pending Orders: $pendingOrders"
-//        view?.findViewById<TextView>(R.id.completedOrdersTextView)?.text = "Completed Orders: $completedOrders"
-//        view?.findViewById<TextView>(R.id.pendingCashTextView)?.text = "Total Pending Cash: $totalPendingCash"
-        binding.totalOrders.text = totalOrders.toString();
-        binding.completedOrders.text = completedOrders.toString();
-        binding.pendingOrders.text = pendingOrders.toString();
-        binding.pendingCash.text = totalPendingCash.toString();
-    }
+    var IDoutlet : String = "";
+//    private fun processOrders(orders: List<AllOrders>) {
+//
+//        orderAdapter = RecentOrdersAdapter(orders)
+//        binding.recyclerView.adapter = orderAdapter
+//
+//        var totalOrders = 0
+//        var pendingOrders = 0
+//        var completedOrders = 0
+//        var totalPendingCash = 0
+//
+//        for (order in orders) {
+//            totalOrders++
+//
+//            when (order.status) {
+////                "pending" -> {
+////                    pendingOrders++
+////                    totalPendingCash += Integer.parseInt(order.amount);
+////                }
+////                "completed" -> completedOrders++
+////                "delivered" -> totalPendingCash += Integer.parseInt(order.amount);
+////                "intransit" -> totalPendingCash += Integer.parseInt(order.amount);
+//            }
+//        }
+//        // Now you have the counts and total pending cash.
+//        // You can update the UI or handle these values as needed.
+//        // For example, updating TextViews:
+////        view?.findViewById<TextView>(R.id.totalOrdersTextView)?.text = "Total Orders: $totalOrders"
+////        view?.findViewById<TextView>(R.id.pendingOrdersTextView)?.text = "Pending Orders: $pendingOrders"
+////        view?.findViewById<TextView>(R.id.completedOrdersTextView)?.text = "Completed Orders: $completedOrders"
+////        view?.findViewById<TextView>(R.id.pendingCashTextView)?.text = "Total Pending Cash: $totalPendingCash"
+//        binding.totalOrders.text = totalOrders.toString();
+//        binding.completedOrders.text = completedOrders.toString();
+//        binding.pendingOrders.text = pendingOrders.toString();
+//        binding.pendingCash.text = totalPendingCash.toString();
+//    }
 
 
 
@@ -199,13 +200,14 @@ class OutletHomeFragment : Fragment() {
                 Log.d("checkResponse", "Fetched outlets: $outlets")
                 for(outlet in outlets){
                     Log.d("checkResponse", outlet.deliveryPartner.toString())
+                    IDoutlet = outlet._id;
                     try {
                         binding.outletName.text= outlet.outletArea ;
                     }
                     catch (e : Exception){
                         e.message.toString()
                     }
-                    }
+                }
                 }
             }
         } catch (e: Exception) {
@@ -213,9 +215,10 @@ class OutletHomeFragment : Fragment() {
         }
 
 
+        Handler().postDelayed({
 
         CoroutineScope(Dispatchers.IO).launch {
-            dataList = RetrofitInstance.api.getOrdersByOutletId(getUserId().toString());
+            dataList = RetrofitInstance.api.getOrdersByOutletId(IDoutlet);
 
             withContext(Dispatchers.Main) {
                 adapter = AllOrderAdapter(requireContext(),dataList)
@@ -226,6 +229,7 @@ class OutletHomeFragment : Fragment() {
             var completedOrders = 0
             var totalPendingCash = 0
             for (order in dataList) {
+                Log.d("checkResponse----->", order.status)
                 totalOrders++
 
                 when (order.status) {
@@ -242,5 +246,6 @@ class OutletHomeFragment : Fragment() {
             binding.pendingOrders.text = pendingOrders.toString();
             binding.pendingCash.text = totalPendingCash.toString();
         }
+        },2000)
     }
 }
