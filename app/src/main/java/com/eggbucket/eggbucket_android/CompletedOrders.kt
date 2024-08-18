@@ -4,8 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
@@ -36,15 +34,15 @@ class CompletedOrders : AppCompatActivity() {
         // Set the adapter and fetch data
         fetchDataAndBindRecyclerview()
     }
-    private fun getUserId():String?{
+    private fun getOutletId():String?{
         val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
-        return sharedPref?.getString("USER_ID",null)
+        return sharedPref?.getString("OUTLET_ID",null)
     }
     private fun fetchDataAndBindRecyclerview() {
         CoroutineScope(Dispatchers.IO).launch {
             // Fetch data from the API
 
-            dataList = RetrofitInstance.api.getOrderByOutletIdByStatus(getUserId().toString(),"completed")
+            dataList = RetrofitInstance.api.getOrderByOutletIdByStatus(getOutletId().toString(),"completed")
             // Update the RecyclerView on the main thread
             withContext(Dispatchers.Main) {
                 adapter = OrdersAdapter(this@CompletedOrders, dataList)

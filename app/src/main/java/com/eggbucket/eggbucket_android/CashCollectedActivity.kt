@@ -39,15 +39,15 @@ class CashCollectedActivity : AppCompatActivity(){
         // Set the adapter and fetch data
         fetchDataAndBindRecyclerview()
     }
-    private fun getUserId():String?{
+    private fun getOutletId():String?{
         val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
-        return sharedPref?.getString("USER_ID",null)
+        return sharedPref?.getString("OUTLET_ID",null)
     }
     private fun fetchDataAndBindRecyclerview() {
         CoroutineScope(Dispatchers.IO).launch {
             // Fetch data from the API
 
-            dataList = RetrofitInstance.api.getOrderByOutletIdByStatus(getUserId().toString(),"delivered")
+            dataList = RetrofitInstance.api.getOrderByOutletIdByStatus(getOutletId().toString(),"delivered")
             // Update the RecyclerView on the main thread
             withContext(Dispatchers.Main) {
                 adapter = CashToCollectAdapter(this@CashCollectedActivity, dataList,lifecycleScope);
