@@ -55,7 +55,7 @@ class OrdersAdapter(
         holder.numberOfTraysTextView.text = order.numTrays
         holder.createdAtTextView.text = order.createdAt
         holder.deliveredAtTextView.text = order.updatedAt
-        holder.orderAmountTextView.text = "$ ${order.amount}"
+        holder.orderAmountTextView.text = "₹ ${order.amount}"
         holder.orderStatusTextView.text=order.status
 
         holder.orderDetails.setOnClickListener {

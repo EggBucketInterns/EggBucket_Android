@@ -140,7 +140,7 @@
                 android:layout_below="@+id/order_amount"
                 android:textStyle="bold"
                 android:textColor="#F37E20"
-                android:text="$ 567.88"
+                android:text="₹ 567.88"
                 android:layout_marginStart="5dp"
                 android:textSize="18sp"
                 android:layout_height="wrap_content"/>
