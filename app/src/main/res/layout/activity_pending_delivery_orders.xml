@@ -15,15 +15,6 @@
         android:baselineAligned="true"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:paddingTop="5dp"
-            android:src="@drawable/previous_errow"
-            android:layout_weight=".1"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            />
-
         <TextView
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
