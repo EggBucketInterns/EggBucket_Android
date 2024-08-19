@@ -38,7 +38,7 @@ class AllOrderAdapter(
         val order = orderList[position]
         holder.noOfTrays.text = order.numTrays;
         holder.status.text = order.status;
-        holder.amount.text = order.amount;
+        holder.amount.text = "₹ ${order.amount}"
         when (order.status) {
             "completed" -> {
               holder.status.setBackgroundResource(R.drawable.completed_back)

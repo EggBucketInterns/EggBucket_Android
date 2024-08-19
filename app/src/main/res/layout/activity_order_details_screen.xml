@@ -123,6 +123,8 @@
                                     android:orientation="horizontal"
                                     >
                                     <TextView
+                                        android:maxLength="20"
+                                        android:id="@+id/txt_created_at"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Created at :"
@@ -311,7 +313,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="$ "
+                                    android:text=" "
                                     android:textSize="16dp"
                                     android:textColor="@color/white"/>
                                 <TextView
@@ -408,6 +410,7 @@
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"/>
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/card_reached"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 app:cardBackgroundColor="#FF3B30"

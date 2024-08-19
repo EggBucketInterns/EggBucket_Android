@@ -55,7 +55,7 @@ class LiveOrderAdapter(
        val currentItem=dataList[position]
         holder.date.text=currentItem.createdAt
         holder.trays.text=currentItem.numTrays
-        holder.amountlive.text=currentItem.amount
+        holder.amountlive.text="₹ ${currentItem.amount}"
         holder.venderName.text = currentItem.customerId?.customerName ?: "Unknown Customer"
         holder.confirm.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {

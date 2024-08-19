@@ -43,9 +43,9 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
         // Update the UI elements with data
         findViewById<TextView>(R.id.orderIdTextView1).text = orderId
         findViewById<TextView>(R.id.numTraysTextView1).text = trays
-        findViewById<TextView>(R.id.amountTextView1).text = amount
+        findViewById<TextView>(R.id.amountTextView1).text = "₹ $amount"
         findViewById<TextView>(R.id.vendorNameTextView1).text = name
-        findViewById<TextView>(R.id.txt_order_created).text = createdAt
+        findViewById<TextView>(R.id.txt_order_created).text = "createdAt $createdAt"
 
        // findViewById<TextView>(R.id.shopNameTextView1).text = customerName
     }

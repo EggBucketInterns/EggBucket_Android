@@ -53,8 +53,8 @@ class OrdersAdapter(
       holder.customerImageView.setImageResource(R.drawable.user_profile_image)
       //  holder.customerIdTextView.text = order.customerId.customerId
         holder.numberOfTraysTextView.text = order.numTrays
-        holder.createdAtTextView.text = order.createdAt
-        holder.deliveredAtTextView.text = order.updatedAt
+        holder.createdAtTextView.text = "createdAt ${order.createdAt}"
+        holder.deliveredAtTextView.text =  "updatedAt ${order.updatedAt}"
         holder.orderAmountTextView.text = "₹ ${order.amount}"
         holder.orderStatusTextView.text=order.status
 

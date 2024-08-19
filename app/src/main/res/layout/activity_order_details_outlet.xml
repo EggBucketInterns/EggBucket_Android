@@ -122,6 +122,7 @@
                                     android:orientation="horizontal"
                                     >
                                     <TextView
+                                        android:maxLength="20"
                                         android:id="@+id/txt_order_created"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -310,7 +311,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="$ "
+                                    android:text=" "
                                     android:textSize="16dp"
                                     android:textColor="@color/white"/>
                                 <TextView

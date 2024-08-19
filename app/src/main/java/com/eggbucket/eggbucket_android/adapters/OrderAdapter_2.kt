@@ -54,9 +54,9 @@ import kotlinx.coroutines.launch
              holder.customerImageView.setImageResource(R.drawable.user_profile_image)
              //  holder.customerIdTextView.text = order.customerId.customerId
              holder.numberOfTraysTextView.text = order.numTrays
-             holder.createdAtTextView.text = order.createdAt
-             holder.deliveredAtTextView.text = order.updatedAt
-             holder.orderAmountTextView.text = "$ ${order.amount}"
+             holder.createdAtTextView.text = "createdAt ${order.createdAt}"
+             holder.deliveredAtTextView.text ="updatedAt ${order.updatedAt}"
+             holder.orderAmountTextView.text = "₹ ${order.amount}"
              holder.orderStatusTextView.text = order.status
 
              holder.orderDetails.setOnClickListener {
@@ -71,6 +71,7 @@ import kotlinx.coroutines.launch
                          intent.putExtra("CREATED_AT", order.createdAt)
                          // Pass the order ID to the next screen using a Bundle
                          intent.putExtra("ORDER_ID", order._id)
+                         intent.putExtra("STATUS", order.status)
 
                          // Start the activity with the Intent
                          context.startActivity(intent)

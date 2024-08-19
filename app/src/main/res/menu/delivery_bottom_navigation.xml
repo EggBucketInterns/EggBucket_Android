@@ -7,7 +7,7 @@
     <item
         android:id="@id/deliveryStoreFragment"
         android:icon="@drawable/shoping_bag"
-        android:title="Shope" />
+        android:title="Shop" />
 
     <item
         android:id="@id/deliverySearchFragment"
