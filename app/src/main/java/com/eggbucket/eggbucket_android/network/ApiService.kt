@@ -9,6 +9,7 @@ import com.eggbucket.eggbucket_android.model.OrderCreate
 import com.eggbucket.eggbucket_android.model.StatusUpdate
 import com.eggbucket.eggbucket_android.model.UpdateReturnAmtResponse
 import com.eggbucket.eggbucket_android.model.VendorItem
+import com.eggbucket.eggbucket_android.model.allcustomer.CustomerDetailsItem
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.model.data.DeliveryPartnerrr
 import com.eggbucket.eggbucket_android.model.data.OrderDetailsResponse
@@ -119,6 +120,11 @@ interface ApiService {
     suspend fun getCustomerByID(
         @Query("customerId") customerId: String
     ) : ArrayList<Customer>
+
+    @GET("customers/egg-bucket-b2b/getAllCustomer")
+    suspend fun getCustomerImageByID(
+        @Query("customerId") customerId: String?
+    ) : Call<CustomerDetailsItem>
 
 //    @GET("egg-bucket-b2b/get-all-outlets")
 //    suspend fun getOutletByOutletPartnerID(

@@ -14,15 +14,21 @@ import com.eggbucket.eggbucket_android.OrderDetailsOutletActivity
 import com.eggbucket.eggbucket_android.Order_Details_Screen
 import com.eggbucket.eggbucket_android.R
 import com.eggbucket.eggbucket_android.model.Order
+import com.eggbucket.eggbucket_android.model.allcustomer.CustomerDetailsItem
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
+import com.eggbucket.eggbucket_android.network.RetrofitInstance
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class OrdersAdapter(
     private val context: Context,
    private val orderList: ArrayList<GetAllOrdersItem>
 ) : RecyclerView.Adapter<OrdersAdapter.OrderViewHolder>() {
+
 
     // ViewHolder class to hold references to the views
    class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -57,7 +63,8 @@ class OrdersAdapter(
         holder.deliveredAtTextView.text =  "updatedAt ${order.updatedAt}"
         holder.orderAmountTextView.text = "₹ ${order.amount}"
         holder.orderStatusTextView.text=order.status
-
+        var outletImage=""
+        var customerImage=""
         holder.orderDetails.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
@@ -70,6 +77,7 @@ class OrdersAdapter(
                     intent.putExtra("CREATED_AT", order.createdAt)
                     // Pass the order ID to the next screen using a Bundle
                     intent.putExtra("ORDER_ID", order._id)
+                    intent.putExtra("id",order.customerId?.customerId)
 
                     // Start the activity with the Intent
                     context.startActivity(intent)

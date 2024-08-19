@@ -72,6 +72,7 @@
                             android:layout_margin="1dp">
 
                             <ImageView
+                                android:id="@+id/im_outlet_image"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:src="@drawable/avatar"
@@ -244,6 +245,7 @@
                                 android:layout_marginTop="20dp"
                                 >
                                 <ImageView
+                                    android:id="@+id/im_customer_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:src="@drawable/avatar1"
