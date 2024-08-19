@@ -31,3 +31,18 @@ data class OrderStatusUpdate(
     val status: String
 )
 
+data class OrderUpdateResponse(
+    val _id: String,
+    val outletId: String,
+    val customerId: String,
+    val deliveryId: String,
+    val numTrays: String,
+    val amount: String,
+    val isUrgent: Boolean,
+    val status: String,
+    val createdAt: String,
+    val updatedAt: String,
+    val __v: Int
+)
+
+

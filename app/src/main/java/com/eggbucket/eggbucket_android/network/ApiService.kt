@@ -13,6 +13,7 @@ import com.eggbucket.eggbucket_android.model.allcustomer.CustomerDetailsItem
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.model.data.DeliveryPartnerrr
 import com.eggbucket.eggbucket_android.model.data.OrderDetailsResponse
+import com.eggbucket.eggbucket_android.model.data.OrderUpdateResponse
 import com.eggbucket.eggbucket_android.model.data.OutletPartnerResponse
 
 import com.eggbucket.eggbucket_android.model.login.LoginRequest
@@ -46,7 +47,9 @@ interface ApiService {
     suspend fun getAllOrders(): ArrayList<GetAllOrdersItem>
 
     @GET("orders/egg-bucket-b2b/order/{orderId}")
-    fun getOrderDetails(@Path("orderId") orderId: String): Call<OrderDetailsResponse>
+    fun getOrderDetails(
+        @Path("orderId") orderId: String
+    ): Call<OrderDetailsResponse>
 
     @POST("auth/egg-bucket-b2b/OutletPartnerLogin")
     fun outletPartnerLogin(@Body request: LoginRequest): Call<LoginResponse?>
@@ -136,12 +139,18 @@ interface ApiService {
         @Query("outletPartner") outletPartner: String
     ): OutletResponse
 
-
-
-
-
+    @PATCH("orders/egg-bucket-b2b/order/{orderId}")
+    fun updateOrderAmount(
+        @Path("orderId") orderId: String,
+        @Body requestBody: Map<String, String>
+    ): Call<OrderUpdateResponse>
 
 }
+
+data class UpdateOrderAmountRequest(
+    val orderId: String,
+    val amount: String
+)
 
 data class UpdateReturnAmountRequest(
     val orderId: String,

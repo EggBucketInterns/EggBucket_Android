@@ -13,7 +13,9 @@ import com.eggbucket.eggbucket_android.R
 import com.eggbucket.eggbucket_android.adapters.OrderViewModel
 import com.eggbucket.eggbucket_android.model.UpdateReturnAmtResponse
 import com.eggbucket.eggbucket_android.model.data.OrderDetailsResponse
+import com.eggbucket.eggbucket_android.model.data.OrderUpdateResponse
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
+import com.eggbucket.eggbucket_android.network.UpdateOrderAmountRequest
 import com.eggbucket.eggbucket_android.network.UpdateReturnAmountRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -59,6 +61,7 @@ class mode_of_payment : AppCompatActivity() {
             updateReturnAmount(orderId, finalAmount)
             updateOrderStatus(orderId)
             updateCollectionAmount(orderId, finalAmount)
+            updateOrderAmount(orderId, finalAmount.toString())
 
             // Navigate to the delivery dashboard
             val intent = Intent(this, delivery_dashboard::class.java)
@@ -81,6 +84,7 @@ class mode_of_payment : AppCompatActivity() {
             try {
                 val response = RetrofitInstance.apiService.updateOrderStatus(orderId, statusUpdate)
                 Log.d("OrderUpdate", "Order updated successfully: $response")
+                Toast.makeText(this@mode_of_payment, "Order updated successfully", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 Log.e("OrderUpdate", "Failed to update order status: ${e.message}")
             }
@@ -116,6 +120,38 @@ class mode_of_payment : AppCompatActivity() {
         })
     }
 
+    private fun updateOrderAmount(orderId: String, amount: String) {
+        // Ensure orderId is correctly formatted
+        if (orderId.isBlank()) {
+            Log.e("OrderAmount", "Order ID is missing or blank!")
+            return
+        }
+
+        // Create the request body as a map with just the amount
+        val requestBody = mapOf("amount" to amount)
+
+        RetrofitInstance.apiService.updateOrderAmount(orderId, requestBody).enqueue(object :
+            Callback<OrderUpdateResponse> {
+            override fun onResponse(
+                call: Call<OrderUpdateResponse>,
+                response: Response<OrderUpdateResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Log.d("OrderAmount", "Successfully updated order amount.")
+                    Log.d("OrderAmount", "Response: ${response.body()}")
+                } else {
+                    Log.e("OrderAmount", "Failed to update order amount: ${response.code()} - ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<OrderUpdateResponse>, t: Throwable) {
+                Log.e("OrderAmount", "Error updating order amount", t)
+            }
+        })
+    }
+
+
+
     private fun updateReturnAmount(orderId: String, amount: Int) {
         val requestBody = UpdateReturnAmountRequest(orderId, amount)
 
@@ -126,6 +162,7 @@ class mode_of_payment : AppCompatActivity() {
                 response: Response<UpdateReturnAmtResponse>
             ) {
                 if (response.isSuccessful) {
+                    Toast.makeText(this@mode_of_payment, "Return amount updated successfully", Toast.LENGTH_SHORT).show()
                     Log.d("ReturnAmount", "Successfully updated return amount for delivery partner.")
                     Log.d("CollectionAmount", "Response: ${response.body()}")
                 } else {
@@ -149,6 +186,7 @@ class mode_of_payment : AppCompatActivity() {
                 response: Response<UpdateReturnAmtResponse>
             ) {
                 if (response.isSuccessful) {
+                    Toast.makeText(this@mode_of_payment, "Collection amount updated successfully", Toast.LENGTH_SHORT).show()
                     Log.d("CollectionAmount", "Successfully updated collection amount for outlet partner.")
                     Log.d("CollectionAmount", "Response: ${response.body()}")
                 } else {
