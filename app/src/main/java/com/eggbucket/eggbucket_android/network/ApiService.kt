@@ -122,9 +122,9 @@ interface ApiService {
     ) : ArrayList<Customer>
 
     @GET("customers/egg-bucket-b2b/getAllCustomer")
-    suspend fun getCustomerImageByID(
+     fun getCustomerImageByID(
         @Query("customerId") customerId: String?
-    ) : Call<CustomerDetailsItem>
+    ) : Call<ArrayList<CustomerDetailsItem>>
 
 //    @GET("egg-bucket-b2b/get-all-outlets")
 //    suspend fun getOutletByOutletPartnerID(

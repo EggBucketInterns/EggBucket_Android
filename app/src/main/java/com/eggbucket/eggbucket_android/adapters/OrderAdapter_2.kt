@@ -72,6 +72,7 @@ import kotlinx.coroutines.launch
                          // Pass the order ID to the next screen using a Bundle
                          intent.putExtra("ORDER_ID", order._id)
                          intent.putExtra("STATUS", order.status)
+                         intent.putExtra("id",order.customerId?.customerId)
 
                          // Start the activity with the Intent
                          context.startActivity(intent)
