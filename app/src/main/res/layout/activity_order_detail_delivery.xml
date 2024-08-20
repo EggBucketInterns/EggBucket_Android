@@ -369,7 +369,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Delivery Partner: # "
+                                    android:text="Delivery Partner: "
                                     android:textSize="18dp"
                                     android:textColor="@color/black"/>
                                 <TextView
@@ -393,7 +393,16 @@
                                 android:src="@drawable/sq_border_bg"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:scaleType="fitXY"/>
+                                android:scaleType="fitXY"
+                                />
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="15dp"
+                                app:cardBackgroundColor="@color/ButtonBlue"
+                                android:id="@+id/openMapBtn">
+
+                            </androidx.cardview.widget.CardView>
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView

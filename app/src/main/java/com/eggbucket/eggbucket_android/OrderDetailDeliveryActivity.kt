@@ -1,10 +1,14 @@
 package com.eggbucket.eggbucket_android
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -20,6 +24,7 @@ class OrderDetailDeliveryActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_order_detail_delivery)
         val reached=findViewById<TextView>(R.id.reached2)
+        val openMapButton = findViewById<CardView>(R.id.openMapBtn)
         // Retrieve the order ID from intent or use a default one
         orderId = intent.getStringExtra("ORDER_ID")
         trays = intent.getStringExtra("TRAYS")
@@ -28,11 +33,27 @@ class OrderDetailDeliveryActivity : AppCompatActivity() {
         createdAt=intent.getStringExtra("CREATED_AT")
         status=intent.getStringExtra("STATUS")
 
+
+        val googleMapLink = "https://maps.app.goo.gl/4WUTPMRmegN5rCw2A"
+        // findViewById<TextView>(R.id.shopNameTextView1).text = customerName
+        openMapButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(googleMapLink))
+            intent.setPackage("com.google.android.apps.maps") // Optional: Open specifically in Google Maps
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            } else {
+                // Handle the case where Google Maps is not installed
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(googleMapLink)))
+            }
+        }
+
+
         if(status.equals("completed") || status.equals("delivered")){
             reached.visibility=View.GONE
         }
 //        intent.putExtra("order_ID",orderId);
-        populateOrderDetails()
+        populateOrderDetails();
+
 
     }
     fun populateOrderDetails() {
@@ -43,6 +64,7 @@ class OrderDetailDeliveryActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.vendorNameTextView2).text = name
         findViewById<TextView>(R.id.delivery_order_created1).text = "createdAt $createdAt"
 
-        // findViewById<TextView>(R.id.shopNameTextView1).text = customerName
     }
-}
+
+    }
+

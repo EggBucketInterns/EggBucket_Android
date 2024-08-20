@@ -400,6 +400,19 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"/>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            app:cardBackgroundColor="@color/ButtonBlue"
+                            android:id="@+id/openMapBtn">
+                            <ImageView
+                                android:src="@drawable/map"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"/>
+
+                        </androidx.cardview.widget.CardView>
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
