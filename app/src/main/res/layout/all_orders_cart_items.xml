@@ -36,6 +36,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
+
             <TextView
                 android:id="@+id/customer_id"
                 android:layout_width="wrap_content"
@@ -188,14 +189,14 @@
                 android:layout_width="200dp"
                 android:layout_marginStart="5dp"
                 android:layout_height="35dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:paddingTop="5dp"
-                    android:paddingStart="4dp"
-                    android:textSize="16sp"
+
+                    android:textSize="14sp"
                     android:textColor="@color/white"
                     android:text="Order Details"
                     android:layout_height="wrap_content"/>

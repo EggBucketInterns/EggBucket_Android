@@ -44,6 +44,7 @@
         android:visibility="visible">
 
         <TextView
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -177,6 +178,7 @@
                     android:src="@drawable/baseline_person_outline_24" />
 
                 <EditText
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#00000000"
@@ -187,6 +189,28 @@
                     android:textSize="16dp"
                     android:textStyle="normal"
                     android:id="@+id/customerID"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Select Customer"
+                        android:id="@+id/selectedCustomerName"
+                        android:gravity="center_vertical"
+                        android:paddingStart="15dp"
+                        android:textColor="#b7aeaf"
+                        android:textSize="16dp"
+                        android:textStyle="normal"
+                        android:visibility="gone"
+                        />
+                <Spinner
+                    android:layout_width="280dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/customerIdDropDown"
+                    android:spinnerMode="dropdown"
+                    />
+                </RelativeLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <TextView
@@ -286,6 +310,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/drop_down_bg"
             android:gravity="center_vertical"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -296,16 +321,16 @@
 
                 />
 
-            <TextView
-                android:id="@+id/assignDelivreyPartnerBtn"
+            <Spinner
+
+                android:id="@+id/assignDelivreyPartnerDropDown"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginStart="10dp"
                 android:gravity="center_vertical"
-                android:paddingStart="18dp"
                 android:text="Assign delivery Partner" />
         </LinearLayout>
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -330,7 +355,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:backgroundTint="#94ABFD"
             android:text="Place Order"
             android:textSize="20dp"

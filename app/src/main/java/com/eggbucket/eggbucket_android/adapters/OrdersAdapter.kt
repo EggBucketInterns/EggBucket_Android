@@ -65,6 +65,8 @@ class OrdersAdapter(
         holder.orderStatusTextView.text=order.status
         var outletImage=""
         var customerImage=""
+
+
         holder.orderDetails.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 try {

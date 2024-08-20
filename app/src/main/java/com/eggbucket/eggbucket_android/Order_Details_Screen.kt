@@ -1,16 +1,21 @@
 package com.eggbucket.eggbucket_android
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.eggbucket.eggbucket_android.model.allcustomer.CustomerDetailsItem
 import com.eggbucket.eggbucket_android.model.data.OrderDetailsResponse
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,15 +23,78 @@ import retrofit2.Response
 class Order_Details_Screen : AppCompatActivity() {
     private lateinit var orderId: String
     private  var status:String?=null
+    private var id:String?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_order_details_screen)
         val reaches=findViewById<TextView>(R.id.reached)
-
-
+        val customerImage=findViewById<ImageView>(R.id.detail_image_customer)
+        val outletImage=findViewById<ImageView>(R.id.details_image_outlet)
+        val openMapButton = findViewById<CardView>(R.id.openMapBtn)
         status=intent.getStringExtra("STATUS")
+        id=intent.getStringExtra("id")
+
+
+
+        val googleMapLink = "https://maps.app.goo.gl/4WUTPMRmegN5rCw2A"
+        // findViewById<TextView>(R.id.shopNameTextView1).text = customerName
+        openMapButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(googleMapLink))
+            intent.setPackage("com.google.android.apps.maps") // Optional: Open specifically in Google Maps
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            } else {
+                // Handle the case where Google Maps is not installed
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(googleMapLink)))
+            }
+        }
+
+
+        val customer = RetrofitInstance.api.getCustomerImageByID(id)
+        customer.enqueue(object : Callback<ArrayList<CustomerDetailsItem>> {
+            override fun onResponse(
+                call: Call<ArrayList<CustomerDetailsItem>>,
+                response: Response<ArrayList<CustomerDetailsItem>>
+            ) {
+                if (response.isSuccessful) {
+                    val partner = response.body()
+                    if (partner != null) {
+                        // Picasso.get().load(partner.img).into(profileImageView)
+                        for(list in partner){
+                            if (id==list.customerId){
+                                Picasso.get().load(list.img).into(customerImage)
+                                Picasso.get().load(list.outlet.img).into(outletImage)
+                            }
+                        }
+
+                        Log.d("Customer Image", "Success to load image")
+                        //outletImage= partner[0].img
+                        Log.d("Customer Image", "Success to load image2")
+                        // customerImage=partner[0].outlet.img
+
+                        /*for (list in partner){
+                            if (id ==list.customerId){
+                                outletImage=list.outlet.img
+                                customerImage=list.img
+                            }
+                        }*/
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<CustomerDetailsItem>>, t: Throwable) {
+                Log.d("Customer Image", "Failed to load image ${t.message}")
+            }
+
+        })
+
+
+
+
+
 
         if(status.equals("completed") || status.equals("delivered")){
             reaches.visibility= View.GONE

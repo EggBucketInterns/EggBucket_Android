@@ -94,7 +94,7 @@ class LoginScreenActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful && response.body() != null) {
                         val userId = response.body()?.user?._id
-                        saveUserId(userId)
+                        saveUserId(userId,0)
                         // Navigate to OutletPartner dashboard
                         startActivity(Intent(this@LoginScreenActivity, MainActivity::class.java))
                     } else {
@@ -125,8 +125,9 @@ class LoginScreenActivity : AppCompatActivity() {
                     response: Response<LoginResponse?>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
-                        val userId = response.body()?.user?._id                        // Store the user ID in shared preferences
-                        saveUserId(userId)
+                        val userId = response.body()?.user?._id
+                        // Store the user ID in shared preferences
+                        saveUserId(userId,1)
                         // Navigate to DeliveryPartner dashboard
                         startActivity(
                             Intent(
@@ -153,11 +154,12 @@ class LoginScreenActivity : AppCompatActivity() {
             })
     }
 
-    private fun saveUserId(userId: String?) {
+    private fun saveUserId(userId: String?, userType: Int?) {
         if (userId != null) {
             val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
             with(sharedPref.edit()) {
                 putString("USER_ID", userId)
+                putString("USER_TYPE", userType.toString());
                 apply()
             }
             Toast.makeText(this, "Saved User ID", Toast.LENGTH_SHORT).show()
