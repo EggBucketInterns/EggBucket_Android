@@ -119,6 +119,12 @@ interface ApiService {
     @PATCH("payment/egg-bucket-b2b/incCollectionAmt")
     fun updateCollectionAmount(@Body body: UpdateReturnAmountRequest): Call<UpdateReturnAmtResponse>
 
+//    @PATCH("payment/egg-bucket-b2b/decReturnAmt")
+//    fun decreaseReturnAmount(@Body body: UpdateReturnAmountRequest): Call<UpdateReturnAmtResponse>
+
+    @PATCH("payment/egg-bucket-b2b/decReturnAmt")
+    suspend fun decreaseReturnAmount(@Body body: UpdateReturnAmountRequest1): Response<UpdateReturnAmtResponse>
+
     @GET("customers/egg-bucket-b2b/getAllCustomer")
     suspend fun getCustomerByID(
         @Query("customerId") customerId: String
@@ -155,6 +161,11 @@ data class UpdateOrderAmountRequest(
 data class UpdateReturnAmountRequest(
     val orderId: String,
     val amount: Int
+)
+
+data class UpdateReturnAmountRequest1(
+    val orderId: String,
+    val amount: String
 )
 
 

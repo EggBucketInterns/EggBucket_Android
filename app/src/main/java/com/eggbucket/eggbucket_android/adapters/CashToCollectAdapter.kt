@@ -7,35 +7,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.eggbucket.eggbucket_android.CompletedOrders
 import com.eggbucket.eggbucket_android.MainActivity
 import com.eggbucket.eggbucket_android.OutletHomeFragment
 import com.eggbucket.eggbucket_android.R
-import com.eggbucket.eggbucket_android.databinding.FragmentOutletHomeBinding
-import com.eggbucket.eggbucket_android.model.Order
-import com.eggbucket.eggbucket_android.model.StatusUpdate
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
-import com.eggbucket.eggbucket_android.model.login.LoginRequest
-import com.eggbucket.eggbucket_android.model.login.LoginResponse
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
 import com.eggbucket.eggbucket_android.network.RetrofitInstance.apiService
-import com.google.gson.Gson
+import com.eggbucket.eggbucket_android.network.UpdateReturnAmountRequest1
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.withContext
 
 class CashToCollectAdapter(
     private val context: Context,
     private val orderList: ArrayList<GetAllOrdersItem>,
     private val coroutineScope: CoroutineScope,
 ) : RecyclerView.Adapter<CashToCollectAdapter.OrderViewHolder>() {
+
     interface OnCompleteClickListener {
         fun onCompleteClick()
     }
@@ -45,7 +37,7 @@ class CashToCollectAdapter(
         val deliveryPartnerName: TextView = itemView.findViewById(R.id.deliveryPartnerName)
         val amoutn: TextView = itemView.findViewById(R.id.amount);
         val CompletedBtn: Button = itemView.findViewById(R.id.completedBtn);
-        fun bind(data: GetAllOrdersItem,onCompleteClickListener: OnCompleteClickListener) {
+        fun bind(data: GetAllOrdersItem, onCompleteClickListener: OnCompleteClickListener) {
             CompletedBtn.setOnClickListener {
                 onCompleteClickListener.onCompleteClick()
             }
@@ -54,8 +46,7 @@ class CashToCollectAdapter(
     }
 
 
-
-    override  fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.cash_collected_item, parent, false)
         return OrderViewHolder(view)
     }
@@ -68,9 +59,10 @@ class CashToCollectAdapter(
         holder.CompletedBtn.setOnClickListener {
             coroutineScope.launch {
                 try {
-                        updateOrder(order._id)
-                        val intent = Intent(context, MainActivity::class.java)
-                        context.startActivity(intent)
+                    updateOrder(order._id)
+                    decreaseReturnAmount(order._id,order.amount)
+                    val intent = Intent(context, MainActivity::class.java)
+                    context.startActivity(intent)
                 } catch (e: Exception) {
 
                     Log.e("MyAdapter", "Failed to update order", e)
@@ -83,12 +75,38 @@ class CashToCollectAdapter(
     override fun getItemCount(): Int {
         return orderList.size
     }
-    fun updateOrder(orderId: String) {
+
+    private fun decreaseReturnAmount(orderId: String,amount:String) {
+        val requestBody = UpdateReturnAmountRequest1(orderId, amount)
+
+        Log.d("ReturnAmountDec", "Request Body: OrderId = $orderId, Amount = $amount")
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = apiService.decreaseReturnAmount(requestBody)
+                if (response.isSuccessful) {
+                    Log.d("ReturnAmountDec", "Successfully decreased return amount.")
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(context, "Return amount decreased successfully", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("ReturnAmountDec", "Failed to decrease return amount: ${response.code()}, Error: $errorBody")
+                }
+            } catch (e: Exception) {
+                Log.e("ReturnAmountDec", "Error decreasing return amount", e)
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun updateOrder(orderId: String) {
         val statusUpdate = mapOf("status" to "completed")
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = RetrofitInstance.apiService.updateStatusCompleted(orderId,statusUpdate);
+                val response =
+                    RetrofitInstance.apiService.updateStatusCompleted(orderId, statusUpdate);
                 val fragment = OutletHomeFragment()
 
 
@@ -100,24 +118,5 @@ class CashToCollectAdapter(
             }
         }
     }
-//    private suspend fun updateStatusToDelivered(userid : String, loginRequest: StatusUpdate) {
-//        RetrofitInstance.api.updateOrderStatus(userid, loginRequest)
-//            .enqueue(object : Callback<Order?> {
-//                override fun onResponse(call: Call<Order?>, response: Response<Order?>) {
-//                    if (response.isSuccessful && response.body() != null) {
-//                        Log.d("MyAdapter", "Updated")
-//                    } else {
-//                        Log.d("MyAdapter", response.body().toString())
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<Order?>, t: Throwable) {
-//                    Log.e("MyAdapter", t.message.toString() )
-//                }
-//            })
-//
-//    }
-
-
 
 }
