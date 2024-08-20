@@ -145,6 +145,16 @@ interface ApiService {
         @Body requestBody: Map<String, String>
     ): Call<OrderUpdateResponse>
 
+    @GET("customers/egg-bucket-b2b/getAllCustomer")
+    suspend fun getCustomerByOutletId(
+        @Query("outlet") outlet: String
+    ) : ArrayList<Customer>
+
+
+    @GET("customers/egg-bucket-b2b/getAllCustomer")
+    suspend fun getDeliveryPartnerByDeliveryPartnerName(
+        @Query("firstName") firstName:String
+    ) : ArrayList<DeliveryPartnerrr>
 }
 
 data class UpdateOrderAmountRequest(
