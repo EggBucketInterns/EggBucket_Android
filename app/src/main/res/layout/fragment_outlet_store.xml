@@ -12,11 +12,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_margin="10dp"
-        android:baselineAligned="true"
+        android:paddingTop="15dp"
         android:layout_height="wrap_content">
 
 <!--        <ImageView-->
@@ -33,9 +33,10 @@
             android:textSize="24dp"
             android:textColor="@color/white"
             android:text="All Orders"
-            android:layout_height="35dp" />
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/filter_layout"
             android:layout_width="40dp"
             android:layout_weight=".2"
@@ -79,7 +80,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview1"
                 android:layout_width="match_parent"
-                android:layout_height="700dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="10dp"
@@ -96,7 +97,8 @@
                 android:layout_marginStart="250dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/clock_img" />
+                android:src="@drawable/clock_img"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/floor1"
@@ -105,7 +107,7 @@
                 android:layout_below="@+id/clockimage12"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/freepik_floor"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -113,7 +115,7 @@
                 android:layout_below="@+id/clockimage12"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/freepik_deviceinject2"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -121,35 +123,36 @@
                 android:layout_below="@+id/clockimage12"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/freepik_character_inject2"
-                android:visibility="gone"/>
+                android:visibility="gone" />
+
             <TextView
                 android:id="@+id/history1"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:text="No Order History Found !"
                 android:layout_width="match_parent"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="20dp"
-                android:textSize="28sp"
-                android:gravity="center"
-                android:layout_below="@+id/floor1"
                 android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:layout_below="@+id/floor1"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:text="No Order History Found !"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/history1"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/referes_background"
                 android:gravity="center"
                 android:padding="10dp"
-                android:textSize="24sp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/referes_background"
-                android:textColor="@color/white"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
                 android:text="Refresh Order History"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                />
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:visibility="gone" />
 
 
         </RelativeLayout>
