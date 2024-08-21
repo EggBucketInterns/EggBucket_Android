@@ -123,7 +123,7 @@
                         android:id="@+id/txt_completed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12"
+                        android:text="0"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"/>
@@ -179,7 +179,7 @@
                         android:id="@+id/pending_order_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12"
+                        android:text="0"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"/>
