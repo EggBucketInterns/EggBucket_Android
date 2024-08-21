@@ -75,6 +75,7 @@ class LiveOrderAdapter(
                     // Create an Intent to navigate to the Order_Details_Screen
                     val intent = Intent(context, Order_Details_Screen::class.java)
 
+
                     // Pass the order ID to the next screen using a Bundle
                     intent.putExtra("ORDER_ID", currentItem._id)
 

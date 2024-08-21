@@ -30,8 +30,6 @@ import kotlinx.coroutines.launch
         val customerImageView: ImageView = itemView.findViewById(R.id.user_image)
         val customerIdTextView: TextView = itemView.findViewById(R.id.customer_idNumber)
         val numberOfTraysTextView: TextView = itemView.findViewById(R.id.trays_no)
-        val createdAtTextView: TextView = itemView.findViewById(R.id.created_at_text)
-        val deliveredAtTextView: TextView = itemView.findViewById(R.id.deliverd_at_text)
         val orderAmountTextView: TextView = itemView.findViewById(R.id.order_money)
         val orderStatusTextView: TextView = itemView.findViewById(R.id.txt_completed)
         val orderDetails:LinearLayout=itemView.findViewById(R.id.linear_layout_all_order_item)
@@ -52,10 +50,8 @@ import kotlinx.coroutines.launch
              // Bind the data to the views
              holder.orderIdTextView.text = "Order Id: #${order._id}"
              holder.customerImageView.setImageResource(R.drawable.user_profile_image)
-             //  holder.customerIdTextView.text = order.customerId.customerId
+               holder.customerIdTextView.text = order.customerId?.customerId
              holder.numberOfTraysTextView.text = order.numTrays
-             holder.createdAtTextView.text = "createdAt ${order.createdAt}"
-             holder.deliveredAtTextView.text ="updatedAt ${order.updatedAt}"
              holder.orderAmountTextView.text = "₹ ${order.amount}"
              holder.orderStatusTextView.text = order.status
 

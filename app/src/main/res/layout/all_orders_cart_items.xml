@@ -1,221 +1,193 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_marginVertical="10dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="10dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <RelativeLayout
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@color/white"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
             <TextView
                 android:id="@+id/order_id"
-                android:maxLength="20"
-                android:layout_width="180dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:text="Order Id : #3577"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginStart="20dp"
-                android:layout_height="25dp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ellips"
+               />
+
             <ImageView
-                android:layout_below="@+id/order_id"
                 android:id="@+id/user_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
                 android:src="@drawable/profile"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_id"/>
 
             <TextView
                 android:id="@+id/customer_id"
                 android:layout_width="wrap_content"
-                android:layout_toEndOf="@+id/user_image"
-                android:layout_below="@+id/order_id"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:text="Customer ID"
-                android:layout_marginStart="5dp"
                 android:textSize="16sp"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_width="100dp"
-                android:id="@+id/customer_idNumber"
-                android:layout_toEndOf="@+id/user_image"
-                android:layout_below="@+id/customer_id"
-                android:text="72382378"
-                android:layout_marginStart="5dp"
-                android:textSize="16sp"
-                android:layout_height="25dp"/>
-            <ImageView
-                android:id="@+id/eggs_image"
-                android:layout_width="wrap_content"
-                android:src="@drawable/eggs1"
-                android:layout_marginStart="15dp"
-                android:layout_below="@+id/customer_idNumber"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:id="@+id/no_of_tray"
-                android:layout_toEndOf="@+id/eggs_image"
-                android:layout_below="@+id/customer_idNumber"
-                android:text="No of Trays/Eggs"
-                android:layout_marginStart="5dp"
-                android:textSize="16sp"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_width="40dp"
-                android:id="@+id/trays_no"
-                android:layout_toEndOf="@+id/eggs_image"
-                android:layout_below="@+id/no_of_tray"
-                android:text="123"
-                android:layout_marginStart="5dp"
-                android:textSize="16sp"
-                android:layout_height="25dp"/>
-            <ImageView
-                android:id="@+id/created_at"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/access_time_24"
-                android:layout_marginStart="20dp"
-                android:layout_below="@+id/trays_no"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintStart_toEndOf="@id/user_image"
+                app:layout_constraintTop_toTopOf="@id/user_image"/>
 
             <TextView
-                android:id="@+id/created_at_text"
-                android:layout_width="150dp"
-                android:layout_height="25dp"
-                android:layout_below="@+id/trays_no"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/created_at"
-                android:maxLength="20"
-                android:text="Created At"
-                android:textColor="@color/textcolor"
-                android:textSize="12sp" />
-            <ImageView
-                android:id="@+id/deliverd_at_image"
-                android:layout_marginTop="10dp"
+                android:id="@+id/customer_idNumber"
                 android:layout_width="wrap_content"
-                android:src="@drawable/access_time_24"
-                android:layout_marginStart="20dp"
-                android:layout_below="@+id/created_at"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="72382378"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/user_image"
+                app:layout_constraintTop_toBottomOf="@id/customer_id"/>
+
+            <ImageView
+                android:id="@+id/eggs_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/eggs1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_image"/>
+
             <TextView
-                android:layout_width="150dp"
-                android:layout_marginTop="10dp"
-                android:gravity="start"
-                android:maxLength="20"
-                android:id="@+id/deliverd_at_text"
-                android:layout_toEndOf="@+id/created_at"
-                android:layout_below="@+id/created_at_text"
-                android:textColor="@color/textcolor"
-                android:text="Delivered At"
-                android:layout_marginStart="5dp"
-                android:textSize="12sp"
-                android:layout_height="25dp"/>
+                android:id="@+id/no_of_tray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="No of Trays/Eggs"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/eggs_image"
+                app:layout_constraintTop_toTopOf="@id/eggs_image"/>
+
+            <TextView
+                android:id="@+id/trays_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="123"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/eggs_image"
+                app:layout_constraintTop_toBottomOf="@id/no_of_tray"/>
 
             <TextView
                 android:id="@+id/order_amount"
-                android:layout_width="150dp"
-                android:layout_height="24dp"
-                android:layout_below="@+id/created_at_text"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="end"
                 android:text="Order Amount"
                 android:textColor="#F37E20"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linear_layout_all_order_item"/>
 
             <TextView
                 android:id="@+id/order_money"
-                android:layout_width="120dp"
-                android:layout_height="25dp"
-                android:layout_below="@+id/order_amount"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:gravity="end"
                 android:text="₹ 567.88"
                 android:textColor="#F37E20"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_amount"/>
 
             <ImageView
                 android:id="@+id/ellips"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@+id/order_id"
-                android:src="@drawable/ellipse" />
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ellipse"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/order_id"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/ellips1"
-                android:layout_width="50dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
                 android:src="@drawable/ellipse1"
-                android:layout_marginStart="60dp"
-                android:layout_below="@+id/trays_no"
-                android:layout_toEndOf="@+id/trays_no"
-                android:layout_height="50dp"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/linear_layout_all_order_item"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@id/trays_no"
+                app:layout_constraintTop_toBottomOf="@id/trays_no"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/txt_completed"
-                android:layout_width="150dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="20dp"
-                android:layout_toEndOf="@+id/order_id"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/pending_back"
-                android:padding="10dp"
+                android:gravity="center"
+                android:padding="8dp"
                 android:text="Completed"
-                android:textSize="10sp"
-                android:textStyle="bold" />
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@id/order_id"
+                app:layout_constraintTop_toBottomOf="@id/ellips"
+                app:layout_constraintTop_toTopOf="@id/ellips" />
 
             <LinearLayout
                 android:id="@+id/linear_layout_all_order_item"
-                android:layout_toEndOf="@+id/no_of_tray"
-                android:layout_below="@+id/no_of_tray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
                 android:background="@drawable/order_details_back"
-                android:layout_width="200dp"
-                android:layout_marginStart="5dp"
-                android:layout_height="35dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
+                android:padding="6dp"
+                app:layout_constraintStart_toEndOf="@id/no_of_tray"
+                app:layout_constraintEnd_toEndOf="parent"
 
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/no_of_tray">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:gravity="start"
                     android:text="Order Details"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/white"
+                    android:textSize="14sp"/>
+
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_weight=".5"
-                    android:padding="10dp"
-                    android:src="@drawable/order_detail_right_errow"
-                    android:layout_height="35dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/order_detail_right_errow"/>
             </LinearLayout>
 
-
-
-
-
-
-
-        </RelativeLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,7 @@ class Order_Details_Screen : AppCompatActivity() {
     private  var status:String?=null
     private var id:String?=null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,7 +36,6 @@ class Order_Details_Screen : AppCompatActivity() {
         val openMapButton = findViewById<CardView>(R.id.openMapBtn)
         status=intent.getStringExtra("STATUS")
         id=intent.getStringExtra("id")
-
 
 
         val googleMapLink = "https://maps.app.goo.gl/4WUTPMRmegN5rCw2A"
