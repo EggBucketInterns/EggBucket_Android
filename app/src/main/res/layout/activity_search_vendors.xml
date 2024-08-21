@@ -21,6 +21,7 @@
     <!-- Search Bar -->
     <EditText
         android:id="@+id/search_bar"
+        android:singleLine="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_vendors_header"

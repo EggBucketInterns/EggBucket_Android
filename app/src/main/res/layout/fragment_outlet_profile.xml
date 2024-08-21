@@ -118,6 +118,7 @@
                     android:layout_marginEnd="8dp"/>
 
                 <EditText
+                    android:singleLine="true"
                     android:id="@+id/firstNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -150,6 +151,7 @@
 
                 <EditText
                     android:id="@+id/lastNameTextView"
+                    android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -182,6 +184,7 @@
 
                 <EditText
                     android:id="@+id/phoneNumberTextView"
+                    android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -213,6 +216,7 @@
 
                 <EditText
                     android:id="@+id/addressTextView"
+                    android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"

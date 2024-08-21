@@ -113,6 +113,7 @@
 
                         <EditText
                             android:id="@+id/amount_rs"
+                            android:singleLine="true"
                             android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:background="@android:color/transparent"
@@ -148,6 +149,7 @@
                             android:id="@+id/discount_amount"
                             android:layout_width="match_parent"
                             android:layout_height="48dp"
+                            android:singleLine="true"
                             android:background="@android:color/transparent"
                             android:hint="Amount in Rs" />
                     </LinearLayout>

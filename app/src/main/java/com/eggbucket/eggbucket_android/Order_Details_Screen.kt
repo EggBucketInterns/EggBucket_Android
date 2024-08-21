@@ -32,6 +32,7 @@ class Order_Details_Screen : AppCompatActivity() {
     private var id: String? = null
     private var outletID: String = ""
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -43,7 +44,6 @@ class Order_Details_Screen : AppCompatActivity() {
         status = intent.getStringExtra("STATUS")
         id = intent.getStringExtra("id")
         orderId = intent.getStringExtra("ORDER_ID") ?: "66b764ddf2476d8c6f2770cb"
-
 
         val googleMapLink = "https://maps.app.goo.gl/4WUTPMRmegN5rCw2A"
         // findViewById<TextView>(R.id.shopNameTextView1).text = customerName

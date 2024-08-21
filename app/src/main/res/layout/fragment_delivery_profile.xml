@@ -118,6 +118,7 @@
                     android:layout_marginEnd="8dp"/>
 
                 <EditText
+                    android:singleLine="true"
                     android:id="@+id/deliveryFirstNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -149,6 +150,7 @@
                     android:layout_marginEnd="8dp"/>
 
                 <EditText
+                    android:singleLine="true"
                     android:id="@+id/deliveryLastNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -186,6 +188,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:hint="Phone Number"
+                    android:singleLine="true"
                     android:editable="false"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
@@ -215,6 +218,7 @@
                 <EditText
                     android:id="@+id/deliveryVehicleNumberTextView"
                     android:layout_width="match_parent"
+                    android:singleLine="true"
                     android:layout_height="wrap_content"
                     android:hint="License Number Plate"
                     android:editable="false"

@@ -49,11 +49,13 @@
 
           <com.google.android.material.textfield.TextInputEditText
               android:layout_width="match_parent"
-              android:padding="24dp"
-              android:textColor="@color/textcolor"
+              android:layout_height="50dp"
               android:background="@drawable/search_back"
-              android:text="Search by Outlet Name"
-              android:layout_height="50dp"/>
+              android:gravity="start"
+              android:paddingStart="40dp"
+              android:singleLine="true"
+              android:hint="Search by Outlet Name"
+              android:textColor="@color/textcolor" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
