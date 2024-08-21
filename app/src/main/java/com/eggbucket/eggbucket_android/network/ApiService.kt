@@ -135,6 +135,12 @@ interface ApiService {
         @Query("customerId") customerId: String?
     ) : Call<ArrayList<CustomerDetailsItem>>
 
+    @GET("customers/egg-bucket-b2b/customer/{customerId}")
+    fun getCustomerImageById(
+        @Path("customerId") customerId: String
+    ): Call<CustomerDetailsItem>
+
+
 //    @GET("egg-bucket-b2b/get-all-outlets")
 //    suspend fun getOutletByOutletPartnerID(
 //        @Query("outletPartner") outletPartner : String
@@ -162,11 +168,6 @@ interface ApiService {
         @Query("firstName") firstName:String
     ) : ArrayList<DeliveryPartnerrr>
 }
-
-data class UpdateOrderAmountRequest(
-    val orderId: String,
-    val amount: String
-)
 
 data class UpdateReturnAmountRequest(
     val orderId: String,

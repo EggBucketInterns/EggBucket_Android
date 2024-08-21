@@ -271,16 +271,16 @@
                                 android:textColor="@color/black"
                                 android:textAlignment="center"
                                 android:layout_marginTop="15dp"/>
-                            <TextView
-                                android:id="@+id/operatingHoursTextView2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Operating Hours : "
-                                android:textSize="14dp"
-                                android:textStyle="normal"
-                                android:textColor="@color/black"
-                                android:textAlignment="center"
-                                android:layout_marginTop="15dp"/>
+<!--                            <TextView-->
+<!--                                android:id="@+id/operatingHoursTextView2"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Operating Hours : "-->
+<!--                                android:textSize="14dp"-->
+<!--                                android:textStyle="normal"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textAlignment="center"-->
+<!--                                android:layout_marginTop="15dp"/>-->
 
                         </LinearLayout>
                         <androidx.cardview.widget.CardView
