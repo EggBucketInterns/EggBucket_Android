@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eggbucket.eggbucket_android.adapters.CashToReturn
 import com.eggbucket.eggbucket_android.adapters.LiveOrderAdapter
 import com.eggbucket.eggbucket_android.adapters.OrderViewModel
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
@@ -60,7 +61,7 @@ class DeliveryHomeFragment : Fragment() {
         cashCollectedBtn.setOnClickListener {
             startActivity(
                 Intent(context,
-                    CashCollectedActivity::class.java
+                    CashToReturn::class.java
                 )
             )
         }

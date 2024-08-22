@@ -2,6 +2,7 @@ package com.eggbucket.eggbucket_android.adapters
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,7 +27,7 @@ class CashToReturn : AppCompatActivity() {
     private lateinit var amountList: ArrayList<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContentView(R.layout.activity_cash_to_return)
         dataList = arrayListOf()
 
@@ -44,24 +45,26 @@ class CashToReturn : AppCompatActivity() {
         val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
         return sharedPref?.getString("USER_ID",null)
     }
+
     private fun fetchDataAndBindRecyclerview() {
         CoroutineScope(Dispatchers.IO).launch {
-            dataList = RetrofitInstance.api.getDeliveryPartnerById(getUserId().toString())
-            for(data in dataList){
-                val payment = data.payments;
-                for(obj in payment){
-                    OutletNameList.add(getOutletName(obj.oId))
-                    amountList.add(obj.returnAmt.toString());
+            try {
+                Log.d("FetchData", "Fetching data")
+                val deliveryPartner = RetrofitInstance.api.getDeliveryPartnerById(getUserId().toString())
+                withContext(Dispatchers.Main) {
+                    // Create a list with the single object to pass to the adapter
+                    val deliveryPartnerList = arrayListOf(deliveryPartner)
+                    adapter = CashToReturnAdapter(this@CashToReturn, deliveryPartnerList)
+                    recyclerView.adapter = adapter
                 }
-            }
-
-            // Update the RecyclerView on the main thread
-            withContext(Dispatchers.Main) {
-                adapter = CashToReturnAdapter(this@CashToReturn, dataList);
-                recyclerView.adapter = adapter
+            } catch (e: Exception) {
+                Log.e("FetchDataError", "Error fetching data: ${e.message}")
             }
         }
     }
+
+
+
     private fun getOutletName(id : String):String{
         val name : String="";
         //parameter me jo id aa rha h usko idhr getOutletwale function me call krke outlet name return kr do function me se/

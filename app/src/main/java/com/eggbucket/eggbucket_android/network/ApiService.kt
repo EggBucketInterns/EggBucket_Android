@@ -168,10 +168,10 @@ interface ApiService {
         @Query("firstName") firstName:String
     ) : ArrayList<DeliveryPartnerrr>
 
-    @GET("deliveryDrivers/egg-bucket-b2b/displayAll-delivery_partner")
+    @GET("deliveryDrivers/egg-bucket-b2b/delivery_partner/{id}")
     suspend fun getDeliveryPartnerById(
-        @Query("_id") id:String
-    ): ArrayList<DeliveryPartnerrr>
+        @Path("id") id: String
+    ): DeliveryPartnerrr
 
     @GET("egg-bucket-b2b/get-all-outlets")
     suspend fun getOutletByOutletId(

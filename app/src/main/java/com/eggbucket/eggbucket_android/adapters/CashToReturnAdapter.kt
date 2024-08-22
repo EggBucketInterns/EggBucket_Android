@@ -39,7 +39,7 @@ class CashToReturnAdapter(
 
     class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val outletName: TextView = itemView.findViewById(R.id.outletName)
-        val amount: TextView = itemView.findViewById(R.id.amount);
+        val amount: TextView = itemView.findViewById(R.id.amount)
     }
 
 
@@ -52,6 +52,10 @@ class CashToReturnAdapter(
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         // Get the current order item
         val order = orderList[position]
+        val outletName = order.payments[position]
+
+        holder.outletName.text = outletName.oId
+        holder.amount.text ="₹ ${outletName.returnAmt.toString()}"
 
     }
 
