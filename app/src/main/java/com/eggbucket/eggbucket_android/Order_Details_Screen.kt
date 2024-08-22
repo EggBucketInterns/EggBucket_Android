@@ -39,7 +39,7 @@ class Order_Details_Screen : AppCompatActivity() {
 
     private var trays: String? = null
     private var amount: String? = null
-    private var name: String? = null
+    private var deliveryname: String? = null
     private var createdAt: String? = null
     private var customerName: String? = null
 
@@ -59,7 +59,7 @@ class Order_Details_Screen : AppCompatActivity() {
         // orderId = intent.getStringExtra("ORDER_ID")
         trays = intent.getStringExtra("TRAYS")
         amount = intent.getStringExtra("AMOUNT")
-        name = intent.getStringExtra("NAME")
+        deliveryname = intent.getStringExtra("DELIVERY_NAME")
         createdAt = intent.getStringExtra("CREATED_AT")
         id = intent.getStringExtra("id")
         customerName = intent.getStringExtra("CUSTOMER_NAME")
@@ -205,9 +205,12 @@ class Order_Details_Screen : AppCompatActivity() {
         findViewById<TextView>(R.id.orderIdTextView).text = id
         findViewById<TextView>(R.id.numTraysTextView).text = trays
         findViewById<TextView>(R.id.amountTextView).text = amount
-        findViewById<TextView>(R.id.vendorNameTextView).text = name
-        findViewById<TextView>(R.id.shopNameTextView).text = customerName
+       // findViewById<TextView>(R.id.vendorNameTextView).text = deliveryname
+       // findViewById<TextView>(R.id.shopNameTextView).text = customerName
         findViewById<TextView>(R.id.txt_created_at).text = createdAt
+        findViewById<TextView>(R.id.delivery_boy_1).text=deliveryname
+        findViewById<TextView>(R.id.customer_name_1).text=customerName
+
         // findViewById<TextView>(R.id.delivery_order_created).text=orderDetails.createdAt
     }
 
@@ -252,6 +255,7 @@ class Order_Details_Screen : AppCompatActivity() {
         findViewById<TextView>(R.id.vendorNameTextView).text = customerName
         findViewById<TextView>(R.id.shopNameTextView).text = orderDetails.deliveryId.firstName
         findViewById<TextView>(R.id.txt_created_at).text = "createdAt ${orderDetails.createdAt}"
+
         // findViewById<TextView>(R.id.delivery_order_created).text=orderDetails.createdAt
 
     }

@@ -67,12 +67,13 @@ class OrderAdapter_2 (
                          val intent = Intent(context, Order_Details_Screen::class.java)
                          intent.putExtra("TRAYS", order.numTrays)
                          intent.putExtra("AMOUNT", order.amount)
-                         intent.putExtra("NAME", order.deliveryId.firstName)
+                         intent.putExtra("DELIVERY_NAME", order.deliveryId.firstName)
                          intent.putExtra("CREATED_AT", order.createdAt)
                          // Pass the order ID to the next screen using a Bundle
                          intent.putExtra("ORDER_ID", order._id)
                          intent.putExtra("STATUS", order.status)
                          intent.putExtra("id",order.customerId?.customerId)
+                         intent.putExtra("CUSTOMER_NAME",order.customerId?.customerName)
 
                          // Start the activity with the Intent
                          // Start the activity with the Intent
