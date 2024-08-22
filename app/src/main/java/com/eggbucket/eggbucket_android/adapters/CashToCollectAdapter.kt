@@ -32,7 +32,7 @@ class CashToCollectAdapter(
         fun onCompleteClick()
     }
 
-    // ViewHolder class to hold references to the views
+
     class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val deliveryPartnerName: TextView = itemView.findViewById(R.id.deliveryPartnerName)
         val amoutn: TextView = itemView.findViewById(R.id.amount);

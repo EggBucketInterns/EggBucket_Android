@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".CollectedCashDelivery"
+            android:name=".adapters.CashToReturn"
             android:exported="false" />
         <activity
             android:name=".OrderDetailDeliveryActivity"
