@@ -175,8 +175,8 @@ interface ApiService {
 
     @GET("egg-bucket-b2b/get-all-outlets")
     suspend fun getOutletByOutletId(
-        @Query("_id") id:String
-    ): ArrayList<OutletResponse>
+        @Query("_id") id: String
+    ): OutletResponse
 }
 
 data class UpdateReturnAmountRequest(

@@ -17,6 +17,7 @@ import com.eggbucket.eggbucket_android.OutletHomeFragment
 import com.eggbucket.eggbucket_android.R
 import com.eggbucket.eggbucket_android.databinding.FragmentOutletHomeBinding
 import com.eggbucket.eggbucket_android.model.Order
+import com.eggbucket.eggbucket_android.model.Outlet
 import com.eggbucket.eggbucket_android.model.StatusUpdate
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.model.data.DeliveryPartnerrr
@@ -28,6 +29,7 @@ import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,6 +38,7 @@ class CashToReturnAdapter(
     private val context: Context,
     private val orderList: ArrayList<DeliveryPartnerrr>,
 ) : RecyclerView.Adapter<CashToReturnAdapter.OrderViewHolder>() {
+    var outletPartnerName = ""
 
     class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val outletName: TextView = itemView.findViewById(R.id.outletName)
@@ -54,7 +57,12 @@ class CashToReturnAdapter(
         val order = orderList[position]
         val outletName = order.payments[position]
 
-        holder.outletName.text = outletName.oId
+        fetchOutletDetails(outletName.oId) { outletPartnerName ->
+            holder.outletName.text = (outletPartnerName ?: "Unknown Outlet").toString()
+        }
+
+//        holder.outletName.text = outletPartnerName
+
         holder.amount.text ="₹ ${outletName.returnAmt.toString()}"
 
     }
@@ -63,4 +71,27 @@ class CashToReturnAdapter(
         return orderList.size
     }
 
+    private fun fetchOutletDetails(outletId: String, onResult: (String?) -> Unit) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val outletResponse = RetrofitInstance.apiService.getOutletByOutletId(outletId)
+                if (outletResponse.status == "success") {
+                    val outlet = outletResponse.data.firstOrNull()
+                    val outletPartnerName = outlet?.outletPartner?.firstName
+                    withContext(Dispatchers.Main) {
+                        onResult(outletPartnerName)
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        onResult(null)
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("FetchOutletError", "Error fetching outlet details: ${e.message}")
+                withContext(Dispatchers.Main) {
+                    onResult(null)
+                }
+            }
+        }
+    }
 }
