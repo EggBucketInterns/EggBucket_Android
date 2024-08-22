@@ -35,7 +35,6 @@ class Order_Details_Screen : AppCompatActivity() {
     private lateinit var orderId: String
     private var status: String? = null
     private var id: String? = null
-    private var outletID: String = ""
 
 
     private var trays: String? = null
@@ -180,7 +179,7 @@ class Order_Details_Screen : AppCompatActivity() {
                         val customerID = orderDetails.customerId._id
                         Log.d("OrderDetails", "Customer ID: $customerID")
                         //retrieve outlet id from order detail
-                        outletID = orderDetails.outletId._id
+                        val outletID = orderDetails.outletId._id
                         Log.d("OrderDetails", "Outlet ID: $outletID")
                         // Update UI with the fetched order details
                         populateOrderDetails(orderDetails)
