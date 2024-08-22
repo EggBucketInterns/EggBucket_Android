@@ -21,9 +21,17 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Order_Details_Screen : AppCompatActivity() {
-    private lateinit var orderId: String
+    private  var orderId: String?=null
     private  var status:String?=null
     private var id:String?=null
+
+
+    private var trays: String? = null
+    private var amount: String? = null
+    private var name: String? = null
+    private var createdAt: String? = null
+    private var customerName:String?=null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +43,17 @@ class Order_Details_Screen : AppCompatActivity() {
         val outletImage=findViewById<ImageView>(R.id.details_image_outlet)
         val openMapButton = findViewById<CardView>(R.id.openMapBtn)
         status=intent.getStringExtra("STATUS")
-        id=intent.getStringExtra("id")
+      //  id=intent.getStringExtra("id")
+
+        orderId = intent.getStringExtra("ORDER_ID")
+        trays = intent.getStringExtra("TRAYS")
+        amount = intent.getStringExtra("AMOUNT")
+        name = intent.getStringExtra("NAME")
+        createdAt = intent.getStringExtra("CREATED_AT")
+        id = intent.getStringExtra("id")
+        customerName=intent.getStringExtra("CUSTOMER_NAME")
+
+
 
 
         val googleMapLink = "https://maps.app.goo.gl/4WUTPMRmegN5rCw2A"
@@ -105,12 +123,12 @@ class Order_Details_Screen : AppCompatActivity() {
 //        intent.putExtra("order_ID",orderId);
 
         // Call API to fetch order details
-        try {
+        /*try {
             getOrderDetails(orderId)
         }
         catch (e : Exception){
             Log.e("ExceptionError", e.message.toString() )
-        }
+        }*/
 
         val reached = findViewById<TextView>(R.id.reached)
         reached.setOnClickListener {
@@ -122,7 +140,7 @@ class Order_Details_Screen : AppCompatActivity() {
         }
     }
 
-    private fun getOrderDetails(orderId: String) {
+  /*  private fun getOrderDetails(orderId: String) {
         val apiService = RetrofitInstance.apiService
         val call = apiService.getOrderDetails(orderId)
 
@@ -143,17 +161,17 @@ class Order_Details_Screen : AppCompatActivity() {
                 Log.e("OrderDetails", "Error fetching order details", t)
             }
         })
-    }
+    }*/
 
-    private fun populateOrderDetails(orderDetails: OrderDetailsResponse) {
-        val customerName = orderDetails.customerId?.customerName ?: "Unknown Customer"
+    private fun populateOrderDetails() {
+       // val customerName = orderDetails.customerId?.customerName ?: "Unknown Customer"
         // Update the UI elements with data
-        findViewById<TextView>(R.id.orderIdTextView).text = orderDetails._id
-        findViewById<TextView>(R.id.numTraysTextView).text = orderDetails.numTrays
-        findViewById<TextView>(R.id.amountTextView).text = "₹ ${orderDetails.amount}"
-        findViewById<TextView>(R.id.vendorNameTextView).text = orderDetails.deliveryId.firstName
+        findViewById<TextView>(R.id.orderIdTextView).text = id
+        findViewById<TextView>(R.id.numTraysTextView).text = trays
+        findViewById<TextView>(R.id.amountTextView).text = amount
+        findViewById<TextView>(R.id.vendorNameTextView).text = name
         findViewById<TextView>(R.id.shopNameTextView).text = customerName
-        findViewById<TextView>(R.id.txt_created_at).text="createdAt ${orderDetails.createdAt}"
+        findViewById<TextView>(R.id.txt_created_at).text=createdAt
        // findViewById<TextView>(R.id.delivery_order_created).text=orderDetails.createdAt
     }
 }

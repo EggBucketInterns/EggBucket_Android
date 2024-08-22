@@ -48,7 +48,7 @@
                 >
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="150dp"
                     android:layout_marginTop="25dp"
                     android:background="@drawable/order_detail_bg"
                     app:cardCornerRadius="25dp"
@@ -62,7 +62,7 @@
                         android:scaleType="fitXY"/>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
+                        android:layout_height="150dp"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
                         <FrameLayout
@@ -195,9 +195,42 @@
                                         android:layout_marginStart="5dp"
                                         android:textColor="@color/black" />
                                     <TextView
+                                        android:id="@+id/outlet_outlet_name"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="HSR Bangalore"
+                                        android:textSize="12dp"
+                                        android:textColor="@color/black"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center_vertical">
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:src="@drawable/profile"/>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+
+                                    >
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Customer Name :  "
+                                        android:textSize="12dp"
+                                        android:layout_marginStart="5dp"
+                                        android:textColor="@color/black" />
+                                    <TextView
+                                        android:id="@+id/outlet_customer_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="xyx"
                                         android:textSize="12dp"
                                         android:textColor="@color/black"/>
                                 </LinearLayout>
@@ -234,6 +267,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="280dp"
+                            android:visibility="gone"
                             android:background="#40FFA500"
                             android:orientation="vertical">
 
