@@ -52,7 +52,7 @@ class DeliveryHomeFragment : Fragment() {
         initViews(view)
         fetchDeliveryPartnerData()
         fetchOrders()
-        observeViewModel()
+        //observeViewModel()
 
         completedOrderCard.setOnClickListener {
             startActivity(Intent(requireContext(), CompletedDeliveryOrders::class.java))
@@ -177,12 +177,12 @@ class DeliveryHomeFragment : Fragment() {
         completedOrder.text = completedOrdersCount.toString()
     }
 
-    private fun observeViewModel() {
+    /*private fun observeViewModel() {
         orderViewModel.amount.observe(viewLifecycleOwner) { amount ->
             Log.d("DeliveryHomeFragment", "Amount collected: ₹${amount}")
             amountCollected.text = "₹${amount}"
         }
-    }
+    }*/
 
     private fun getUserId(): String? {
         val sharedPref = activity?.getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)

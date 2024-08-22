@@ -3,6 +3,7 @@ package com.eggbucket.eggbucket_android
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextClock
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -32,6 +33,8 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
     private var name: String? = null
     private var createdAt: String? = null
     private var id: String? = null
+    private var customerName:String?=null
+    private var deliveryName:String?=null
     /*private var outletImage: String? = null
     private var customerImage: String? = null*/
 
@@ -49,6 +52,8 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
         name = intent.getStringExtra("NAME")
         createdAt = intent.getStringExtra("CREATED_AT")
         id = intent.getStringExtra("id")
+        deliveryName=intent.getStringExtra("DELIVERY_NAME")
+        customerName=intent.getStringExtra("CUSTOMER_NAME")
 
 
         //try {
@@ -110,6 +115,10 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.amountTextView1).text = "₹ $amount"
         findViewById<TextView>(R.id.vendorNameTextView1).text = name
         findViewById<TextView>(R.id.txt_order_created).text = "createdAt $createdAt"
+        findViewById<TextView>(R.id.outlet_customer_name).text=customerName
+        findViewById<TextView>(R.id.outlet_delivery_name).text=deliveryName
+
+
 
     }
 
