@@ -7,11 +7,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.adapters.LiveOrderAdapter
@@ -39,6 +41,7 @@ class DeliveryHomeFragment : Fragment() {
     lateinit var completedOrder: TextView
     lateinit var dataList: ArrayList<GetAllOrdersItem>
     lateinit var adapter: OrdersAdapter
+    lateinit var cashCollectedBtn : LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +56,14 @@ class DeliveryHomeFragment : Fragment() {
         fetchDeliveryPartnerData()
         fetchOrders()
         observeViewModel()
+
+        cashCollectedBtn.setOnClickListener {
+            startActivity(
+                Intent(context,
+                    CashCollectedActivity::class.java
+                )
+            )
+        }
 
         completedOrderCard.setOnClickListener {
             startActivity(Intent(requireContext(), CompletedDeliveryOrders::class.java))
@@ -70,6 +81,7 @@ class DeliveryHomeFragment : Fragment() {
         completedOrder = view.findViewById(R.id.txt_completed)
         recyclerView = view.findViewById(R.id.live_order_RV)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        cashCollectedBtn = view.findViewById(R.id.cashCollectedBtn)
     }
 
     private fun fetchOrders() {

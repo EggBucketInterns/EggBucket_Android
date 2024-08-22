@@ -167,6 +167,16 @@ interface ApiService {
     suspend fun getDeliveryPartnerByDeliveryPartnerName(
         @Query("firstName") firstName:String
     ) : ArrayList<DeliveryPartnerrr>
+
+    @GET("deliveryDrivers/egg-bucket-b2b/displayAll-delivery_partner")
+    suspend fun getDeliveryPartnerById(
+        @Query("_id") id:String
+    ): ArrayList<DeliveryPartnerrr>
+
+    @GET("egg-bucket-b2b/get-all-outlets")
+    suspend fun getOutletByOutletId(
+        @Query("_id") id:String
+    ): ArrayList<OutletResponse>
 }
 
 data class UpdateReturnAmountRequest(
