@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.OrderDetailsOutletActivity
 import com.eggbucket.eggbucket_android.Order_Details_Screen
@@ -18,10 +20,12 @@ import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
- class OrderAdapter_2 (
-    private val context: Context,
-    private val orderList: ArrayList<GetAllOrdersItem>
+class OrderAdapter_2 (
+     private val context: Context,
+     private val fragmentManager: FragmentManager,
+     private val orderList: ArrayList<GetAllOrdersItem>
 ) : RecyclerView.Adapter<OrderAdapter_2.OrderViewHolder_2>() {
 
     // ViewHolder class to hold references to the views
@@ -71,7 +75,14 @@ import kotlinx.coroutines.launch
                          intent.putExtra("id",order.customerId?.customerId)
 
                          // Start the activity with the Intent
-                         context.startActivity(intent)
+                         // Start the activity with the Intent
+                         withContext(Dispatchers.Main) {
+                             context.startActivity(intent)
+
+                             // Remove the fragment from the back stack
+                             fragmentManager.popBackStack()
+                         }
+
 
                      } catch (e: Exception) {
                          // Handle any errors

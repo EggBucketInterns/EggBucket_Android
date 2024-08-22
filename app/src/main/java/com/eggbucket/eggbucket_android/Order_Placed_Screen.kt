@@ -18,6 +18,7 @@ class Order_Placed_Screen : AppCompatActivity() {
         backBtn.setOnClickListener {
             val intent = Intent(this@Order_Placed_Screen, MainActivity::class.java)
             startActivity(intent);
+            finish()
         }
         }
     }

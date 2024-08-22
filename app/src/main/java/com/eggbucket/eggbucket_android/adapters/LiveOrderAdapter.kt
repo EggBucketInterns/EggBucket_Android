@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.DeliveryHomeFragment
 import com.eggbucket.eggbucket_android.Order_Details_Screen
@@ -20,6 +21,7 @@ import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +31,7 @@ import java.util.Locale
 class LiveOrderAdapter(
 
     val context:Context,
+    private val fragmentManager: FragmentManager,
     val dataList:ArrayList<GetAllOrdersItem>
 ):RecyclerView.Adapter<LiveOrderAdapter.LiveOrderViewHolder>() {
 
@@ -88,7 +91,14 @@ class LiveOrderAdapter(
                     intent.putExtra("ORDER_ID", currentItem._id)
 
                     // Start the activity with the Intent
-                    context.startActivity(intent)
+                    withContext(Dispatchers.Main) {
+                        context.startActivity(intent)
+
+                        // Remove the fragment from the back stack
+                        fragmentManager.popBackStack()
+                    }
+
+
 
                 } catch (e: Exception) {
                     // Handle any errors

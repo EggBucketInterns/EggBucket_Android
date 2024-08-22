@@ -50,7 +50,7 @@ class DeliveryStoreFragment : Fragment() {
             val dataList = RetrofitInstance.api.getOrdersByDeliveryId(getUserId().toString())
 
             withContext(Dispatchers.Main) {
-                adapter = OrderAdapter_2(requireContext(),dataList)
+                adapter = OrderAdapter_2(requireContext(),parentFragmentManager,dataList)
                 recyclerView.adapter = adapter
             }
         }

@@ -31,7 +31,7 @@ class CashCollectedActivity : AppCompatActivity(){
 
 
         // Find the RecyclerView
-        recyclerView = findViewById(R.id.cashRecyclerView)
+        recyclerView = findViewById(R.id.cash_RecyclerView)
 
         // Set layout manager
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -41,7 +41,7 @@ class CashCollectedActivity : AppCompatActivity(){
     }
     private fun getOutletId():String?{
         val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
-        return sharedPref?.getString("OUTLET_ID",null)
+        return sharedPref?.getString("USER_ID",null)
     }
     private fun fetchDataAndBindRecyclerview() {
         CoroutineScope(Dispatchers.IO).launch {

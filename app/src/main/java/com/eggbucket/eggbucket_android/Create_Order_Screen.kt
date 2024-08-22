@@ -337,6 +337,7 @@ class Create_Order_Screen : AppCompatActivity() {
                         val intent =
                             Intent(this@Create_Order_Screen, Order_Placed_Screen::class.java)
                         startActivity(intent)
+                        finish()
                     } else {
                         Log.d("checkResponse", order.toString())
                         Toast.makeText(applicationContext, "Invalid Customer ID", Toast.LENGTH_SHORT).show();

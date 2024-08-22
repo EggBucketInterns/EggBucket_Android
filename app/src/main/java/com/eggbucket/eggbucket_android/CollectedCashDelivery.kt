@@ -27,7 +27,7 @@ class CollectedCashDelivery : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_collected_cash_delivery)
 
-        dataList = arrayListOf()
+        /*dataList = arrayListOf()
 
 
         // Find the RecyclerView
@@ -37,13 +37,13 @@ class CollectedCashDelivery : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Set the adapter and fetch data
-        fetchDataAndBindRecyclerview()
+        fetchDataAndBindRecyclerview()*/
     }
-    private fun getOutletId():String?{
+  /*  private fun getOutletId():String?{
         val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
         return sharedPref?.getString("OUTLET_ID",null)
-    }
-    private fun fetchDataAndBindRecyclerview() {
+    }*/
+    /*private fun fetchDataAndBindRecyclerview() {
         CoroutineScope(Dispatchers.IO).launch {
             // Fetch data from the API
 
@@ -54,5 +54,5 @@ class CollectedCashDelivery : AppCompatActivity() {
                 recyclerView.adapter = adapter
             }
         }
-    }
+    }*/
 }

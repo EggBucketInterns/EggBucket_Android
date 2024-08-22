@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun gotoCreateOrder(){
             startActivity(Intent(this,Create_Order_Screen::class.java))
+        finish()
     }
 
     private fun View.isKeyboardVisible(): Boolean {

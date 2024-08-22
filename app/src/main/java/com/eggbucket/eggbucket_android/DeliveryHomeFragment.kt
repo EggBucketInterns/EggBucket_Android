@@ -114,7 +114,7 @@ class DeliveryHomeFragment : Fragment() {
                     completedOrder.text = completedOrders.size.toString()
 
                     // Set up the live order adapter
-                    liveOrderAdapter = LiveOrderAdapter(requireContext(), liveOrderDataList)
+                    liveOrderAdapter = LiveOrderAdapter(requireContext(),parentFragmentManager, liveOrderDataList)
                     recyclerView.adapter = liveOrderAdapter
                     Log.d(
                         "DeliveryHomeFragment",

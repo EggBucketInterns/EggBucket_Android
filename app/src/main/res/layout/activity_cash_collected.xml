@@ -59,7 +59,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cashRecyclerView"
+            android:id="@+id/cash_RecyclerView"
             android:layout_below="@+id/search_outlet"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
