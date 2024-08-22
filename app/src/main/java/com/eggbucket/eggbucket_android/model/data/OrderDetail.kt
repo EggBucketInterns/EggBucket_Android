@@ -2,7 +2,7 @@ package com.eggbucket.eggbucket_android.model.data
 
 data class OrderDetailsResponse(
     val _id: String,
-    val outletId: Any?,
+    val outletId: OutletId,
     val customerId: CustomerId,
     val deliveryId: DeliveryId,
     val numTrays: String,
@@ -24,6 +24,12 @@ data class CustomerId(
 data class DeliveryId(
     val _id: String,
     val firstName: String,
+    val phoneNumber: String
+)
+
+data class OutletId(
+    val _id: String,
+    val outletNumber: String,
     val phoneNumber: String
 )
 
