@@ -11,13 +11,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.adapters.CashToReturn
 import com.eggbucket.eggbucket_android.adapters.LiveOrderAdapter
-import com.eggbucket.eggbucket_android.adapters.OrderViewModel
 import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.model.data.DeliveryPartnerrr
@@ -30,7 +28,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DeliveryHomeFragment : Fragment() {
-    private val orderViewModel: OrderViewModel by activityViewModels()
     lateinit var recyclerView: RecyclerView
     lateinit var liveOrderAdapter: LiveOrderAdapter
     lateinit var liveOrderDataList: ArrayList<GetAllOrdersItem>
@@ -182,16 +179,16 @@ class DeliveryHomeFragment : Fragment() {
     }
 
 
-    private fun updateOrderStats() {
-        val pendingOrdersCount = adapter.getPendingOrdersCount()
-        val completedOrdersCount = adapter.getCompletedOrdersCount()
-
-        Log.d("DeliveryHomeFragment", "Pending orders count: $pendingOrdersCount")
-        Log.d("DeliveryHomeFragment", "Completed orders count: $completedOrdersCount")
-
-        pendingOrderCount.text = pendingOrdersCount.toString()
-        completedOrder.text = completedOrdersCount.toString()
-    }
+//    private fun updateOrderStats() {
+//        val pendingOrdersCount = adapter.getPendingOrdersCount()
+//        val completedOrdersCount = adapter.getCompletedOrdersCount()
+//
+//        Log.d("DeliveryHomeFragment", "Pending orders count: $pendingOrdersCount")
+//        Log.d("DeliveryHomeFragment", "Completed orders count: $completedOrdersCount")
+//
+//        pendingOrderCount.text = pendingOrdersCount.toString()
+//        completedOrder.text = completedOrdersCount.toString()
+//    }
 
     /*private fun observeViewModel() {
         orderViewModel.amount.observe(viewLifecycleOwner) { amount ->
@@ -207,11 +204,7 @@ class DeliveryHomeFragment : Fragment() {
         return userId
     }
 
-    fun onButtonClick(position: Int) {
-        startActivity(Intent(requireContext(), Order_Details_Screen::class.java))
-    }
-
-    /*override fun onTextViewClick(position: Int) {
-        TODO("Not yet implemented")
-    }*/
+//    fun onButtonClick(position: Int) {
+//        startActivity(Intent(requireContext(), Order_Details_Screen::class.java))
+//    }
 }

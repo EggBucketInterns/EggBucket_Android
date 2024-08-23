@@ -21,7 +21,6 @@ class CashToReturnAdapter(
     private val context: Context,
     private val orderList: ArrayList<DeliveryPartnerrr>,
 ) : RecyclerView.Adapter<CashToReturnAdapter.OrderViewHolder>() {
-    var outletPartnerName = ""
 
     class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val outletName: TextView = itemView.findViewById(R.id.outletName)
@@ -45,13 +44,11 @@ class CashToReturnAdapter(
             holder.outletName.text = (outletPartnerName ?: "Unknown Outlet").toString()
             Glide.with(context)
                 .load(outletImage)
-//                .placeholder(R.drawable.generic_avatar)
+                .placeholder(R.drawable.logo)
                 .into(holder.image)
         }
 
-//        holder.outletName.text = outletPartnerName
-
-        holder.amount.text ="₹ ${outletName.returnAmt.toString()}"
+        holder.amount.text ="₹ ${outletName.returnAmt}"
 
     }
 
