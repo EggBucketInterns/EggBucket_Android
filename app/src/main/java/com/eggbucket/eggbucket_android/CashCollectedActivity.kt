@@ -41,7 +41,7 @@ class CashCollectedActivity : AppCompatActivity(){
     }
     private fun getOutletId():String?{
         val sharedPref = getSharedPreferences("EggBucketPrefs", Context.MODE_PRIVATE)
-        return sharedPref?.getString("USER_ID",null)
+        return sharedPref?.getString("OUTLET_ID",null)
     }
     private fun fetchDataAndBindRecyclerview() {
         CoroutineScope(Dispatchers.IO).launch {
