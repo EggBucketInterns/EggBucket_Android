@@ -13,7 +13,6 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.adapters.CashToReturn
@@ -101,18 +100,22 @@ class DeliveryHomeFragment : Fragment() {
                     // Filter live orders based on user ID
                     liveOrderDataList =
                         dataList.filter { it.deliveryId._id == userId && it.status == "pending" } as ArrayList<GetAllOrdersItem>
-                    Log.d("DeliveryHomeFragment", "Filtered live orders: $liveOrderDataList")
-                    Log.d("DeliveryHomeFragment", "User Id: $userId")
+
+                    val pendingOrdersValue = liveOrderDataList.size
+                    Log.d("DeliveryHomeFragment", "Filtered Pending orders: $liveOrderDataList")
+                    Log.d("DeliveryHomeFragment", "Pending order count: $pendingOrdersValue")
 
                     // Calculate the number of completed and pending orders
                     val completedOrders =
-                        dataList.filter { it.deliveryId._id == userId && it.status == "delivered" }
-                    val pendingOrders = liveOrderDataList.size
+                        dataList.filter { it.deliveryId._id == userId && it.status == "completed" } as ArrayList<GetAllOrdersItem>
 
-                    val totalAmountCollected = completedOrders.sumOf { it.amount.toDouble() }
+                    val completedOrderValue= completedOrders.size
 
-                    pendingOrderCount.text = pendingOrders.toString()
-                    completedOrder.text = completedOrders.size.toString()
+                    Log.d("DeliveryHomeFragment", "Filtered Completed orders: $liveOrderDataList")
+                    Log.d("DeliveryHomeFragment", "Completed order count: $completedOrderValue")
+
+                    pendingOrderCount.text = pendingOrdersValue.toString()
+                    completedOrder.text = completedOrderValue.toString()
 
                     // Set up the live order adapter
                     liveOrderAdapter = LiveOrderAdapter(requireContext(),parentFragmentManager, liveOrderDataList)
