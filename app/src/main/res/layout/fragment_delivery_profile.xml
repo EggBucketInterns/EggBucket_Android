@@ -55,7 +55,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/car"
+                        android:src="@drawable/logo"
                         android:contentDescription="Profile Image"
                         android:layout_marginBottom="8dp"
                         android:layout_marginTop="8dp"

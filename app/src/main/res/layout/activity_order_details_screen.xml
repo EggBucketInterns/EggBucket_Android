@@ -76,7 +76,7 @@
                                 android:id="@+id/details_image_outlet"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/avatar"
+                                android:src="@drawable/logo"
                                 android:scaleType="fitXY"/>
 
 
@@ -315,7 +315,7 @@
                                     android:id="@+id/detail_image_customer"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/avatar1"
+                                    android:src="@drawable/logo"
                                     android:scaleType="centerCrop"/>
                             </androidx.cardview.widget.CardView>
 
