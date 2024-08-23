@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CashToCollectAdapter(
-    private val context: Context,
+    private val activity: Activity,
     private val orderList: ArrayList<GetAllOrdersItem>,
 
     private val coroutineScope: CoroutineScope,
@@ -49,7 +49,7 @@ class CashToCollectAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.cash_collected_item, parent, false)
+        val view = LayoutInflater.from(activity).inflate(R.layout.cash_collected_item, parent, false)
         return OrderViewHolder(view)
     }
 
@@ -63,8 +63,10 @@ class CashToCollectAdapter(
                 try {
                     updateOrder(order._id)
                     decreaseReturnAmount(order._id,order.amount)
-                    val intent = Intent(context, MainActivity::class.java)
-                    context.startActivity(intent)
+                    val intent = Intent(activity, MainActivity::class.java)
+                    activity.startActivity(intent)
+                    activity.finish()
+
 
                 } catch (e: Exception) {
 
@@ -90,7 +92,7 @@ class CashToCollectAdapter(
                 if (response.isSuccessful) {
                     Log.d("ReturnAmountDec", "Successfully decreased return amount.")
                     withContext(Dispatchers.Main) {
-                        Toast.makeText(context, "Return amount decreased successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "Return amount decreased successfully", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     val errorBody = response.errorBody()?.string()

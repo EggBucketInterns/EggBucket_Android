@@ -59,7 +59,7 @@ class Order_Details_Screen : AppCompatActivity() {
         // orderId = intent.getStringExtra("ORDER_ID")
         trays = intent.getStringExtra("TRAYS")
         amount = intent.getStringExtra("AMOUNT")
-        deliveryname = intent.getStringExtra("DELIVERY_NAME")
+        deliveryname = intent.getStringExtra("NAME")
         createdAt = intent.getStringExtra("CREATED_AT")
         id = intent.getStringExtra("id")
         customerName = intent.getStringExtra("CUSTOMER_NAME")

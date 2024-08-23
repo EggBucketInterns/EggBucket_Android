@@ -47,6 +47,7 @@ class CashCollectedActivity : AppCompatActivity(){
             withContext(Dispatchers.Main) {
                 adapter = CashToCollectAdapter(this@CashCollectedActivity, dataList,lifecycleScope);
                 recyclerView.adapter = adapter
+
             }
         }
     }
