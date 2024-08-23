@@ -65,7 +65,7 @@ class CashToReturnAdapter(
                 val outletResponse = RetrofitInstance.apiService.getOutletByOutletId(outletId)
                 if (outletResponse.status == "success") {
                     val outlet = outletResponse.data.firstOrNull()
-                    val outletPartnerName = outlet?.outletPartner?.firstName
+                    val outletPartnerName = outlet?.outletArea
                     val outletImage = outlet?.img
                     withContext(Dispatchers.Main) {
                         onResult(outletPartnerName, outletImage)
