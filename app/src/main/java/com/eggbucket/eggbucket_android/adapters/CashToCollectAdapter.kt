@@ -1,5 +1,6 @@
 package com.eggbucket.eggbucket_android.adapters
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -25,6 +26,7 @@ import kotlinx.coroutines.withContext
 class CashToCollectAdapter(
     private val context: Context,
     private val orderList: ArrayList<GetAllOrdersItem>,
+
     private val coroutineScope: CoroutineScope,
 ) : RecyclerView.Adapter<CashToCollectAdapter.OrderViewHolder>() {
 
@@ -63,6 +65,7 @@ class CashToCollectAdapter(
                     decreaseReturnAmount(order._id,order.amount)
                     val intent = Intent(context, MainActivity::class.java)
                     context.startActivity(intent)
+
                 } catch (e: Exception) {
 
                     Log.e("MyAdapter", "Failed to update order", e)

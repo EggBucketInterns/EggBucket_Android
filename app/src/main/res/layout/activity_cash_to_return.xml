@@ -49,7 +49,8 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:padding="24dp"
+                        android:padding="2dp"
+                        android:paddingStart="40dp"
                         android:textColor="@color/textcolor"
                         android:background="@drawable/search_back"
                         android:text="Search by Outlet Name"

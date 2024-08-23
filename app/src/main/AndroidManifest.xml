@@ -66,6 +66,7 @@
         </activity>
         <activity
             android:name=".Create_Order_Screen"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
