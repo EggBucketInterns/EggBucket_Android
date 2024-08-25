@@ -1,5 +1,6 @@
 package com.eggbucket.eggbucket_android.adapters
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -95,9 +96,10 @@ class LiveOrderAdapter(
                         context.startActivity(intent)
 
                         // Remove the fragment from the back stack
-                        fragmentManager.popBackStack()
+                       // fragmentManager.popBackStack()
+                        // Finish the hosted activity
+                        (context as? Activity)?.finish()
                     }
-
 
 
                 } catch (e: Exception) {

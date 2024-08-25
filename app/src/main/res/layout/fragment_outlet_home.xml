@@ -132,6 +132,9 @@
                             android:id="@+id/totalOrderBtn"
                             android:layout_width="140dp"
                             android:layout_height="118dp"
+                            android:background="?android:selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:elevation="4dp"
                             android:layout_margin="1dp"
                             android:layout_marginEnd="10dp"
@@ -173,6 +176,9 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="140dp"
                             android:layout_height="118dp"
+                            android:background="?android:selectableItemBackground"
+                            android:clickable="true"
+
                          android:layout_marginStart="16dp"
                             android:id="@+id/pendingOrdersBtn"
                             android:elevation="4dp"
@@ -223,6 +229,8 @@
                             android:layout_width="140dp"
                             android:layout_height="118dp"
                             android:layout_margin="1dp"
+                            android:background="?android:selectableItemBackground"
+                            android:clickable="true"
                             android:elevation="4dp"
                             app:cardCornerRadius="23dp"
                             android:id="@+id/completedOrderBtn"
@@ -265,6 +273,8 @@
                             android:layout_height="118dp"
                         android:layout_marginStart="16dp"
                             android:elevation="4dp"
+                            android:background="?android:selectableItemBackground"
+                            android:clickable="true"
                             app:cardCornerRadius="23dp"
                             android:id="@+id/pendingCashBtn"
                             >
