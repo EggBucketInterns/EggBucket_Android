@@ -11,8 +11,8 @@
         <ImageView
             android:id="@+id/imagev1"
             android:layout_centerVertical="true"
-            android:src="@drawable/menu_photo"
-            android:layout_width="wrap_content"
+            android:src="@drawable/logo"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"/>
         <TextView
