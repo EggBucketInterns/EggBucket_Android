@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ import com.eggbucket.eggbucket_android.databinding.FragmentOutletHomeBinding
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
 import com.eggbucket.eggbucket_android.network.RetrofitInstance.apiService
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,6 +36,8 @@ class OutletHomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var orderAdapter: RecentOrdersAdapter
     private var outletId: String = ""
+    lateinit var profileImage:ImageView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +49,7 @@ class OutletHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        profileImage=view.findViewById(R.id.avatar)
         setupRecyclerView()
         try {
             binding.totalOrderBtn.setOnClickListener {
@@ -143,6 +148,7 @@ class OutletHomeFragment : Fragment() {
                         for (outlet in outlets) {
                             binding.outletName.text = outlet.outletArea
                             outletId = outlet._id
+                            Picasso.get().load(outlet.img).into(profileImage)
                             Log.d("OutletId", "outletId $outletId")
                             saveOutletIdToPreferences(outletId)
                             Log.d("OutletId Saved", "saved $outletId")

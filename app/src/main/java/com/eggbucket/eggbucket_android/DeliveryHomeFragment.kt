@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -20,6 +21,7 @@ import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
 import com.eggbucket.eggbucket_android.model.data.DeliveryPartnerrr
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -39,6 +41,7 @@ class DeliveryHomeFragment : Fragment() {
     lateinit var dataList: ArrayList<GetAllOrdersItem>
     lateinit var adapter: OrdersAdapter
     lateinit var cashCollectedBtn : LinearLayout
+    lateinit var profileImage:ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,6 +71,7 @@ class DeliveryHomeFragment : Fragment() {
         pendingOrderCard.setOnClickListener {
             startActivity(Intent(requireContext(), PendingDeliveryOrders::class.java))
         }
+
     }
 
     private fun initViews(view: View) {
@@ -79,6 +83,7 @@ class DeliveryHomeFragment : Fragment() {
         recyclerView = view.findViewById(R.id.live_order_RV)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         cashCollectedBtn = view.findViewById(R.id.cashCollectedBtn)
+        profileImage=view.findViewById(R.id.profileImage)
     }
 
     private fun fetchOrders() {
@@ -149,6 +154,7 @@ class DeliveryHomeFragment : Fragment() {
                             // Calculate total amount collected
                             val totalAmountCollected = partner.payments.sumOf { it.returnAmt.toDouble() }
                             amountCollected.text = "₹${totalAmountCollected}"
+                            Picasso.get().load(partner.img).into(profileImage)
                             Log.d(
                                 "DeliveryHomeFragment",
                                 "Amount collected: ₹${totalAmountCollected}"

@@ -98,7 +98,7 @@ class LiveOrderAdapter(
                         // Remove the fragment from the back stack
                        // fragmentManager.popBackStack()
                         // Finish the hosted activity
-                        (context as? Activity)?.finish()
+                        //(context as? Activity)?.finish()
                     }
 
 

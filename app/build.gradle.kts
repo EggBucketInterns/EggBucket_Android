@@ -79,4 +79,6 @@ dependencies {
 
     implementation ("com.github.bumptech.glide:glide:4.15.1")
 
+    implementation ("com.intuit.sdp:sdp-android:1.1.1")
+
 }
