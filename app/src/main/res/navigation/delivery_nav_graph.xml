@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_delivery_search" />
     <fragment
         android:id="@+id/deliveryStoreFragment"
-        android:name="com.eggbucket.eggbucket_android.DeliveryStoreFragment"
+        android:name="com.eggbucket.eggbucket_android.DeliveryShopFragment"
         android:label="fragment_delivery_store"
         tools:layout="@layout/fragment_delivery_store" />
     <fragment

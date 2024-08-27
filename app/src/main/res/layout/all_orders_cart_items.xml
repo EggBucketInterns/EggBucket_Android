@@ -36,7 +36,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/profile"
+                android:src="@drawable/profile_yellow_bg"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/order_id"/>
 
