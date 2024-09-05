@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_outlet_search" />
     <fragment
         android:id="@+id/outletStoreFragment"
-        android:name="com.eggbucket.eggbucket_android.OutletStoreFragment"
+        android:name="com.eggbucket.eggbucket_android.OutletShopFragment"
         android:label="fragment_outlet_store"
         tools:layout="@layout/fragment_outlet_store" />
 </navigation>

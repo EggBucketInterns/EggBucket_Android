@@ -54,8 +54,6 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
         id = intent.getStringExtra("id")
         deliveryName=intent.getStringExtra("DELIVERY_NAME")
         customerName=intent.getStringExtra("CUSTOMER_NAME")
-
-
         //try {
 
 
