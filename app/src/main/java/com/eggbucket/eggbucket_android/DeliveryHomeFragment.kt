@@ -43,6 +43,7 @@ class DeliveryHomeFragment : Fragment() {
     lateinit var cashCollectedBtn : LinearLayout
     lateinit var profileImage:ImageView
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -101,7 +102,7 @@ class DeliveryHomeFragment : Fragment() {
 
                     // Filter live orders based on user ID
                     liveOrderDataList =
-                        dataList.filter { it.deliveryId._id == userId && it.status == "pending" } as ArrayList<GetAllOrdersItem>
+                        dataList.filter { it.deliveryId != null && it.deliveryId._id == userId && it.status == "pending" } as ArrayList<GetAllOrdersItem>
 
                     val pendingOrdersValue = liveOrderDataList.size
                     Log.d("DeliveryHomeFragment", "Filtered Pending orders: $liveOrderDataList")
@@ -109,15 +110,18 @@ class DeliveryHomeFragment : Fragment() {
 
                     // Calculate the number of completed and pending orders
                     val completedOrders =
-                        dataList.filter { it.deliveryId._id == userId && it.status == "completed" } as ArrayList<GetAllOrdersItem>
+                        dataList.filter { it.deliveryId != null && it.deliveryId._id == userId && it.status == "completed" } as ArrayList<GetAllOrdersItem>
 
-                    val completedOrderValue= completedOrders.size
+                   val  completedOrderValue= completedOrders.size
 
                     Log.d("DeliveryHomeFragment", "Filtered Completed orders: $liveOrderDataList")
                     Log.d("DeliveryHomeFragment", "Completed order count: $completedOrderValue")
 
-                    pendingOrderCount.text = pendingOrdersValue.toString()
-                    completedOrder.text = completedOrderValue.toString()
+                        pendingOrderCount.text = pendingOrdersValue.toString()
+                        completedOrder.text = completedOrderValue.toString()
+
+
+
 
                     // Set up the live order adapter
                     liveOrderAdapter = LiveOrderAdapter(requireContext(),parentFragmentManager, liveOrderDataList)
