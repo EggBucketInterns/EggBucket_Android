@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import com.eggbucket.eggbucket_android.model.allcustomer.CustomerDetailsItem
 import com.eggbucket.eggbucket_android.model.data.DeliveryPartnerrr
 import com.eggbucket.eggbucket_android.model.data.OrderDetailsResponse
@@ -25,6 +26,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.logging.Handler
 
 class Order_Details_Screen : AppCompatActivity() {
     /*<<<<<<< HEAD
@@ -42,7 +44,7 @@ class Order_Details_Screen : AppCompatActivity() {
     private var deliveryname: String? = null
     private var createdAt: String? = null
     private var customerName: String? = null
-
+    private var mapUrl : String ? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +80,7 @@ class Order_Details_Screen : AppCompatActivity() {
                             if (id == list.customerId) {
                                 Picasso.get().load(list.img).into(customerImage)
                                 Picasso.get().load(list.outlet.img).into(outletImage)
+                                mapUrl = list.location;
                             }
                         }
 
@@ -111,17 +114,20 @@ class Order_Details_Screen : AppCompatActivity() {
       //  id = intent.getStringExtra("id")
         orderId = intent.getStringExtra("ORDER_ID") ?: "66b764ddf2476d8c6f2770cb"
 
+        android.os.Handler().postDelayed({
+            val googleMapLink = mapUrl;
+            Log.d("checkResponse----->", googleMapLink.toString())
+        }, 1000)
 
-        val googleMapLink = "https://maps.app.goo.gl/4WUTPMRmegN5rCw2A"
         // findViewById<TextView>(R.id.shopNameTextView1).text = customerName
         openMapButton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(googleMapLink))
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(mapUrl))
             intent.setPackage("com.google.android.apps.maps") // Optional: Open specifically in Google Maps
             if (intent.resolveActivity(packageManager) != null) {
                 startActivity(intent)
             } else {
                 // Handle the case where Google Maps is not installed
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(googleMapLink)))
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(mapUrl)))
             }
         }
 
