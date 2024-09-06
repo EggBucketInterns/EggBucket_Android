@@ -3,23 +3,14 @@ package com.eggbucket.eggbucket_android
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
-import android.widget.TextClock
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.bumptech.glide.Glide
-import com.eggbucket.eggbucket_android.adapters.OrdersAdapter
 import com.eggbucket.eggbucket_android.model.allcustomer.CustomerDetailsItem
-import com.eggbucket.eggbucket_android.model.allorders.GetAllOrdersItem
-import com.eggbucket.eggbucket_android.model.data.OrderDetailsResponse
 import com.eggbucket.eggbucket_android.network.RetrofitInstance
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -35,8 +26,8 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
     private var id: String? = null
     private var customerName:String?=null
     private var deliveryName:String?=null
-    /*private var outletImage: String? = null
-    private var customerImage: String? = null*/
+    private var outletId: String? = null
+    private var outletName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,17 +38,31 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
         val customerImage= findViewById<ImageView>(R.id.im_customer_image)
         // Retrieve the order ID from intent or use a default one
         orderId = intent.getStringExtra("ORDER_ID")
+        Log.d("OrderDetailOutletActivity", "Order ID: $orderId")
         trays = intent.getStringExtra("TRAYS")
         amount = intent.getStringExtra("AMOUNT")
         name = intent.getStringExtra("NAME")
         createdAt = intent.getStringExtra("CREATED_AT")
         id = intent.getStringExtra("id")
+        Log.d("OrderDetailOutletActivity", "Order ID: $id")
         deliveryName=intent.getStringExtra("DELIVERY_NAME")
+        Log.d("OrderDetailOutletActivity", "Delivery Name: $deliveryName")
         customerName=intent.getStringExtra("CUSTOMER_NAME")
+        Log.d("OrderDetailOutletActivity", "Customer Name: $customerName")
+        outletId = intent.getStringExtra("OUTLET_ID")
+        Log.d("OrderDetailOutletActivity", "Outlet ID: $outletId")
+
+        if (outletId != null) {
+            fetchOutletDetails(outletId!!) { outletName, _ ->
+                findViewById<TextView>(R.id.order_detail_outlet_name).text = outletName ?: "Unknown Outlet"
+            }
+        }
         //try {
 
 
+
         val customer = RetrofitInstance.api.getCustomerImageByID(id)
+        Log.d("OrderDetailOutletActivity", "Customer Image: $customer and  Customer ID: $id")
         customer.enqueue(object : Callback<ArrayList<CustomerDetailsItem>> {
             override fun onResponse(
                 call: Call<ArrayList<CustomerDetailsItem>>,
@@ -66,31 +71,21 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val partner = response.body()
                     if (partner != null) {
-                       // Picasso.get().load(partner.img).into(profileImageView)
                         for(list in partner){
                             if (id==list.customerId){
                                 Picasso.get().load(list.img).into(customerImage)
                                 Picasso.get().load(list.outlet.img).into(outletImage)
                             }
                         }
+                        Log.d("OrderDetailOutletActivity", "Success to load image")
 
-                        Log.d("Customer Image", "Success to load image")
-                        //outletImage= partner[0].img
-                       // customerImage=partner[0].outlet.img
-
-                        /*for (list in partner){
-                            if (id ==list.customerId){
-                                outletImage=list.outlet.img
-                                customerImage=list.img
-                            }
-                        }*/
                     }
 
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<CustomerDetailsItem>>, t: Throwable) {
-                Log.d("Customer Image", "Failed to load image ${t.message}")
+                Log.d("OrderDetailOutletActivity", "Failed to load image ${t.message}")
             }
 
         })
@@ -106,6 +101,33 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
         populateOrderDetails()
     }
 
+    private fun fetchOutletDetails(outletId: String, onResult: (String?, Any?) -> Unit) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val outletResponse = RetrofitInstance.apiService.getOutletByOutletId(outletId)
+                if (outletResponse.status == "success") {
+                    Log.d("OrderDetailOutletActivity", "Outlet Response fetched successfully")
+                    val outlet = outletResponse.data.firstOrNull()
+                    val outletPartnerName = outlet?.outletArea
+                    Log.d("OrderDetailOutletActivity", "Outlet Name: $outletPartnerName")
+                    withContext(Dispatchers.Main) {
+                        onResult(outletPartnerName, null)
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        onResult(null, null)
+                        Log.d("OrderDetailOutletActivity", "Outlet Response is null")
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("OrderDetailOutletActivity", "Error fetching outlet details: ${e.message}")
+                withContext(Dispatchers.Main) {
+                    onResult(null, null)
+                }
+            }
+        }
+    }
+
     fun populateOrderDetails() {
         // Update the UI elements with data
         findViewById<TextView>(R.id.orderIdTextView1).text = orderId
@@ -115,9 +137,7 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.txt_order_created).text = "createdAt $createdAt"
         findViewById<TextView>(R.id.outlet_customer_name).text=customerName
         findViewById<TextView>(R.id.outlet_delivery_name).text=deliveryName
-
-
-
+        findViewById<TextView>(R.id.order_detail_outlet_name).text=outletId
     }
 
 }

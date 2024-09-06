@@ -41,10 +41,12 @@ class Order_Details_Screen : AppCompatActivity() {
 
     private var trays: String? = null
     private var amount: String? = null
+    private var outletName:String?=null
     private var deliveryname: String? = null
     private var createdAt: String? = null
     private var customerName: String? = null
     private var mapUrl : String ? = null;
+    private var outletId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +67,14 @@ class Order_Details_Screen : AppCompatActivity() {
         createdAt = intent.getStringExtra("CREATED_AT")
         id = intent.getStringExtra("id")
         customerName = intent.getStringExtra("CUSTOMER_NAME")
+        outletId = intent.getStringExtra("OUTLET_ID")
+        Log.d("OrderDetailOutletActivity", "Outlet ID: $outletId")
+
+        if (outletId != null) {
+            fetchOutletDetails(outletId!!) { outletName, _ ->
+                findViewById<TextView>(R.id.outletNameDetail).text = outletName ?: "Unknown Outlet"
+            }
+        }
 
         val customer = RetrofitInstance.api.getCustomerImageByID(id)
         customer.enqueue(object : Callback<ArrayList<CustomerDetailsItem>> {
@@ -167,6 +177,33 @@ class Order_Details_Screen : AppCompatActivity() {
         }
     }
 
+    private fun fetchOutletDetails(outletId: String, onResult: (String?, Any?) -> Unit) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val outletResponse = RetrofitInstance.apiService.getOutletByOutletId(outletId)
+                if (outletResponse.status == "success") {
+                    Log.d("OrderDetailOutletActivity", "Outlet Response fetched successfully")
+                    val outlet = outletResponse.data.firstOrNull()
+                    val outletPartnerName = outlet?.outletArea
+                    Log.d("OrderDetailOutletActivity", "Outlet Name: $outletPartnerName")
+                    withContext(Dispatchers.Main) {
+                        onResult(outletPartnerName, null)
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        onResult(null, null)
+                        Log.d("OrderDetailOutletActivity", "Outlet Response is null")
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("OrderDetailOutletActivity", "Error fetching outlet details: ${e.message}")
+                withContext(Dispatchers.Main) {
+                    onResult(null, null)
+                }
+            }
+        }
+    }
+
 
     private fun getOrderDetails(orderId: String) {
         val apiService = RetrofitInstance.apiService
@@ -216,6 +253,7 @@ class Order_Details_Screen : AppCompatActivity() {
         findViewById<TextView>(R.id.txt_created_at).text = createdAt
         findViewById<TextView>(R.id.delivery_boy_1).text=deliveryname
         findViewById<TextView>(R.id.customer_name_1).text=customerName
+        findViewById<TextView>(R.id.outletNameDetail).text=outletName
 
         // findViewById<TextView>(R.id.delivery_order_created).text=orderDetails.createdAt
     }

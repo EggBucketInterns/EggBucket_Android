@@ -222,16 +222,16 @@ class Create_Order_Screen : AppCompatActivity() {
             }
         }
 
-        fun getDeliveryPartnerByName(name : String){
-            CoroutineScope(Dispatchers.IO).launch {
-            val resp = apiService.getDeliveryPartnerByDeliveryPartnerName(name);
-                Log.d("checkResponse----->", resp.toString())
-                for(dp in resp){
-                    Log.d("checkResponse----->", dp._id.toString())
-                }
-
-            }
-        }
+//        fun getDeliveryPartnerByName(name : String){
+//            CoroutineScope(Dispatchers.IO).launch {
+//            val resp = apiService.getDeliveryPartnerByDeliveryPartnerName(name);
+//                Log.d("checkResponse----->", resp.toString())
+//                for(dp in resp){
+//                    Log.d("checkResponse----->", dp._id.toString())
+//                }
+//
+//            }
+//        }
 
 //        fun fetchOutletByOutletPartnerID(id: String) {
 //            CoroutineScope(Dispatchers.IO).launch {

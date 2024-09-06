@@ -73,6 +73,7 @@ class OrderAdapter_2 (
                          intent.putExtra("ORDER_ID", order._id)
                          intent.putExtra("STATUS", order.status)
                          intent.putExtra("id",order.customerId?.customerId)
+                         intent.putExtra("OUTLET_ID", order.outletId?._id)
                          intent.putExtra("CUSTOMER_NAME",order.customerId?.customerName)
 
                          // Start the activity with the Intent

@@ -195,10 +195,10 @@
                                         android:layout_marginStart="5dp"
                                         android:textColor="@color/black" />
                                     <TextView
-                                        android:id="@+id/outlet_outlet_name"
+                                        android:id="@+id/order_detail_outlet_name"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="HSR Bangalore"
+                                        android:text=""
                                         android:textSize="12dp"
                                         android:textColor="@color/black"/>
                                 </LinearLayout>

@@ -75,6 +75,7 @@ class OrdersAdapter(
                     intent.putExtra("CREATED_AT", order.createdAt)
                     // Pass the order ID to the next screen using a Bundle
                     intent.putExtra("ORDER_ID", order._id)
+                    intent.putExtra("OUTLET_ID",order.outletId?._id)
                     intent.putExtra("id",order.customerId?.customerId)
                     intent.putExtra("CUSTOMER_NAME",order.customerId?.customerName)
 

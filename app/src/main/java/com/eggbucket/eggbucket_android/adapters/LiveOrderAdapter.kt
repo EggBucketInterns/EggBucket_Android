@@ -86,6 +86,7 @@ class LiveOrderAdapter(
                     // Pass the order ID to the next screen using a Bundle
                     intent.putExtra("CUSTOMER_NAME",currentItem.customerId?.customerName)
                     intent.putExtra("id",currentItem.customerId?.customerId)
+                    intent.putExtra("OUTLET_ID", currentItem.outletId?._id)
 
 
                     // Pass the order ID to the next screen using a Bundle
