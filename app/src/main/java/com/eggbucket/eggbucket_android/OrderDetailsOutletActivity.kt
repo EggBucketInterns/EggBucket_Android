@@ -57,9 +57,6 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.order_detail_outlet_name).text = outletName ?: "Unknown Outlet"
             }
         }
-        //try {
-
-
 
         val customer = RetrofitInstance.api.getCustomerImageByID(id)
         Log.d("OrderDetailOutletActivity", "Customer Image: $customer and  Customer ID: $id")
@@ -90,14 +87,6 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
 
         })
 
-
-        /* }catch (e:Exception){
-             //Toast.makeText(this@OrderDetailsOutletActivity,"api error ${e.message}",Toast.LENGTH_SHORT).show()
-                Log.d("ApiCall error","problem ${e.message}")
-             }    }*/
-
-
-//        intent.putExtra("order_ID",orderId);
         populateOrderDetails()
     }
 
@@ -137,7 +126,6 @@ class OrderDetailsOutletActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.txt_order_created).text = "createdAt $createdAt"
         findViewById<TextView>(R.id.outlet_customer_name).text=customerName
         findViewById<TextView>(R.id.outlet_delivery_name).text=deliveryName
-        findViewById<TextView>(R.id.order_detail_outlet_name).text=outletId
     }
 
 }

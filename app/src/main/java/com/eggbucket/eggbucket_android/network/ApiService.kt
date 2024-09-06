@@ -67,17 +67,6 @@ interface ApiService {
         @Query("status") status: String
     ): ArrayList<GetAllOrdersItem>
 
-//    @PATCH("orders/egg-bucket-b2b/order/{id}")
-//    suspend fun updateOrderStatus(
-//        @Path("id") orderId: String,
-//        @Body statusUpdate: Map<String, String>): GetAllOrdersItem
-//
-//        @PATCH("orders/egg-bucket-b2b/order/{id}")
-//        suspend fun updateOrderStatus(
-//            @Path("id") orderId: String,
-//            @Body status: StatusUpdate
-//        ):Call<Order>
-
     @PATCH("orders/egg-bucket-b2b/order/{id}")
     suspend fun updateStatusCompleted(
         @Path("id") orderId: String,
@@ -102,11 +91,6 @@ interface ApiService {
     @GET("orders/egg-bucket-b2b/getAllOrder")
     suspend fun getOrdersByDeliveryId(@Query("deliveryId") deliveryId: String): ArrayList<GetAllOrdersItem>
 
-
-    //@GET("orders/egg-bucket-b2b/getAllOrder")
-  //  suspend fun getOrdersByDeliveryIdByStatus(@Query("deliveryId") deliveryId: String,@Query("status") status: String): ArrayList<GetAllOrdersItem>
-
-
     @GET("orders/egg-bucket-b2b/getAllOrder")
     suspend fun getOrderByDeliveryIdByStatus(
         @Query("deliveryId") deliveryId: String,
@@ -118,9 +102,6 @@ interface ApiService {
 
     @PATCH("payment/egg-bucket-b2b/incCollectionAmt")
     fun updateCollectionAmount(@Body body: UpdateReturnAmountRequest): Call<UpdateReturnAmtResponse>
-
-//    @PATCH("payment/egg-bucket-b2b/decReturnAmt")
-//    fun decreaseReturnAmount(@Body body: UpdateReturnAmountRequest): Call<UpdateReturnAmtResponse>
 
     @PATCH("payment/egg-bucket-b2b/decReturnAmt")
     suspend fun decreaseReturnAmount(@Body body: UpdateReturnAmountRequest1): Response<UpdateReturnAmtResponse>
@@ -139,12 +120,6 @@ interface ApiService {
     fun getCustomerImageById(
         @Path("customerId") customerId: String
     ): Call<CustomerDetailsItem>
-
-
-//    @GET("egg-bucket-b2b/get-all-outlets")
-//    suspend fun getOutletByOutletPartnerID(
-//        @Query("outletPartner") outletPartner : String
-//    ) : Array<OutletModel>
 
     @GET("egg-bucket-b2b/get-all-outlets")
     suspend fun getOutletByOutletPartnerID(
