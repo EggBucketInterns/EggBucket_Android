@@ -1,5 +1,6 @@
 package com.eggbucket.eggbucket_android
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,24 +35,35 @@ class OutletShopFragment : Fragment() {
     lateinit var adapter: OrdersAdapter
     lateinit var recyclerView: RecyclerView
     lateinit var dataList:ArrayList<GetAllOrdersItem>
+    lateinit var refreshBtn : ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_outlet_store, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val gotoFilter = view.findViewById<LinearLayout>(R.id.filter_layout)
+        refreshBtn =view.findViewById(R.id.refreshBtn);
+        val rotationAnimator = ObjectAnimator.ofFloat(refreshBtn, "rotation", 0f, 360f)
+        rotationAnimator.duration = 1000 // 1/2 second for the full rotation
+        rotationAnimator.start()
         gotoFilter.setOnClickListener {
 
         }
         dataList= arrayListOf()
         // Find the RecyclerView
         recyclerView = view.findViewById(R.id.recyclerview1)
+        refreshBtn.setOnClickListener{
+            fragmentManager?.beginTransaction()?.detach(this)?.commit();
+            fragmentManager?.beginTransaction()?.attach(this)?.commit();
+        }
 
         // Set layout manager
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

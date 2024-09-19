@@ -37,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/profileImage"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/notificationIcon"
+            app:layout_constraintEnd_toStartOf="@id/refreshBtn"
             android:paddingStart="16dp">
 
             <TextView
@@ -57,10 +57,10 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/notificationIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/notification"
+            android:id="@+id/refreshBtn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/refresh"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />

@@ -109,12 +109,12 @@ interface ApiService {
     @GET("customers/egg-bucket-b2b/getAllCustomer")
     suspend fun getCustomerByID(
         @Query("customerId") customerId: String
-    ) : ArrayList<Customer>
+    ): ArrayList<Customer>
 
     @GET("customers/egg-bucket-b2b/getAllCustomer")
-     fun getCustomerImageByID(
+    fun getCustomerImageByID(
         @Query("customerId") customerId: String?
-    ) : Call<ArrayList<CustomerDetailsItem>>
+    ): Call<ArrayList<CustomerDetailsItem>>
 
     @GET("customers/egg-bucket-b2b/customer/{customerId}")
     fun getCustomerImageById(
@@ -135,13 +135,13 @@ interface ApiService {
     @GET("customers/egg-bucket-b2b/getAllCustomer")
     suspend fun getCustomerByOutletId(
         @Query("outlet") outlet: String
-    ) : ArrayList<Customer>
+    ): ArrayList<Customer>
 
 
     @GET("customers/egg-bucket-b2b/getAllCustomer")
     suspend fun getDeliveryPartnerByDeliveryPartnerName(
-        @Query("firstName") firstName:String
-    ) : ArrayList<DeliveryPartnerrr>
+        @Query("firstName") firstName: String
+    ): ArrayList<DeliveryPartnerrr>
 
     @GET("deliveryDrivers/egg-bucket-b2b/delivery_partner/{id}")
     suspend fun getDeliveryPartnerById(
@@ -152,8 +152,13 @@ interface ApiService {
     suspend fun getOutletByOutletId(
         @Query("_id") id: String
     ): OutletResponse
-}
 
+    @PATCH("orders/egg-bucket-b2b/order/{orderId}")
+    fun updateDeliveryPartner(
+        @Path("orderId") orderId: String,
+        @Body requestBody: Map<String, String?>
+    ): Call<GetAllOrdersItem>
+}
 data class UpdateReturnAmountRequest(
     val orderId: String,
     val amount: Int

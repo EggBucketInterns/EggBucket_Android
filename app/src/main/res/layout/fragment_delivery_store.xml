@@ -38,29 +38,15 @@
             android:text="All Orders"
             android:layout_height="35dp" />
 
-        <LinearLayout
-            android:layout_width="40dp"
-            android:layout_weight=".2"
-            android:gravity="center"
-            android:background="@drawable/filter_background"
-            android:layout_height="30dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_weight=".3"
-                android:paddingStart="5dp"
-                android:paddingVertical="5dp"
-                android:paddingTop="5dp"
-                android:src="@drawable/filter"
-                android:layout_height="30dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="filter"
-                android:paddingTop="5dp"
-                android:layout_weight=".6"
-                android:layout_height="30dp" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/refreshBtn"
+            android:layout_width="35dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="35dp"
+            android:src="@drawable/refresh2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
     </LinearLayout>

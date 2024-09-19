@@ -1,7 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="10dp">
@@ -27,9 +26,10 @@
                 android:text="Order Id : #3577"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/ellips"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ellips"
+                />
 
             <ImageView
                 android:id="@+id/user_image"
@@ -38,7 +38,7 @@
                 android:layout_marginTop="8dp"
                 android:src="@drawable/profile_yellow_bg"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/order_id" />
+                app:layout_constraintTop_toBottomOf="@id/order_id"/>
 
             <TextView
                 android:id="@+id/customer_id"
@@ -48,7 +48,7 @@
                 android:text="Customer ID"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/user_image"
-                app:layout_constraintTop_toTopOf="@id/user_image" />
+                app:layout_constraintTop_toTopOf="@id/user_image"/>
 
             <TextView
                 android:id="@+id/customer_idNumber"
@@ -58,7 +58,7 @@
                 android:text="72382378"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/user_image"
-                app:layout_constraintTop_toBottomOf="@id/customer_id" />
+                app:layout_constraintTop_toBottomOf="@id/customer_id"/>
 
             <ImageView
                 android:id="@+id/eggs_image"
@@ -67,7 +67,7 @@
                 android:layout_marginTop="8dp"
                 android:src="@drawable/eggs1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/user_image" />
+                app:layout_constraintTop_toBottomOf="@id/user_image"/>
 
             <TextView
                 android:id="@+id/no_of_tray"
@@ -77,7 +77,7 @@
                 android:text="No of Trays/Eggs"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/eggs_image"
-                app:layout_constraintTop_toTopOf="@id/eggs_image" />
+                app:layout_constraintTop_toTopOf="@id/eggs_image"/>
 
             <TextView
                 android:id="@+id/trays_no"
@@ -87,39 +87,34 @@
                 android:text="123"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/eggs_image"
-                app:layout_constraintTop_toBottomOf="@id/no_of_tray" />
+                app:layout_constraintTop_toBottomOf="@id/no_of_tray"/>
 
             <TextView
                 android:id="@+id/order_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="100dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="end"
                 android:text="Order Amount"
                 android:textColor="#F37E20"
                 android:textSize="18sp"
-
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linear_layout_all_order_item" />
+                app:layout_constraintTop_toBottomOf="@id/linear_layout_all_order_item"/>
 
             <TextView
                 android:id="@+id/order_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="end"
                 android:text="₹ 567.88"
                 android:textColor="#F37E20"
                 android:textSize="18sp"
-
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.32"
-                app:layout_constraintStart_toEndOf="@+id/order_amount"
-                app:layout_constraintTop_toBottomOf="@+id/linear_layout_all_order_item" />
+                app:layout_constraintTop_toBottomOf="@id/order_amount"/>
 
             <ImageView
                 android:id="@+id/ellips"
@@ -151,49 +146,47 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/pending_back"
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="Completed"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.035" />
+                app:layout_constraintStart_toEndOf="@id/order_id"
+                app:layout_constraintTop_toBottomOf="@id/ellips"
+                app:layout_constraintTop_toTopOf="@id/ellips" />
 
             <LinearLayout
                 android:id="@+id/linear_layout_all_order_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:background="@drawable/order_details_back"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal"
+                android:background="@drawable/order_details_back"
                 android:padding="6dp"
-
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintStart_toEndOf="@id/no_of_tray"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/trays_no">
+                app:layout_constraintTop_toBottomOf="@id/no_of_tray">
 
                 <TextView
-                    android:id="@+id/brown_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
                     android:maxLines="1"
                     android:paddingTop="10dp"
+                    android:gravity="start"
                     android:text="Order Details"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:src="@drawable/order_detail_right_errow" />
+                    android:src="@drawable/order_detail_right_errow"/>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

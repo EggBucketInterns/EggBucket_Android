@@ -1,5 +1,6 @@
 package com.eggbucket.eggbucket_android
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -42,6 +43,7 @@ class DeliveryHomeFragment : Fragment() {
     lateinit var adapter: OrdersAdapter
     lateinit var cashCollectedBtn : LinearLayout
     lateinit var profileImage:ImageView
+    lateinit var refreshBtn : ImageView
 
 
     override fun onCreateView(
@@ -66,6 +68,14 @@ class DeliveryHomeFragment : Fragment() {
             )
         }
 
+        refreshBtn.setOnClickListener{
+            fragmentManager?.beginTransaction()?.detach(this)?.commit();
+            fragmentManager?.beginTransaction()?.attach(this)?.commit()
+        }
+        val rotationAnimator = ObjectAnimator.ofFloat(refreshBtn, "rotation", 0f, 360f)
+        rotationAnimator.duration = 1000 // 1/2 second for the full rotation
+        rotationAnimator.start()
+
         completedOrderCard.setOnClickListener {
             startActivity(Intent(requireContext(), CompletedDeliveryOrders::class.java))
         }
@@ -85,6 +95,8 @@ class DeliveryHomeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         cashCollectedBtn = view.findViewById(R.id.cashCollectedBtn)
         profileImage=view.findViewById(R.id.profileImage)
+        refreshBtn =view.findViewById(R.id.refreshBtn);
+
     }
 
     private fun fetchOrders() {

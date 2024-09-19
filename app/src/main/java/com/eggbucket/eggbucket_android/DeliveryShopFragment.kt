@@ -1,11 +1,13 @@
 package com.eggbucket.eggbucket_android
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eggbucket.eggbucket_android.adapters.OrderAdapter_2
@@ -20,6 +22,7 @@ class DeliveryShopFragment : Fragment() {
     lateinit var adapter: OrderAdapter_2
     lateinit var recyclerView: RecyclerView
     lateinit var dataList:ArrayList<GetAllOrdersItem>
+    lateinit var refreshBtn : ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +44,14 @@ class DeliveryShopFragment : Fragment() {
 
         // Set the adapter
         fetchDataAndBindRecyclerview()
+        refreshBtn =view.findViewById(R.id.refreshBtn);
+        val rotationAnimator = ObjectAnimator.ofFloat(refreshBtn, "rotation", 0f, 360f)
+        rotationAnimator.duration = 1000 // 1/2 second for the full rotation
+        rotationAnimator.start()
+        refreshBtn.setOnClickListener{
+            fragmentManager?.beginTransaction()?.detach(this)?.commit();
+            fragmentManager?.beginTransaction()?.attach(this)?.commit()
+        }
 
 
     }

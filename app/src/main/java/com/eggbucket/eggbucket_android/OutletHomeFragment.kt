@@ -1,6 +1,7 @@
 package com.eggbucket.eggbucket_android
 
 import RecentOrdersAdapter
+import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -37,6 +38,7 @@ class OutletHomeFragment : Fragment() {
     private lateinit var orderAdapter: RecentOrdersAdapter
     private var outletId: String = ""
     lateinit var profileImage:ImageView
+    lateinit var refreshBtn : ImageView
 
 
     override fun onCreateView(
@@ -49,8 +51,17 @@ class OutletHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        refreshBtn =view.findViewById(R.id.refreshBtn);
+        val rotationAnimator = ObjectAnimator.ofFloat(refreshBtn, "rotation", 0f, 360f)
+        rotationAnimator.duration = 1000 // 1/2 second for the full rotation
+        rotationAnimator.start()
+
         profileImage=view.findViewById(R.id.avatar)
         setupRecyclerView()
+        refreshBtn.setOnClickListener{
+            fragmentManager?.beginTransaction()?.detach(this)?.commit();
+            fragmentManager?.beginTransaction()?.attach(this)?.commit()
+        }
         try {
             binding.totalOrderBtn.setOnClickListener {
 
